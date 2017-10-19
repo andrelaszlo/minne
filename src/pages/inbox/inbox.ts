@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
+import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs';
+
  
 /**
  * Generated class for the InboxPage page.s
@@ -16,10 +19,15 @@ import { FirebaseProvider } from '../../providers/firebase/firebase';
 })
 export class InboxPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseProvider: FirebaseProvider) {
+  public items: Observable<any>;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseProvider: FirebaseProvider,
+    public angularFireDatabase: AngularFireDatabase) {
+    this.items = firebaseProvider.getItems();
   }
 
   ionViewDidLoad() {
+    console.log("items", this.items);
     console.log('ionViewDidLoad InboxPage');
   }
 

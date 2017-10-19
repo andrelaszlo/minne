@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs';
 
-/*
-  Generated class for the FirebaseProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class FirebaseProvider {
 
-  constructor(public http: Http) {
-    console.log('Hello FirebaseProvider Provider');
+  constructor(
+    public http: Http,
+    public angularFireDatabase: AngularFireDatabase) {
+  }
+
+  getItems(): Observable<any> {
+    return this.angularFireDatabase.list('/notes').valueChanges();
   }
 
 }
