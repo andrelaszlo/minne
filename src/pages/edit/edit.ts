@@ -14,10 +14,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'edit.html',
 })
 export class EditPage {
-  public noteId: string;
+  public note;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.noteId = navParams.get("noteId");
+    this.note = navParams.get("note");
   }
 
 }

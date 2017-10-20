@@ -4,7 +4,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let item of items | async" (click)="presentModal(item.key)">
+    <ion-item *ngFor="let item of items | async" (click)="presentModal(item)">
       {{item.content}}
     </ion-item>
   </ion-list>

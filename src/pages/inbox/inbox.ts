@@ -34,9 +34,8 @@ export class InboxPage {
     console.log('ionViewDidLoad InboxPage');
   }
 
-  presentModal(noteId: string) {
-    console.log("nodeId", noteId);
-    let modal = this.modalCtrl.create(EditPage, { noteId: noteId });
+  presentModal(note) {
+    let modal = this.modalCtrl.create(EditPage, { note });
     modal.present();
   }
 
