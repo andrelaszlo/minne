@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FirebaseProvider } from '../../providers/firebase/firebase'
 
 /**
  * Generated class for the EditPage page.
@@ -15,9 +16,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EditPage {
   public note;
+  public key;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseProvider: FirebaseProvider) {
     this.note = navParams.get("note");
+    this.key = this.note.key;
+    delete this.note.key;
+  }
+
+  saveNote() {
+    this.firebaseProvider.saveItem(this.key, this.note);
   }
 
 }
