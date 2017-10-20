@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 import { InboxPage } from '../pages/inbox/inbox';
 import { ArchivePage } from '../pages/archive/archive';
 
+import { MainMenuComponent } from '../components/main-menu/main-menu';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -28,20 +29,22 @@ const firebaseConfig = {
   declarations: [
     MyApp,
     InboxPage,
-    ArchivePage
+    ArchivePage,
+    MainMenuComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     InboxPage,
-    ArchivePage
+    ArchivePage,
+    MainMenuComponent
   ],
   providers: [
     StatusBar,
