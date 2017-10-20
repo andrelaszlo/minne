@@ -5,6 +5,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { InboxPage } from '../pages/inbox/inbox';
 import { ArchivePage } from '../pages/archive/archive';
+import { AddPage } from '../pages/add/add';
+import { EditPage } from '../pages/edit/edit';
 
 import { MainMenuComponent } from '../components/main-menu/main-menu';
 
@@ -30,6 +32,8 @@ const firebaseConfig = {
     MyApp,
     InboxPage,
     ArchivePage,
+    AddPage,
+    EditPage,
     MainMenuComponent
   ],
   imports: [
@@ -44,6 +48,8 @@ const firebaseConfig = {
     MyApp,
     InboxPage,
     ArchivePage,
+    AddPage,
+    EditPage,
     MainMenuComponent
   ],
   providers: [
