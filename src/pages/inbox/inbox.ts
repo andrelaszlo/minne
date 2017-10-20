@@ -28,12 +28,15 @@ export class InboxPage {
   }
 
   ionViewDidLoad() {
-    console.log("items", this.items);
+    console.log("items", this.items.forEach(
+      value => console.log("item", value)
+    ));
     console.log('ionViewDidLoad InboxPage');
   }
 
-  presentModal(nodeId: string) {
-    let modal = this.modalCtrl.create(EditPage, { noteId: nodeId });
+  presentModal(noteId: string) {
+    console.log("nodeId", noteId);
+    let modal = this.modalCtrl.create(EditPage, { noteId: noteId });
     modal.present();
   }
 

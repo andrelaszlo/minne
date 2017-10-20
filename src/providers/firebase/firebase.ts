@@ -13,7 +13,9 @@ export class FirebaseProvider {
   }
 
   getItems(): Observable<any> {
-    return this.angularFireDatabase.list('/notes').valueChanges();
+    return this.angularFireDatabase.list('/notes').snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    });
   }
 
 }
