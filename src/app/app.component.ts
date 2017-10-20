@@ -14,15 +14,17 @@ export class MyApp {
 
   rootPage: any = InboxPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, icon: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Inbox', component: InboxPage },
-      { title: 'Archive', component: ArchivePage }
+      { title: 'Inbox', icon: 'happy', component: InboxPage },
+      { title: 'Archive', icon: 'folder', component: ArchivePage },
+      { title: 'Calendar', icon: 'calendar', component: InboxPage },
+      { title: 'To-do', icon: 'checkmark-circle', component: InboxPage },
     ];
 
   }

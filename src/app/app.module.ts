@@ -59,4 +59,6 @@ const firebaseConfig = {
     FirebaseProvider
   ]
 })
-export class AppModule {}
+export class AppModule {
+  public static applicationName = 'ozelot';
+}
