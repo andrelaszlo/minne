@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
-import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs';
-
+import { AddPage } from '../add/add'
+import { EditPage } from '../edit/edit'
  
 /**
  * Generated class for the InboxPage page.s
@@ -22,13 +23,18 @@ export class InboxPage {
   public items: Observable<any>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseProvider: FirebaseProvider,
-    public angularFireDatabase: AngularFireDatabase) {
+    public angularFireDatabase: AngularFireDatabase, public modalCtrl: ModalController) {
     this.items = firebaseProvider.getItems();
   }
 
   ionViewDidLoad() {
     console.log("items", this.items);
     console.log('ionViewDidLoad InboxPage');
+  }
+
+  presentModal(nodeId: string) {
+    let modal = this.modalCtrl.create(EditPage, { noteId: nodeId });
+    modal.present();
   }
 
 }
