@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the AddPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, ViewController, NavParams } from 'ionic-angular';
+import { FirebaseProvider } from '../../providers/firebase/firebase'
 
 @IonicPage()
 @Component({
@@ -15,11 +9,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  note: any = {content: ""};
+
+  constructor(
+    public viewCtrl: ViewController,
+    public navParams: NavParams,
+    public firebaseProvider: FirebaseProvider
+  ) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddPage');
+  saveNote() {
+    this.firebaseProvider.addItem(this.note);
+    this.viewCtrl.dismiss();
   }
 
 }

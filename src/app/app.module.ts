@@ -60,5 +60,5 @@ const firebaseConfig = {
   ]
 })
 export class AppModule {
-  public static applicationName = 'ozelot';
+  public static applicationName = 'minne';
 }
