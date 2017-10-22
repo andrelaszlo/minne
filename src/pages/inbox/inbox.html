@@ -4,12 +4,20 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let item of items | async" (click)="presentModal(item)">
+    <ion-item *ngFor="let item of items | async" (click)="showEditNote(item)">
       {{item.content}}
     </ion-item>
   </ion-list>
 
-  <ion-fab bottom right>
-      <button ion-fab color="danger" mini><ion-icon name="add"></ion-icon></button>
+  <ion-fab bottom right #addFab>
+      <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
+      <ion-fab-list side="left">
+          <button ion-fab (click)="addNote(NoteType.text, addFab)" menuClose><ion-icon name="paper"></ion-icon></button>
+          <button ion-fab (click)="addNote(NoteType.voice, addFab)"><ion-icon name="microphone"></ion-icon></button>        
+          <button ion-fab (click)="addNote(NoteType.camera, addFab)"><ion-icon name="camera"></ion-icon></button>
+          <button ion-fab (click)="addNote(NoteType.photo, addFab)"><ion-icon name="image"></ion-icon></button>
+          <button ion-fab (click)="addNote(NoteType.drawing, addFab)"><ion-icon name="brush"></ion-icon></button>
+      </ion-fab-list>
   </ion-fab>
+
 </ion-content>

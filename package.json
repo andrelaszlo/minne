@@ -1,8 +1,8 @@
 {
-  "name": "calico",
+  "name": "minne",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Narjis Hachilif and André Laszlo",
+  "homepage": "http://example.com/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -38,7 +38,7 @@
     "@ionic/app-scripts": "3.0.0",
     "typescript": "2.3.4"
   },
-  "description": "An Ionic project",
+  "description": "The most helpful calendar in the world",
   "cordova": {
     "plugins": {
       "cordova-plugin-ionic": {

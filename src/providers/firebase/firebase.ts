@@ -19,8 +19,12 @@ export class FirebaseProvider {
   }
 
   saveItem(key, item) {
-    console.log("saving", key, item);
     this.angularFireDatabase.object(`/notes/${key}`).update(item);
+  }
+
+  addItem(note) {
+    // TODO: input validation
+    this.angularFireDatabase.list(`/notes/`).push(note);
   }
 
 }
