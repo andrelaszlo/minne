@@ -18,6 +18,13 @@ export class FirebaseProvider {
     });
   }
 
+  getSortedItems(): Observable<any> {
+    return this.angularFireDatabase.list('/notes', ref => ref.orderByChild('date').startAt((new Date()).toISOString()))
+    .snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    });;
+  }
+
   saveItem(key, item) {
     this.angularFireDatabase.object(`/notes/${key}`).update(item);
   }

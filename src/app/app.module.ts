@@ -9,6 +9,7 @@ import { ArchivePage } from '../pages/archive/archive';
 import { AddPage } from '../pages/add/add';
 import { EditPage } from '../pages/edit/edit';
 import { LoginPage } from '../pages/login/login';
+import { CalendarPage } from '../pages/calendar/calendar';
 import { LoginPageModule } from '../pages/login/login.module';
 
 
@@ -43,6 +44,7 @@ const firebaseConfig = {
     ArchivePage,
     AddPage,
     EditPage,
+    CalendarPage
   ],
   imports: [
     BrowserModule,
@@ -61,6 +63,7 @@ const firebaseConfig = {
     AddPage,
     EditPage,
     LoginPage,
+    CalendarPage
   ],
   providers: [
     StatusBar,

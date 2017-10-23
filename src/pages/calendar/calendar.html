@@ -1,0 +1,16 @@
+<ion-header>
+  <main-menu title="calendar"></main-menu>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card *ngFor="let item of items | async">
+    <ion-item *ngIf="item.date">
+      <ion-datetime displayFormat="MMM DD, YYYY HH:mm" max="2030-01-01" [(ngModel)]="item.date"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      {{item.content}}
+    </ion-item>
+  </ion-card>
+
+</ion-content>
