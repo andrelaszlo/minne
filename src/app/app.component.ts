@@ -1,9 +1,14 @@
+import * as firebase from "firebase";
+
+import { AngularFireAuth } from 'angularfire2/auth';
+
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { InboxPage } from '../pages/inbox/inbox';
+import { LoginPage } from '../pages/login/login';
 import { ArchivePage } from '../pages/archive/archive';
 
 @Component({
@@ -12,14 +17,13 @@ import { ArchivePage } from '../pages/archive/archive';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = InboxPage;
+  rootPage: any = LoginPage;
 
   pages: Array<{title: string, icon: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.initializeApp();
+  user: any;
 
-    // used for an example of ngFor and navigation
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, afAuth: AngularFireAuth) {    
     this.pages = [
       { title: 'Inbox', icon: 'happy', component: InboxPage },
       { title: 'Archive', icon: 'folder', component: ArchivePage },
@@ -27,6 +31,19 @@ export class MyApp {
       { title: 'To-do', icon: 'checkmark-circle', component: InboxPage },
     ];
 
+    const authObserver = afAuth.authState.subscribe( user => {
+      this.user = user;
+      console.log("user", user);
+      if (!user) {
+        this.rootPage = 'LoginPage';
+        authObserver.unsubscribe();
+      } else { 
+        this.rootPage = InboxPage;
+        authObserver.unsubscribe();
+      }
+    });
+
+    this.initializeApp();
   }
 
   initializeApp() {
@@ -35,6 +52,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      console.log("platform ready, root", this.rootPage);
     });
   }
 
