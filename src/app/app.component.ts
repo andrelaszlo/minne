@@ -12,6 +12,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import { InboxPage } from '../pages/inbox/inbox';
 import { LoginPage } from '../pages/login/login';
 import { ArchivePage } from '../pages/archive/archive';
+import { CalendarPage } from '../pages/calendar/calendar';
 
 @Component({
   templateUrl: 'app.html'
@@ -35,7 +36,7 @@ export class MyApp {
     this.pages = [
       { title: 'Inbox', icon: 'happy', component: InboxPage },
       { title: 'Archive', icon: 'folder', component: ArchivePage },
-      { title: 'Calendar', icon: 'calendar', component: InboxPage },
+      { title: 'Calendar', icon: 'calendar', component: CalendarPage },
       { title: 'To-do', icon: 'checkmark-circle', component: InboxPage },
     ];
 
