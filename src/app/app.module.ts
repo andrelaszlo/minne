@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { UserAgent } from '@ionic-native/user-agent';
 
 import { MyApp } from './app.component';
 import { InboxPage } from '../pages/inbox/inbox';
@@ -68,8 +69,16 @@ const firebaseConfig = {
     FirebaseProvider,
     AngularFireAuth,
     AuthProvider,
-    ConfigProvider
+    ConfigProvider,
+    UserAgent
   ]
 })
 export class AppModule {
+  
+  constructor(private userAgent: UserAgent) {
+    let userAgentString: string = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36';
+    this.userAgent.set(userAgentString)
+      .then((res: any) => console.log(res))
+      .catch((error: any) => console.error(error));
+  }
 }
