@@ -16,4 +16,8 @@ export class AuthProvider {
 		this.auth.auth.signInWithPopup(provider);
   }
 
+  logout() {
+    this.auth.auth.signOut();
+  }
+
 }

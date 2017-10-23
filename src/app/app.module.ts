@@ -8,6 +8,8 @@ import { ArchivePage } from '../pages/archive/archive';
 import { AddPage } from '../pages/add/add';
 import { EditPage } from '../pages/edit/edit';
 import { LoginPage } from '../pages/login/login';
+import { LoginPageModule } from '../pages/login/login.module';
+
 
 import { MainMenuComponent } from '../components/main-menu/main-menu';
 
@@ -40,14 +42,14 @@ const firebaseConfig = {
     ArchivePage,
     AddPage,
     EditPage,
-    LoginPage,
   ],
   imports: [
     BrowserModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    LoginPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

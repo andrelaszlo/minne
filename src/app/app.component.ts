@@ -7,6 +7,8 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { AuthProvider } from '../providers/auth/auth';
+
 import { InboxPage } from '../pages/inbox/inbox';
 import { LoginPage } from '../pages/login/login';
 import { ArchivePage } from '../pages/archive/archive';
@@ -23,7 +25,13 @@ export class MyApp {
 
   user: any;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, afAuth: AngularFireAuth) {    
+  constructor(
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    afAuth: AngularFireAuth,
+    public authProvider: AuthProvider
+  ) {    
     this.pages = [
       { title: 'Inbox', icon: 'happy', component: InboxPage },
       { title: 'Archive', icon: 'folder', component: ArchivePage },
@@ -36,10 +44,8 @@ export class MyApp {
       console.log("user", user);
       if (!user) {
         this.rootPage = 'LoginPage';
-        authObserver.unsubscribe();
       } else { 
         this.rootPage = InboxPage;
-        authObserver.unsubscribe();
       }
     });
 
@@ -60,5 +66,10 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  logout() {
+    this.authProvider.logout();
+    this.nav.setRoot(LoginPage);
   }
 }
