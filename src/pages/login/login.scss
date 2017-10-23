@@ -1,0 +1,16 @@
+@import '../../theme/variables';
+
+page-login {
+    #google-button {
+        background-color: color($colors, google, base);
+    }
+    #facebook-button {
+        background-color: color($colors, facebook, base);
+    }
+    #twitter-button {
+        background-color: color($colors, twitter, base);
+    }
+    #github-button {
+        background-color: color($colors, github, base);
+    }
+}
