@@ -6,7 +6,7 @@
 
   <ion-card *ngFor="let item of items | async" (click)="showEditNote(item)">
     <ion-item *ngIf="item.date">
-      <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="item.date"></ion-datetime>
+      <ion-datetime displayFormat="MMM DD, YYYY HH:mm" pickerFormat="MMM DD, YYYY HH:mm" [(ngModel)]="item.date"></ion-datetime>
     </ion-item>
     <ion-item>
       {{item.content}}
