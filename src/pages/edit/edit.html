@@ -5,7 +5,7 @@
 <ion-footer>
   <ion-item>
     <ion-label>Date</ion-label>
-    <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="note.date"></ion-datetime>
+    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" pickerFormat="MMM DD, YYYY HH:mm" [(ngModel)]="note.date"></ion-datetime>
   </ion-item>
   <ion-toolbar>
     <button ion-button (click)="saveNote()">Save</button>
