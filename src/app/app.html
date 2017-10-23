@@ -7,7 +7,7 @@
 
   <ion-content>
     <ion-list>
-        <ion-item menuClose *ngFor="let p of pages" (click)="p.action()">
+        <ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)">
           <ion-icon name="{{p.icon}}" ng-if="p.icon" item-start></ion-icon>
           <ion-label>{{p.title}}</ion-label>
         </ion-item>
