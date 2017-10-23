@@ -1,0 +1,27 @@
+import { Component } from '@angular/core';
+import { AuthProvider } from '../../providers/auth/auth';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ConfigProvider } from '../../providers/config/config';
+
+@IonicPage()
+@Component({
+  selector: 'page-login',
+  templateUrl: 'login.html',
+})
+export class LoginPage {
+  appName: string;
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private auth: AuthProvider,
+    configProvider: ConfigProvider,
+  ) {
+    this.appName = configProvider.applicationName;    
+  }
+
+  login(provider: string) {
+    this.auth.login(provider);
+  }
+
+}
