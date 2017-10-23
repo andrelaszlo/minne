@@ -79,6 +79,7 @@ const firebaseConfig = {
 export class AppModule {
   
   constructor(private userAgent: UserAgent) {
+    // TODO, either fix this (it's not working) or remove it
     let userAgentString: string = 'Mozilla/5.0 Google';
     this.userAgent.set(userAgentString)
       .then((res: any) => console.log(res))

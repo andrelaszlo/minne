@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { FirebaseProvider } from '../firebase/firebase';
 import * as firebaseAuth from '@firebase/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
@@ -11,7 +10,7 @@ export class AuthProvider {
 
   public AuthService = AuthProvider;
 
-  constructor(public http: Http, private firebaseProvider: FirebaseProvider, private auth: AngularFireAuth) {
+  constructor(public http: Http, private auth: AngularFireAuth) {
   }
 
   login(provider: string) {
@@ -36,6 +35,14 @@ export class AuthProvider {
 
   logout() {
     this.auth.auth.signOut();
+  }
+
+  getUser() {
+    let user = this.auth.auth.currentUser;
+    if (!user) {
+      throw "No user is currently signed in";
+    }
+    return user;
   }
 
 }
