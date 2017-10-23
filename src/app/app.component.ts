@@ -29,9 +29,9 @@ export class MyApp {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
+    public authProvider: AuthProvider,    
     afAuth: AngularFireAuth,
-    public authProvider: AuthProvider
-  ) {    
+  ) {
     this.pages = [
       { title: 'Inbox', icon: 'happy', component: InboxPage },
       { title: 'Archive', icon: 'folder', component: ArchivePage },

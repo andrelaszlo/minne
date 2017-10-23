@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthProvider } from '../../providers/auth/auth';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ConfigProvider } from '../../providers/config/config';
 
 @IonicPage()
 @Component({
@@ -8,12 +9,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+  appName: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private auth: AuthProvider,
+    configProvider: ConfigProvider,
+  ) {
+    this.appName = configProvider.applicationName;    
   }
 
-  login() {
-    this.auth.login();
+  login(provider: string) {
+    this.auth.login(provider);
   }
 
 }
