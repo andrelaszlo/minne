@@ -2,7 +2,7 @@
   <button ion-button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
-  <ion-title>
-    {{ appName }}<span ng-if="title"> - {{ title }}</span>
+  <ion-title ng-if="title">
+    {{ title }}
   </ion-title>
 </ion-navbar>

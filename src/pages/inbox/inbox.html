@@ -1,5 +1,5 @@
 <ion-header>
-  <main-menu title="inbox"></main-menu>
+  <main-menu title="drafts"></main-menu>
 </ion-header>
 
 <ion-content>
@@ -26,7 +26,8 @@
       </ion-item-options>
   
       <ion-item-options side="right">
-        <button ion-button (click)="unread(item)">Unread</button>
+        <button ion-button (click)="unread(item)" color="secondary" icon-only><ion-icon name="checkmark"></ion-icon></button>
+        <button ion-button (click)="unread(item)" color="danger">Delete</button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

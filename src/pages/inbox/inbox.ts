@@ -57,6 +57,9 @@ export class InboxPage {
   }
 
   
+  archive(note) {
+    this.firebaseProvider.archive(note);
+  }
 
   private showAddNote() {
     let modal = this.modalCtrl.create(AddPage);
