@@ -37,6 +37,10 @@ export class FirebaseProvider {
     this.angularFireDatabase.list(this.notesPath()).push(note);
   }
 
+  archive(note) {
+    note['archived'] = true;
+  }
+
   private notesPath() {
     let userId = this.authProvider.getUser().uid;
     return `/users/${userId}/notes`;

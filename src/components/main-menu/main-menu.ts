@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ConfigProvider } from '../../providers/config/config';
 
 @Component({
   selector: 'main-menu',
@@ -11,9 +10,8 @@ export class MainMenuComponent {
   title: string;
   appName: string;
 
-  constructor(configProvider: ConfigProvider) {
+  constructor() {
     this.title = '';
-    this.appName = configProvider.applicationName;
   }
 
 }
