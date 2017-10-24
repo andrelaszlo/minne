@@ -15,20 +15,28 @@ export class FirebaseProvider {
   ) {
   }
 
-  getItems(): Observable<any> {
-    return this.angularFireDatabase.list(this.notesPath()).snapshotChanges().map(changes => {
-      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-    });
+  getItems(includeArchived: boolean = false): Observable<any> {
+    return this.angularFireDatabase
+      .list(this.notesPath())
+      .snapshotChanges()
+      .map(changes => 
+        changes
+          .map(c => ({ key: c.payload.key, ...c.payload.val() }))
+          .filter(item => includeArchived || item['archived'] != true)
+      );
   }
 
   getSortedItems(): Observable<any> {
     return this.angularFireDatabase.list(this.notesPath(), ref => ref.orderByChild('date').startAt((new Date()).toISOString()))
-    .snapshotChanges().map(changes => {
-      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-    });;
+      .snapshotChanges().map(changes => {
+        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+      });
   }
 
   saveItem(key, item) {
+    if (item['key']) {
+      delete item['key'];
+    }
     this.angularFireDatabase.object(`${this.notesPath()}/${key}`).update(item);
   }
 
@@ -39,6 +47,7 @@ export class FirebaseProvider {
 
   archive(note) {
     note['archived'] = true;
+    this.saveItem(note['key'], note);
   }
 
   private notesPath() {

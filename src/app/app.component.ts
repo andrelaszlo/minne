@@ -42,7 +42,6 @@ export class MyApp {
 
     const authObserver = afAuth.authState.subscribe( user => {
       this.user = user;
-      console.log("user", user);
       if (!user) {
         this.rootPage = 'LoginPage';
       } else { 
@@ -59,7 +58,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      console.log("platform ready, root", this.rootPage);
     });
   }
 
