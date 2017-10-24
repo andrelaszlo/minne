@@ -2,16 +2,34 @@
   <main-menu title="inbox"></main-menu>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
-  <ion-card *ngFor="let item of items | async" (click)="showEditNote(item)">
-    <ion-item *ngIf="item.date">
-      <ion-datetime displayFormat="MMM DD, YYYY HH:mm" max="2030-01-01" [(ngModel)]="item.date"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      {{item.content}}
-    </ion-item>
-  </ion-card>
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of items | async" (click)="showEditNote(item)">
+      <ion-card ion-item>
+        <ion-card-content style="height:auto">
+          {{  item.content }}
+        </ion-card-content>
+        <ion-row >
+          <ion-col center text-right>
+            <ion-note *ngIf="item.date">
+              {{ item.date }}
+            </ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+
+      <ion-item-options side="left" (ionSwipe)="archive(item)">
+        <button ion-button expandable color="secondary" icon-only (click)="archive(item)">
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+      </ion-item-options>
+  
+      <ion-item-options side="right">
+        <button ion-button (click)="unread(item)">Unread</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 
   <ion-fab bottom right #addFab>
       <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>

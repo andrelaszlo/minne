@@ -56,6 +56,8 @@ export class InboxPage {
     modal.present();
   }
 
+  
+
   private showAddNote() {
     let modal = this.modalCtrl.create(AddPage);
     modal.present();

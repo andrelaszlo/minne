@@ -34,7 +34,7 @@ export class MyApp {
     afAuth: AngularFireAuth,
   ) {
     this.pages = [
-      { title: 'Inbox', icon: 'happy', component: InboxPage },
+      { title: 'Drafts', icon: 'happy', component: InboxPage },
       { title: 'Archive', icon: 'folder', component: ArchivePage },
       { title: 'Calendar', icon: 'calendar', component: CalendarPage },
       { title: 'To-do', icon: 'checkmark-circle', component: InboxPage },
