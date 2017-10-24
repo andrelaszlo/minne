@@ -13,7 +13,7 @@
         <ion-row >
           <ion-col center text-right>
             <ion-note *ngIf="item.date">
-              {{ item.date }}
+              {{ item.date | date:"medium" }}
             </ion-note>
           </ion-col>
         </ion-row>
