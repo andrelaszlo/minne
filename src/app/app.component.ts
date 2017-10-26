@@ -1,4 +1,5 @@
 import * as firebase from "firebase";
+import * as moment from 'moment';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -8,6 +9,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AuthProvider } from '../providers/auth/auth';
+import { ConfigProvider } from '../providers/config/config';
+
 
 import { InboxPage } from '../pages/inbox/inbox';
 import { LoginPage } from '../pages/login/login';
@@ -30,7 +33,8 @@ export class MyApp {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public authProvider: AuthProvider,    
+    public authProvider: AuthProvider,
+    public configProvider: ConfigProvider,
     afAuth: AngularFireAuth,
   ) {
     this.pages = [
@@ -56,6 +60,7 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      moment.locale(this.configProvider.getLocale());
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { UserAgent } from '@ionic-native/user-agent';
 
 import { MyApp } from './app.component';
+import { HumanTimePipe } from '../pipes/human-time/human-time';
 import { InboxPage } from '../pages/inbox/inbox';
 import { ArchivePage } from '../pages/archive/archive';
 import { AddPage } from '../pages/add/add';
@@ -11,7 +12,6 @@ import { EditPage } from '../pages/edit/edit';
 import { LoginPage } from '../pages/login/login';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { LoginPageModule } from '../pages/login/login.module';
-
 
 import { MainMenuComponent } from '../components/main-menu/main-menu';
 
@@ -39,6 +39,7 @@ const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
+    HumanTimePipe,
     MainMenuComponent,
     InboxPage,
     ArchivePage,
