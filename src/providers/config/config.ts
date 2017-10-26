@@ -10,6 +10,9 @@ export class ConfigProvider {
   constructor(public http: Http) {
   }
 
+  /**
+   * Get the user's time zone. When null is returned, the system's default time zone should be used.
+   */
   getTimeZone() {
     return 'Europe/Paris';
   }
