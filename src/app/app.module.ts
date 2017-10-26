@@ -25,7 +25,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 import { AuthProvider } from '../providers/auth/auth';
 import { ConfigProvider } from '../providers/config/config';
-import { DateProvider } from '../providers/date/date';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDGAn4uKvIlW8JItNIDyBifGpSP_IWj1js",
@@ -75,8 +74,7 @@ const firebaseConfig = {
     AngularFireAuth,
     AuthProvider,
     ConfigProvider,
-    UserAgent,
-    DateProvider
+    UserAgent
   ]
 })
 export class AppModule {

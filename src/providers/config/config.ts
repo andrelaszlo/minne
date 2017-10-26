@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import * as moment from 'moment';
+import * as momentTimezone from 'moment-timezone';
 
-/*
-  Generated class for the ConfigProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class ConfigProvider {
   applicationName: string = 'minne';
@@ -16,7 +11,11 @@ export class ConfigProvider {
   }
 
   getTimeZone() {
-    
+    return 'Europe/Paris';
+  }
+
+  getLocale() {
+    return 'en-US';
   }
 
 }
