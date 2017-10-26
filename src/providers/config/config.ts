@@ -15,4 +15,8 @@ export class ConfigProvider {
   constructor(public http: Http) {
   }
 
+  getTimeZone() {
+    
+  }
+
 }

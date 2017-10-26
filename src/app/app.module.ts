@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { UserAgent } from '@ionic-native/user-agent';
 
 import { MyApp } from './app.component';
+import { HumanTimePipe } from '../pipes/human-time/human-time';
 import { InboxPage } from '../pages/inbox/inbox';
 import { ArchivePage } from '../pages/archive/archive';
 import { AddPage } from '../pages/add/add';
@@ -11,7 +12,6 @@ import { EditPage } from '../pages/edit/edit';
 import { LoginPage } from '../pages/login/login';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { LoginPageModule } from '../pages/login/login.module';
-
 
 import { MainMenuComponent } from '../components/main-menu/main-menu';
 
@@ -25,6 +25,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 import { AuthProvider } from '../providers/auth/auth';
 import { ConfigProvider } from '../providers/config/config';
+import { DateProvider } from '../providers/date/date';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDGAn4uKvIlW8JItNIDyBifGpSP_IWj1js",
@@ -39,6 +40,7 @@ const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
+    HumanTimePipe,
     MainMenuComponent,
     InboxPage,
     ArchivePage,
@@ -73,7 +75,8 @@ const firebaseConfig = {
     AngularFireAuth,
     AuthProvider,
     ConfigProvider,
-    UserAgent
+    UserAgent,
+    DateProvider
   ]
 })
 export class AppModule {
