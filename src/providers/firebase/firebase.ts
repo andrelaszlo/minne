@@ -50,6 +50,14 @@ export class FirebaseProvider {
     this.saveItem(note['key'], note);
   }
 
+  delete(note) {
+    const key = note['key'];
+    if(!key) {
+      throw new Error('The note key was not found');
+    }
+    this.angularFireDatabase.object(`${this.notesPath()}/${key}`).remove();
+  }
+
   private notesPath() {
     let userId = this.authProvider.getUser().uid;
     return `/users/${userId}/notes`;

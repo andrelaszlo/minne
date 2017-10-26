@@ -64,6 +64,26 @@ export class InboxPage {
     this.firebaseProvider.archive(note);
   }
 
+  delete(note) {
+    const alert = this.alertCtrl.create({
+      title: 'Confirm deletion',
+      message: 'Do you want to delete this note?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.firebaseProvider.delete(note);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
   private showAddNote() {
     let modal = this.modalCtrl.create(AddPage);
     modal.present();
