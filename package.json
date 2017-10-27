@@ -49,8 +49,7 @@
         "APP_ID": "4dbbdf6c",
         "CHANNEL_NAME": "Master",
         "UPDATE_METHOD": "background"
-      },
-      "im.ltdev.cordova.UserAgent": {}
+      }
     }
   }
 }

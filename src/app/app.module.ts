@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { UserAgent } from '@ionic-native/user-agent';
 
 import { MyApp } from './app.component';
 import { HumanTimePipe } from '../pipes/human-time/human-time';
@@ -73,17 +72,7 @@ const firebaseConfig = {
     FirebaseProvider,
     AngularFireAuth,
     AuthProvider,
-    ConfigProvider,
-    UserAgent
+    ConfigProvider
   ]
 })
-export class AppModule {
-  
-  constructor(private userAgent: UserAgent) {
-    // TODO, either fix this (it's not working) or remove it
-    let userAgentString: string = 'Mozilla/5.0 Google';
-    this.userAgent.set(userAgentString)
-      .then((res: any) => console.log(res))
-      .catch((error: any) => console.error(error));
-  }
-}
+export class AppModule {}
