@@ -2,65 +2,94 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { QueryFn } from 'angularfire2/firestore/interfaces';
 import { Observable } from 'rxjs';
 import { AuthProvider } from '../auth/auth';
+import * as moment from 'moment-timezone';
+
+export interface Note {
+  id: string;
+  user: string;
+  date: Date;
+  content: string;
+  archived: boolean;
+}
 
 @Injectable()
 export class FirebaseProvider {
 
+  private notesCollection: AngularFirestoreCollection<Note>;
+
   constructor(
     public http: Http,
     public angularFireDatabase: AngularFireDatabase,
-    public authProvider: AuthProvider
+    public authProvider: AuthProvider,
+    public angularFireStore: AngularFirestore
   ) {
+    this.notesCollection = angularFireStore.collection<Note>('notes');
   }
 
-  getItems(includeArchived: boolean = false): Observable<any> {
-    return this.angularFireDatabase
-      .list(this.notesPath())
-      .snapshotChanges()
-      .map(changes => 
-        changes
-          .map(c => ({ key: c.payload.key, ...c.payload.val() }))
-          .filter(item => includeArchived || item['archived'] != true)
-      );
-  }
-
-  getSortedItems(): Observable<any> {
-    return this.angularFireDatabase.list(this.notesPath(), ref => ref.orderByChild('date').startAt((new Date()).toISOString()))
-      .snapshotChanges().map(changes => {
-        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+  private getNotesByQuery(filterFn: QueryFn): Observable<Note[]> {
+    var notesCollection = this.angularFireStore.collection<Note>('notes', filterFn);
+    var notes: Observable<Note[]> = notesCollection.snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as Note;
+        const id = a.payload.doc.id;
+        return { id, ...data };
       });
+    });
+    return notes;
   }
 
-  saveItem(key, item) {
-    if (item['key']) {
-      delete item['key'];
+  getItems(includeArchived: boolean = false): Observable<Note[]> {
+    let userId = this.authProvider.getUser().uid
+    return this.getNotesByQuery(
+      ref => ref
+        .where('user', '==', userId)
+        .where('archived', '==', false)
+        .orderBy('date', 'desc')
+    );
+  }
+
+  getSortedItems(): Observable<Note[]> {
+    let userId = this.authProvider.getUser().uid
+    return this.getNotesByQuery(
+      ref => ref
+        .where('user', '==', userId)
+        .where('archived', '==', false)
+        .where('date', ">=", moment().startOf('day').format())
+        .orderBy('date', 'asc')
+    );
+  }
+
+  saveItem(id, note) {
+    if (note['id']) {
+      delete note['id'];
     }
-    this.angularFireDatabase.object(`${this.notesPath()}/${key}`).update(item);
+    this.angularFireStore
+      .doc<Note>(`notes/${id}`)
+      .update(note);
   }
 
-  addItem(note) {
-    // TODO: input validation
-    this.angularFireDatabase.list(this.notesPath()).push(note);
+  addItem(note: Note) {
+    console.log("Adding item", note);
+    this.notesCollection.add(note);
   }
 
-  archive(note) {
+  archive(id, note) {
     note['archived'] = true;
-    this.saveItem(note['key'], note);
+    this.saveItem(id, note);
   }
 
   delete(note) {
-    const key = note['key'];
+    const key = note['id'];
     if(!key) {
-      throw new Error('The note key was not found');
+      throw new Error('The note id was not found');
     }
-    this.angularFireDatabase.object(`${this.notesPath()}/${key}`).remove();
-  }
-
-  private notesPath() {
-    let userId = this.authProvider.getUser().uid;
-    return `/users/${userId}/notes`;
+    this.angularFireStore
+      .doc<Note>(`notes/${note.id}`)
+      .delete();
   }
 
 }

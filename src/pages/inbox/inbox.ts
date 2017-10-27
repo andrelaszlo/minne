@@ -59,7 +59,7 @@ export class InboxPage {
 
   
   archive(note) {
-    this.firebaseProvider.archive(note);
+    this.firebaseProvider.archive(note.id, note);
   }
 
   delete(note) {
