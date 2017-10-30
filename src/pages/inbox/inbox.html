@@ -4,7 +4,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item-sliding *ngFor="let item of items | async">
+    <!--<ion-item-sliding *ngFor="let item of items | async">
       <ion-card ion-item (click)="showEditNote(item)">
         <ion-card-header>{{ getDayName(item.date) }}</ion-card-header>
         <ion-card-content style="height:auto">
@@ -29,7 +29,11 @@
         <button ion-button (click)="unread(item)" color="#00ffff" icon-only><ion-icon name="more"></ion-icon></button>
         <button ion-button (click)="delete(item)" color="danger" icon-only><ion-icon name="trash"></ion-icon></button>
       </ion-item-options>
-    </ion-item-sliding>
+    </ion-item-sliding>-->
+
+    <div>
+      {{ items | async | async }}
+    </div>
   </ion-list>
 
   <ion-fab bottom right #addFab>
