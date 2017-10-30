@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { Observable } from 'rxjs';
+import 'rxjs/add/operator/groupBy'
 import * as moment from 'moment-timezone';
 
 @IonicPage()
