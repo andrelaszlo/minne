@@ -5,7 +5,7 @@ import * as moment from 'moment-timezone';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs';
-import { groupBy } from 'rxjs/operator/groupBy'
+import 'rxjs/add/operator/groupBy'
 import { AddPage } from '../add/add'
 import { EditPage } from '../edit/edit'
 
@@ -35,9 +35,15 @@ export class InboxPage {
     public modalCtrl: ModalController,
     public alertCtrl: AlertController
   ) {
-    this.items = firebaseProvider.getItems();
-    console.log(this.items.groupBy);
-    this.items.groupBy(note => moment(note.date).format('dddd'));
+    this.items = firebaseProvider.getItems().flatMap(items => {
+      console.log('items', items);
+      return Observable.from(items).groupBy(this.getDayName);
+    });
+
+    firebaseProvider.getItems().map(items => {
+      console.log('items', items);
+      return Observable.from(items).groupBy(this.getDayName).toArray();
+    }).subscribe(items => console.log('items2', items));
   }
 
   addNote(noteType: NoteType, fab: FabContainer) {
