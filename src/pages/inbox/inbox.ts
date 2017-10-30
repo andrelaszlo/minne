@@ -35,15 +35,31 @@ export class InboxPage {
     public modalCtrl: ModalController,
     public alertCtrl: AlertController
   ) {
-    this.items = firebaseProvider.getItems().flatMap(items => {
-      console.log('items', items);
-      return Observable.from(items).groupBy(this.getDayName);
+    //this.items = firebaseProvider.getItems();
+    this.items = firebaseProvider.getItems().map(items => {
+      var lastGroup = null;
+      var result = [];
+      var temp = [];
+      for (let item of items) {
+        var group = this.getDayName(item);
+        if (lastGroup == null) {
+          lastGroup = group;
+        } else if (group != lastGroup) {
+          result.push({'key': lastGroup, 'items': temp});
+          lastGroup = group;          
+          temp = [item];
+        } else {
+          temp.push(item);
+        }
+      }
+      if (temp.length) {
+        result.push({'key': lastGroup, 'items': temp});
+      }
+      console.log("result", result);
+      return result;
     });
 
-    firebaseProvider.getItems().map(items => {
-      console.log('items', items);
-      return Observable.from(items).groupBy(this.getDayName).toArray();
-    }).subscribe(items => console.log('items2', items));
+    this.items.subscribe(items => console.log('items2', items));
   }
 
   addNote(noteType: NoteType, fab: FabContainer) {
