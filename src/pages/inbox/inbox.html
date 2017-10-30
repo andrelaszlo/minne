@@ -3,14 +3,14 @@
 </ion-header>
 
 <ion-content>
-
   <ion-list>
     <ion-item-sliding *ngFor="let item of items | async">
       <ion-card ion-item (click)="showEditNote(item)">
+        <ion-card-header>{{ getDayName(item.date) }}</ion-card-header>
         <ion-card-content style="height:auto">
-          {{  item.content }}
+          {{ item.content }}
         </ion-card-content>
-        <ion-row >
+        <ion-row>
           <ion-col center text-right>
             <ion-note *ngIf="item.date">
               {{ item.date | humanTime }}

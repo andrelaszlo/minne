@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, AlertController, FabContainer } from 'ionic-angular';
+import * as moment from 'moment-timezone';
 
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs';
+import { groupBy } from 'rxjs/operator/groupBy'
 import { AddPage } from '../add/add'
 import { EditPage } from '../edit/edit'
 
@@ -34,6 +36,8 @@ export class InboxPage {
     public alertCtrl: AlertController
   ) {
     this.items = firebaseProvider.getItems();
+    console.log(this.items.groupBy);
+    this.items.groupBy(note => moment(note.date).format('dddd'));
   }
 
   addNote(noteType: NoteType, fab: FabContainer) {
@@ -80,6 +84,10 @@ export class InboxPage {
       ]
     });
     alert.present();
+  }
+
+  getDayName(note) {
+    return moment(note.date).format('dddd');
   }
 
   private showAddNote() {
