@@ -4,47 +4,42 @@
 
 <ion-content>
   <ion-list>
-    <ng-container *ngFor="let group of items | async">
-      <ion-item-divider color="light">
-          {{ group.key }}  
-      </ion-item-divider>
-      <ion-item-sliding *ngFor="let item of group.items">
-        <ion-card ion-item (click)="showEditNote(item)">
-          <ion-card-content style="height:auto">
-            {{ item.content }}
-          </ion-card-content>
-          <ion-row>
-            <ion-col center text-right>
-              <ion-note *ngIf="item.date">
-                {{ item.date | humanTime }}
-              </ion-note>
-            </ion-col>
-          </ion-row>
-        </ion-card>
+    <ion-item-sliding *ngFor="let item of items | async">
+      <ion-card ion-item (click)="showEditNote(item)">
+        <ion-card-content style="height:auto">
+          {{ item.content }}
+        </ion-card-content>
+        <ion-row >
+          <ion-col center text-right>
+            <ion-note *ngIf="item.date">
+              {{ item.date | humanTime }}
+            </ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-card>
 
-        <ion-item-options side="left" (ionSwipe)="archive(item)">
-          <button ion-button expandable color="secondary" icon-only (click)="archive(item)">
-            <ion-icon name="checkmark"></ion-icon>
-          </button>
-        </ion-item-options>
-    
-        <ion-item-options side="right">
-          <button ion-button (click)="unread(item)" color="#00ffff" icon-only><ion-icon name="more"></ion-icon></button>
-          <button ion-button (click)="delete(item)" color="danger" icon-only><ion-icon name="trash"></ion-icon></button>
-        </ion-item-options>
-      </ion-item-sliding>
-    </ng-container>
+      <ion-item-options side="left" (ionSwipe)="archive(item)">
+        <button ion-button expandable color="secondary" icon-only (click)="archive(item)">
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+      </ion-item-options>
+
+      <ion-item-options side="right">
+        <button ion-button (click)="unread(item)" color="#00ffff" icon-only><ion-icon name="more"></ion-icon></button>
+        <button ion-button (click)="delete(item)" color="danger" icon-only><ion-icon name="trash"></ion-icon></button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 
   <ion-fab bottom right #addFab>
-      <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
-      <ion-fab-list side="left">
-          <button ion-fab (click)="addNote(NoteType.text, addFab)" menuClose><ion-icon name="paper"></ion-icon></button>
-          <button ion-fab (click)="addNote(NoteType.voice, addFab)"><ion-icon name="microphone"></ion-icon></button>        
-          <button ion-fab (click)="addNote(NoteType.camera, addFab)"><ion-icon name="camera"></ion-icon></button>
-          <button ion-fab (click)="addNote(NoteType.photo, addFab)"><ion-icon name="image"></ion-icon></button>
-          <button ion-fab (click)="addNote(NoteType.drawing, addFab)"><ion-icon name="brush"></ion-icon></button>
-      </ion-fab-list>
+    <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab (click)="addNote(NoteType.text, addFab)" menuClose><ion-icon name="paper"></ion-icon></button>
+      <button ion-fab (click)="addNote(NoteType.voice, addFab)"><ion-icon name="microphone"></ion-icon></button>
+      <button ion-fab (click)="addNote(NoteType.camera, addFab)"><ion-icon name="camera"></ion-icon></button>
+      <button ion-fab (click)="addNote(NoteType.photo, addFab)"><ion-icon name="image"></ion-icon></button>
+      <button ion-fab (click)="addNote(NoteType.drawing, addFab)"><ion-icon name="brush"></ion-icon></button>
+    </ion-fab-list>
   </ion-fab>
 
 </ion-content>

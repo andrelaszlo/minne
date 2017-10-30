@@ -3,32 +3,35 @@
 </ion-header>
 
 <ion-content>
+  <ion-list inset>
+    <ion-item-group *ngFor="let group of items | async">
+      <ion-list-header text-center>
+        {{ group.key }}
+      </ion-list-header>
+      <ion-item-sliding *ngFor="let item of group.items">
+        <ion-card ion-item>
+          <ion-card-content style="height:auto">
+            {{ item.content }}
+          </ion-card-content>
+          <ion-row >
+            <ion-col center text-right>
+              <ion-note *ngIf="item.date">
+                {{ getTime(item.date) }}
+              </ion-note>
+            </ion-col>
+          </ion-row>
+        </ion-card>
 
-  <ion-list>
-    <ion-item-sliding *ngFor="let item of items | async">
-      <ion-card ion-item>
-        <ion-card-content style="height:auto">
-          {{  item.content }}
-        </ion-card-content>
-        <ion-row >
-          <ion-col center text-right>
-            <ion-note *ngIf="item.date">
-              {{ item.date | date:"medium" }}
-            </ion-note>
-          </ion-col>
-        </ion-row>
-      </ion-card>
+        <ion-item-options side="left" (ionSwipe)="archive(item)">
+          <button ion-button expandable color="secondary" icon-only>
+            <ion-icon name="checkmark"></ion-icon>
+          </button>
+        </ion-item-options>
 
-      <ion-item-options side="left" (ionSwipe)="archive(item)">
-        <button ion-button expandable color="secondary" icon-only>
-          <ion-icon name="checkmark"></ion-icon>
-        </button>
-      </ion-item-options>
-
-      <ion-item-options side="right">
-        <button ion-button (click)="unread(item)">Unread</button>
-      </ion-item-options>
-    </ion-item-sliding>
+        <ion-item-options side="right">
+          <button ion-button (click)="unread(item)">Unread</button>
+        </ion-item-options>
+      </ion-item-sliding>
+  </ion-item-group>
   </ion-list>
-
 </ion-content>
