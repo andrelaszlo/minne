@@ -22,8 +22,10 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FirebaseProvider } from '../providers/firebase/firebase';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AuthProvider } from '../providers/auth/auth';
 import { ConfigProvider } from '../providers/config/config';
+
 
 const firebaseConfig = {
   apiKey: "***REMOVED***",
@@ -47,6 +49,7 @@ const firebaseConfig = {
     CalendarPage
   ],
   imports: [
+    AngularFirestoreModule,
     BrowserModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),

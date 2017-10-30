@@ -27,6 +27,7 @@ export class CalendarPage {
         var group = this.getDayName(item);
         if (lastGroup == null) {
           lastGroup = group;
+          temp.push(item);
         } else if (group != lastGroup) {
           if (temp.length) {
             result.push({'key': lastGroup, 'items': temp});
