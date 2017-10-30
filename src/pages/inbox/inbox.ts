@@ -4,7 +4,6 @@ import { IonicPage, NavController, NavParams, ModalController, AlertController, 
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/groupBy'
 import { AddPage } from '../add/add'
 import { EditPage } from '../edit/edit'
 
