@@ -9,19 +9,18 @@ import { FirebaseProvider } from '../../providers/firebase/firebase'
 })
 export class EditPage {
   public note: any = {'content': null};
-  public key: any;
+  public id: string = null;
   
   constructor(
     public viewCtrl: ViewController,
     public navParams: NavParams,
     public firebaseProvider: FirebaseProvider) {
       this.note = navParams.get("note");
-      this.key = this.note.key;
-      delete this.note.key;
+      this.id = this.note.id;
     }
     
     saveNote() {
-      this.firebaseProvider.saveItem(this.key, this.note);
+      this.firebaseProvider.saveItem(this.note.id, this.note);
       this.viewCtrl.dismiss();
     }
     
