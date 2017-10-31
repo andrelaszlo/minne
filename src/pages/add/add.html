@@ -1,18 +1,28 @@
-<ion-content padding>
-  <ion-textarea placeholder="Buy milk" [(ngModel)]="note.content"></ion-textarea>
-</ion-content>
-  
-<ion-footer>
-  <ion-item>
+<ion-header>
+  <ion-navbar>
+    <ion-buttons>
+      <button ion-button (click)="dismiss()" icon-only><ion-icon name="close"></ion-icon></button>
+    </ion-buttons>
+
+    <ion-buttons end>
+        <button ion-button (click)="saveNote()">Save</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item no-lines>
     <ion-label>Date</ion-label>
     <ion-datetime
       displayFormat="MMM DD, YYYY HH:mm"
       max="2030-01-01"
-      [ngModel]="note.date | formatToLocal" 
+      [ngModel]="note.date | formatToLocal"
       (ngModelChange)="note.date=$event">>
     </ion-datetime>
   </ion-item>
-  <ion-toolbar>
-    <button ion-button (click)="saveNote()">Save</button>
-  </ion-toolbar>
-</ion-footer>  
+
+  <ion-item no-lines>
+    <ion-label floating>Note content</ion-label>
+    <ion-textarea rows="7" [(ngModel)]="note.content"></ion-textarea>
+  </ion-item>
+</ion-content>
