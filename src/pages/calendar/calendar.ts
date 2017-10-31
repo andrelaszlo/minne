@@ -49,8 +49,16 @@ export class CalendarPage {
     });
   }
 
-  getTime(value: Date) {
-    return moment(value).format('HH:mm');
+  getTime(date: Date) {
+    return moment(date)
+      .calendar(null, {
+        sameDay: 'LT',
+        nextDay: 'LT',
+        nextWeek: 'LT',
+        sameElse: function(date) {
+          return 'LLL';
+        }
+      });
   }
 
   showEditNote(note) {
@@ -89,7 +97,19 @@ export class CalendarPage {
   }
 
   private getDayName(note) {
-    return moment(note.date).format('dddd, MMM D');
+    return moment(note.date)
+      .calendar(null, {
+        sameDay: '[Today]',
+        nextDay: '[Tomorrow]',
+        nextWeek: 'dddd',
+        sameElse: function(date) {
+          let endOfYear = moment().endOf("year");
+          if (this.isAfter(endOfYear)) {
+            return 'Y';
+          }
+          return 'MMMM';
+        }
+      });
   }
 
 }
