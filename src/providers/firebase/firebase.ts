@@ -73,7 +73,6 @@ export class FirebaseProvider {
   }
 
   addItem(note: Note) {
-    console.log("Adding item", note);
     this.notesCollection.add(note);
   }
 

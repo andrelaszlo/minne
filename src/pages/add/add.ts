@@ -26,7 +26,6 @@ export class AddPage {
   }
 
   saveNote() {
-    console.log("Saving note", this.note);
     // TODO: move all this note logic to a provider or something
     this.note['user'] = this.authProvider.getUser().uid;
     this.note['archived'] = !!this.note['archived'];
