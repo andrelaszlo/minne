@@ -35,5 +35,9 @@
   </ion-item-group>
   </ion-list>
 
-  <add-button></add-button>
+  <ion-fab bottom right #addFab>
+    <button ion-fab icon-only color="danger" (click)="addNote(addFab)">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
