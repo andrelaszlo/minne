@@ -5,7 +5,12 @@
 <ion-footer>
   <ion-item>
     <ion-label>Date</ion-label>
-    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" max="2030-01-01" [(ngModel)]="note.date"></ion-datetime>
+    <ion-datetime
+      displayFormat="MMM DD, YYYY HH:mm"
+      max="2030-01-01"
+      [ngModel]="note.date | formatToLocal" 
+      (ngModelChange)="note.date=$event">>
+    </ion-datetime>
   </ion-item>
   <ion-toolbar>
     <button ion-button (click)="saveNote()">Save</button>
