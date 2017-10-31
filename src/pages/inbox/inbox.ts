@@ -4,16 +4,7 @@ import { IonicPage, NavController, NavParams, ModalController, AlertController, 
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs';
-import { AddPage } from '../add/add'
 import { EditPage } from '../edit/edit'
-
-export enum NoteType {
-  text,
-  voice,
-  camera,
-  photo,
-  drawing
-}
 
 @IonicPage()
 @Component({
@@ -23,7 +14,6 @@ export enum NoteType {
 export class InboxPage {
   
   public items: Observable<any>;
-  public NoteType = NoteType;
   
   constructor(
     public navCtrl: NavController,
@@ -35,29 +25,12 @@ export class InboxPage {
   ) {
     this.items = firebaseProvider.getItems();
   }
-
-  addNote(noteType: NoteType, fab: FabContainer) {
-    switch(noteType) {
-      case NoteType.text:
-      fab.close();
-      this.showAddNote();
-      break;
-      default:
-      let alert = this.alertCtrl.create({
-        title: 'Sorry!',
-        subTitle: 'This is not implemented yet 😢 Please let us know if you think we should make it a priority.',
-        buttons: ['OK']
-      });
-      alert.present();
-    }
-  }
   
   showEditNote(note) {
     let modal = this.modalCtrl.create(EditPage, { note });
     modal.present();
   }
 
-  
   archive(note) {
     this.firebaseProvider.archive(note.id, note);
   }
@@ -80,11 +53,6 @@ export class InboxPage {
       ]
     });
     alert.present();
-  }
-
-  private showAddNote() {
-    let modal = this.modalCtrl.create(AddPage);
-    modal.present();
   }
   
 }
