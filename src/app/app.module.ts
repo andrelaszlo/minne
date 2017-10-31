@@ -13,6 +13,7 @@ import { CalendarPage } from '../pages/calendar/calendar';
 import { LoginPageModule } from '../pages/login/login.module';
 
 import { MainMenuComponent } from '../components/main-menu/main-menu';
+import { AddButtonComponent } from '../components/add-button/add-button';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -42,6 +43,7 @@ const firebaseConfig = {
     MyApp,
     HumanTimePipe,
     MainMenuComponent,
+    AddButtonComponent,
     InboxPage,
     ArchivePage,
     AddPage,
@@ -61,6 +63,7 @@ const firebaseConfig = {
   entryComponents: [
     MyApp,
     MainMenuComponent,
+    AddButtonComponent,
     InboxPage,
     ArchivePage,
     AddPage,
