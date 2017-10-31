@@ -3,7 +3,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { HumanTimePipe } from '../pipes/human-time/human-time';
 import { InboxPage } from '../pages/inbox/inbox';
 import { ArchivePage } from '../pages/archive/archive';
 import { AddPage } from '../pages/add/add';
@@ -11,6 +10,9 @@ import { EditPage } from '../pages/edit/edit';
 import { LoginPage } from '../pages/login/login';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { LoginPageModule } from '../pages/login/login.module';
+
+import { HumanTimePipe } from '../pipes/human-time/human-time';
+import { FormatToLocalPipe } from '../pipes/format-to-local/format-to-local';
 
 import { MainMenuComponent } from '../components/main-menu/main-menu';
 
@@ -41,6 +43,7 @@ const firebaseConfig = {
   declarations: [
     MyApp,
     HumanTimePipe,
+    FormatToLocalPipe,
     MainMenuComponent,
     InboxPage,
     ArchivePage,
