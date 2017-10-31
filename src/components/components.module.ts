@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { MainMenuComponent } from './main-menu/main-menu';
-import { AddButtonComponent } from './add-button/add-button';
 @NgModule({
 	declarations: [
-		MainMenuComponent,
-		AddButtonComponent
+		MainMenuComponent
 	],
 	imports: [],
 	exports: [
-		MainMenuComponent,
-		AddButtonComponent
+		MainMenuComponent
 	]
 })
 export class ComponentsModule {}

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, FabContainer, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, FabContainer, ModalController, AlertController } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/groupBy'
 import * as moment from 'moment-timezone';
-import { AddPage } from '../../pages/add/add'
+import { AddPage } from '../../pages/add/add';
+import { EditPage } from '../edit/edit';
 
 @IonicPage()
 @Component({
@@ -19,7 +20,8 @@ export class CalendarPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public firebaseProvider: FirebaseProvider,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public alertCtrl: AlertController
   ) {
     this.items = firebaseProvider.getSortedItems().map(items => {
       var lastGroup = null;
@@ -49,6 +51,35 @@ export class CalendarPage {
 
   getTime(value: Date) {
     return moment(value).format('HH:mm');
+  }
+
+  showEditNote(note) {
+    let modal = this.modalCtrl.create(EditPage, { note });
+    modal.present();
+  }
+
+  archive(note) {
+    this.firebaseProvider.archive(note.id, note);
+  }
+
+  delete(note) {
+    const alert = this.alertCtrl.create({
+      title: 'Confirm deletion',
+      message: 'Do you want to delete this note?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.firebaseProvider.delete(note);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   addNote(fab: FabContainer) {
