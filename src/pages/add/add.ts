@@ -4,7 +4,6 @@ import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AuthProvider } from '../../providers/auth/auth';
 import { ConfigProvider} from '../../providers/config/config';
 
-
 import * as moment from 'moment-timezone';
 
 @IonicPage()
