@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, ViewController, NavParams } from 'ionic-angular';
+import { Component, ElementRef } from '@angular/core';
+import { IonicPage, ViewController, NavController, NavParams } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AuthProvider } from '../../providers/auth/auth';
 import { ConfigProvider} from '../../providers/config/config';
@@ -18,6 +18,7 @@ export class AddPage {
 
   constructor(
     public viewCtrl: ViewController,
+    public navCtrl: NavController,
     public navParams: NavParams,
     public firebaseProvider: FirebaseProvider,
     public authProvider: AuthProvider,
@@ -37,6 +38,10 @@ export class AddPage {
     this.note['date'] = date.format();
     this.firebaseProvider.addItem(this.note);
     this.viewCtrl.dismiss();
+  }
+
+  dismiss() {
+    this.navCtrl.pop();
   }
 
 }
