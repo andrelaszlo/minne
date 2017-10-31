@@ -38,18 +38,18 @@ export class MyApp {
     afAuth: AngularFireAuth,
   ) {
     this.pages = [
-      { title: 'Drafts', icon: 'happy', component: InboxPage },
-      { title: 'Archive', icon: 'folder', component: ArchivePage },
       { title: 'Calendar', icon: 'calendar', component: CalendarPage },
+      { title: 'Drafts', icon: 'happy', component: InboxPage },
       { title: 'To-do', icon: 'checkmark-circle', component: InboxPage },
+      { title: 'Archive', icon: 'folder', component: ArchivePage },
     ];
 
     const authObserver = afAuth.authState.subscribe( user => {
       this.user = user;
       if (!user) {
         this.rootPage = 'LoginPage';
-      } else { 
-        this.rootPage = InboxPage;
+      } else {
+        this.rootPage = CalendarPage;
       }
     });
 
