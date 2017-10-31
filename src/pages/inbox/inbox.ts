@@ -5,6 +5,7 @@ import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs';
 import { EditPage } from '../edit/edit'
+import { AddPage } from '../../pages/add/add'
 
 @IonicPage()
 @Component({
@@ -53,6 +54,12 @@ export class InboxPage {
       ]
     });
     alert.present();
+  }
+
+  addNote(fab: FabContainer) {
+    fab.close();
+    let modal = this.modalCtrl.create(AddPage);
+    modal.present();
   }
   
 }

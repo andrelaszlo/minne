@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, FabContainer, ModalController } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/groupBy'
 import * as moment from 'moment-timezone';
+import { AddPage } from '../../pages/add/add'
 
 @IonicPage()
 @Component({
@@ -17,7 +18,8 @@ export class CalendarPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public firebaseProvider: FirebaseProvider
+    public firebaseProvider: FirebaseProvider,
+    public modalCtrl: ModalController
   ) {
     this.items = firebaseProvider.getSortedItems().map(items => {
       var lastGroup = null;
@@ -47,6 +49,12 @@ export class CalendarPage {
 
   getTime(value: Date) {
     return moment(value).format('HH:mm');
+  }
+
+  addNote(fab: FabContainer) {
+    fab.close();
+    let modal = this.modalCtrl.create(AddPage);
+    modal.present();
   }
 
   private getDayName(note) {
