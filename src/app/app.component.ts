@@ -10,7 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AuthProvider } from '../providers/auth/auth';
 import { ConfigProvider } from '../providers/config/config';
-
+import { NotificationProvider } from '../providers/notification/notification';
 
 import { InboxPage } from '../pages/inbox/inbox';
 import { LoginPage } from '../pages/login/login';
@@ -35,6 +35,7 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public authProvider: AuthProvider,
     public configProvider: ConfigProvider,
+    public notificationProvider: NotificationProvider,
     afAuth: AngularFireAuth,
   ) {
     this.pages = [
