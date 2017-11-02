@@ -80,13 +80,13 @@
       "cordova-universal-links-plugin": {},
       "cordova-plugin-buildinfo": {},
       "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-statusbar": {},
       "cordova-plugin-customurlscheme": {
-        "URL_SCHEME": "com.firebase.cordova",
+        "URL_SCHEME": "com.minne",
         "ANDROID_SCHEME": " ",
         "ANDROID_HOST": " ",
         "ANDROID_PATHPREFIX": "/"
-      },
-      "cordova-plugin-statusbar": {}
+      }
     },
     "platforms": [
       "android"
