@@ -30,16 +30,28 @@ export class AuthProvider {
         break;
     }
 
-    this.auth.auth.signInWithPopup(authProvider);
+    // Signin with popup is not supported in Cordova
+    this.auth.auth.signInWithRedirect(authProvider)
+      .then( result => {
+        // This gives you a Google Access Token.
+        // You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        console.log(token, user);
+      }).catch(function(error) {
+        // Handle Errors here.
+        console.log(error.message);
+      });
   }
 
   logout() {
     this.auth.auth.signOut();
   }
 
-  getUser() {
+  getUser(throwError: boolean = true) {
     let user = this.auth.auth.currentUser;
-    if (!user) {
+    if (!user && throwError) {
       throw "No user is currently signed in";
     }
     return user;

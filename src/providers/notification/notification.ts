@@ -23,7 +23,7 @@ export class NotificationProvider {
     for(let note of currentNotifications) {
       this.localNotifications.schedule({
         id: 1,
-        at: note.date,
+        //at: note.date,
         text: note.content
       });
     }
@@ -37,7 +37,7 @@ export class NotificationProvider {
     return [
       {
         content: 'hello',
-        date: moment().add(10, 'seconds')
+        //date: moment().add(10, 'seconds')
       }
     ]
   }
