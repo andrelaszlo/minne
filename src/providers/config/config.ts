@@ -5,7 +5,7 @@ import * as momentTimezone from 'moment-timezone';
 
 @Injectable()
 export class ConfigProvider {
-  applicationName: string = 'minne';
+  applicationName: string = 'Minne';
 
   constructor(public http: Http) {
   }
