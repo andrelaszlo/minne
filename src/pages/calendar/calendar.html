@@ -10,7 +10,7 @@
       </ion-list-header>
       <ion-item-sliding *ngFor="let item of group.items">
         <ion-card ion-item (click)="showEditNote(item)">
-          <ion-card-content style="height:auto">
+          <ion-card-content>
             {{ item.content }}
           </ion-card-content>
           <ion-row>
