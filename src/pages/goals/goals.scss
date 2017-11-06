@@ -1,0 +1,31 @@
+page-goals {
+    .menu-button {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: transparent;
+    }
+
+    .goals {
+        background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url("../../assets/imgs/nantesriver.jpg") no-repeat center;
+        text-align: center;
+        background-size: cover;
+    }
+
+    .title {
+        position: absolute;
+        top: 15%;
+        font-size: 2.0em;
+        width: 100%;
+        font-weight: bold;
+        color: #fff;
+    }
+    
+    .subtitle {
+        font-size: 1.5em;
+        position: absolute;
+        top: 25%;
+        width: 100%;
+        color: #fff;
+    }
+}
