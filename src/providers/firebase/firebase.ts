@@ -58,7 +58,7 @@ export class FirebaseProvider {
       ref => ref
         .where('user', '==', userId)
         .where('archived', '==', false)
-        .where('date', ">=", moment().startOf('day').format())
+        .where('date', ">=", moment().subtract(2, 'hours').format())
         .orderBy('date', 'asc')
     );
   }

@@ -4,6 +4,8 @@ page-goals {
         top: 0;
         left: 0;
         background-color: transparent;
+        border-width: 0;
+        color: white;
     }
 
     .goals {
@@ -27,5 +29,10 @@ page-goals {
         top: 25%;
         width: 100%;
         color: #fff;
+    }
+
+    .button-add {
+        padding: 0px 10px 6px 10px;
+        margin-top: -6px;
     }
 }
