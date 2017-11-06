@@ -9,7 +9,7 @@
         {{ group.key }}
       </ion-list-header>
       <ion-item-sliding *ngFor="let item of group.items">
-        <ion-card ion-item (click)="showEditNote(item)">
+        <ion-card ion-item (click)="showEditNote(item)" [ngClass]="{'past-item': isPast(item.date)}">
           <ion-card-content>
             {{ item.content }}
           </ion-card-content>
