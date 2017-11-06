@@ -8,8 +8,8 @@
 
 <ion-footer>
   <ion-list>
-    <ion-card *ngFor="let item of items | async">
-      <ion-card-content style="height:auto">
+    <ion-card *ngFor="let item of items | async" (click)="calendarRedirect()">
+      <ion-card-content>
         {{ item.content }}
       </ion-card-content>
       <ion-row>
@@ -23,7 +23,7 @@
   </ion-list>
 
   <div class="button-add">
-    <button ion-button icon-only block (click)="addNote(addFab)">
+    <button ion-button icon-only block (click)="addNote()">
       <ion-icon name="add"></ion-icon>
     </button>
   </div>

@@ -4,6 +4,7 @@ import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Observable } from 'rxjs';
 import { AddPage } from '../../pages/add/add';
+import { CalendarPage } from '../../pages/calendar/calendar';
 
 @IonicPage()
 @Component({
@@ -32,6 +33,10 @@ export class GoalsPage {
   addNote() {
     let modal = this.modalCtrl.create(AddPage);
     modal.present();
+  }
+
+  calendarRedirect() {
+    this.navCtrl.setRoot(CalendarPage,{});
   }
 
 }
