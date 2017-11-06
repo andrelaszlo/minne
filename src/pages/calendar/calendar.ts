@@ -96,6 +96,10 @@ export class CalendarPage {
     modal.present();
   }
 
+  isPast(when: any) {
+    return moment(when).isBefore(moment());
+  }
+
   private getDayName(note) {
     return moment(note.date)
       .calendar(null, {
