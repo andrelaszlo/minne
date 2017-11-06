@@ -16,10 +16,15 @@ export interface Note {
   archived: boolean;
 }
 
+export interface User {
+  goal: string;
+}
+
 @Injectable()
 export class FirebaseProvider {
 
   private notesCollection: AngularFirestoreCollection<Note>;
+  private usersCollection: AngularFirestoreCollection<User>;
 
   constructor(
     public http: Http,
@@ -28,6 +33,7 @@ export class FirebaseProvider {
     public angularFireStore: AngularFirestore
   ) {
     this.notesCollection = angularFireStore.collection<Note>('notes');
+    this.usersCollection = angularFireStore.collection<User>('users');
   }
 
   private getNotesByQuery(filterFn: QueryFn): Observable<Note[]> {
@@ -86,6 +92,19 @@ export class FirebaseProvider {
 
   addItem(note: Note) {
     this.notesCollection.add(note);
+  }
+
+  addGoal(goal: string) {
+    let userId = this.authProvider.getUser().uid;
+    this.usersCollection.doc(userId).update({goal});
+  }
+
+  getGoal() {
+    let userId = this.authProvider.getUser().uid;
+    return this.usersCollection.doc(userId).snapshotChanges().map(user => {
+      console.log("user log", user);
+      return user['goal'];
+    });
   }
 
   archive(id, note) {

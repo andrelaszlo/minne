@@ -3,11 +3,14 @@
     <ion-icon name="menu"></ion-icon>
   </button>
   <div class="title">Hello {{ getUserName() }}!</div>
-
   <ion-item>
     <ion-label class="subtitle" floating>What is your goal for this week?</ion-label>
-    <ion-input class="subtitle"></ion-input>
+    <ion-input class="subtitle" [(ngModel)]="goal"></ion-input>
   </ion-item>
+  <div>
+    <div class="subtitle">Your goal this week is</div>
+    <div class="goal">{{ getGoal() | async }}</div>
+  </div>
 </ion-content>
 
 <ion-footer>

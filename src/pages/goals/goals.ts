@@ -13,6 +13,7 @@ import { CalendarPage } from '../../pages/calendar/calendar';
 })
 export class GoalsPage {
 
+  public goal: string;
   public items: Observable<any>;
   public limitedItems: Observable<any>;
 
@@ -28,6 +29,14 @@ export class GoalsPage {
 
   getUserName() {
     return this.authProvider.getUser().displayName.split(" ")[0];
+  }
+
+  getGoal() {
+    return this.firebaseProvider.getGoal();
+  }
+
+  saveGoal(goal) {
+    this.firebaseProvider.addGoal(goal);
   }
 
   addNote() {
