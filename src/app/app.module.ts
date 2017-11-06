@@ -11,6 +11,7 @@ import { AddPage } from '../pages/add/add';
 import { EditPage } from '../pages/edit/edit';
 import { LoginPage } from '../pages/login/login';
 import { CalendarPage } from '../pages/calendar/calendar';
+import { GoalsPage } from '../pages/goals/goals';
 import { LoginPageModule } from '../pages/login/login.module';
 
 import { HumanTimePipe } from '../pipes/human-time/human-time';
@@ -52,7 +53,8 @@ const firebaseConfig = {
     ArchivePage,
     AddPage,
     EditPage,
-    CalendarPage
+    CalendarPage,
+    GoalsPage
   ],
   imports: [
     AngularFirestoreModule,
@@ -73,7 +75,8 @@ const firebaseConfig = {
     AddPage,
     EditPage,
     LoginPage,
-    CalendarPage
+    CalendarPage,
+    GoalsPage
   ],
   providers: [
     StatusBar,
