@@ -16,6 +16,7 @@ import { InboxPage } from '../pages/inbox/inbox';
 import { LoginPage } from '../pages/login/login';
 import { ArchivePage } from '../pages/archive/archive';
 import { CalendarPage } from '../pages/calendar/calendar';
+import { GoalsPage } from '../pages/goals/goals';
 
 @Component({
   templateUrl: 'app.html'
@@ -39,6 +40,7 @@ export class MyApp {
     afAuth: AngularFireAuth,
   ) {
     this.pages = [
+      { title: 'Home', icon: 'home', component: GoalsPage },
       { title: 'Calendar', icon: 'calendar', component: CalendarPage },
       { title: 'Drafts', icon: 'happy', component: InboxPage },
       { title: 'To-do', icon: 'checkmark-circle', component: InboxPage },
@@ -50,7 +52,7 @@ export class MyApp {
       if (!user) {
         this.rootPage = 'LoginPage';
       } else {
-        this.rootPage = CalendarPage;
+        this.rootPage = GoalsPage;
       }
     });
 

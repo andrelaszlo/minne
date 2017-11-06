@@ -63,6 +63,18 @@ export class FirebaseProvider {
     );
   }
 
+  getLimitedItems(): Observable<Note[]> {
+    let userId = this.authProvider.getUser().uid
+    return this.getNotesByQuery(
+      ref => ref
+        .where('user', '==', userId)
+        .where('archived', '==', false)
+        .where('date', ">=", moment().format())
+        .orderBy('date', 'asc')
+        .limit(2)
+    );
+  }
+
   saveItem(id, note) {
     if (note['id']) {
       delete note['id'];

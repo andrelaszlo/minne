@@ -1,0 +1,31 @@
+<ion-content class="goals">
+  <button ion-button menuToggle icon-only class="menu-button">
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <div class="title">Hello {{ getUserName() }}!</div>
+  <div class="subtitle">What is your goal for this week?</div>
+  <ion-fab bottom right #addFab>
+    <button ion-fab icon-only color="danger" (click)="addNote(addFab)">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
+
+<ion-footer>
+  <ion-list>
+    <div *ngFor="let item of items | async">
+      <ion-card (click)="showEditNote(item)">
+        <ion-card-content style="height:auto">
+          {{ item.content }}
+        </ion-card-content>
+        <ion-row>
+          <ion-col center text-right>
+            <ion-note *ngIf="item.date">
+              {{ item.date | humanTime }}
+            </ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+  </ion-list>
+</ion-footer>
