@@ -16,6 +16,12 @@ page-goals {
         background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url("../../assets/imgs/nantesriver.jpg") no-repeat center;
         text-align: center;
         background-size: cover;
+        ion-item {
+            background-color: transparent;
+            padding-left:25px;
+            padding-right:25px;
+            text-align: center;
+        }
     }
 
     .title {
@@ -26,11 +32,11 @@ page-goals {
         margin-top: 2em;
         margin-bottom:1em;
     }
-    
+
     .subtitle {
         font-size: 1.5em;
         width: 100%;
-        color: #fff;
+        color: #fff !important;
     }
 
     .button-add {
