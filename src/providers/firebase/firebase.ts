@@ -63,6 +63,7 @@ export class FirebaseProvider {
     );
   }
 
+  // TODO: faster way?
   getLimitedItems(): Observable<Note[]> {
     let userId = this.authProvider.getUser().uid
     return this.getNotesByQuery(
