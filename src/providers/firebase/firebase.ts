@@ -81,7 +81,7 @@ export class FirebaseProvider {
     );
   }
 
-  saveItem(id, note) {
+  saveItem(id, note): void {
     if (note['id']) {
       delete note['id'];
     }
@@ -90,19 +90,18 @@ export class FirebaseProvider {
       .update(note);
   }
 
-  addItem(note: Note) {
+  addItem(note: Note): void {
     this.notesCollection.add(note);
   }
 
-  addGoal(goal: string) {
+  addGoal(goal: string): void {
     let userId = this.authProvider.getUser().uid;
     this.usersCollection.doc(userId).update({goal});
   }
 
-  getGoal() {
+  getGoal(): Observable<string> {
     let userId = this.authProvider.getUser().uid;
-    return this.usersCollection.doc(userId).snapshotChanges().map(user => {
-      console.log("user log", user);
+    return this.usersCollection.doc(userId).valueChanges().map(user => {
       return user['goal'];
     });
   }
