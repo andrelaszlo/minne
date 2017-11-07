@@ -42,8 +42,8 @@ export class MyApp {
     this.pages = [
       { title: 'Home', icon: 'home', component: GoalsPage },
       { title: 'Calendar', icon: 'calendar', component: CalendarPage },
-      { title: 'Drafts', icon: 'happy', component: InboxPage },
       { title: 'To-do', icon: 'checkmark-circle', component: InboxPage },
+      { title: 'Drafts', icon: 'happy', component: InboxPage },
       { title: 'Archive', icon: 'folder', component: ArchivePage },
     ];
 
