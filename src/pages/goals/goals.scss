@@ -4,19 +4,24 @@ page-goals {
     }
 
     .menu-button {
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: transparent;
         border-width: 0;
-        color: white;
+        color: #fff;
     }
 
     /* TODO: check IE and padding */
-    .goals {
+    ion-content {
         background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url("../assets/imgs/nantesriver.jpg") no-repeat center;
         text-align: center;
         background-size: cover;
+        ion-list {
+            margin: 0 !important;
+            background-color: #fff;
+        }
+    }
+
+    .goals {
+        height: 60%;
+        white-space: normal;
         ion-item {
             background-color: transparent;
             padding-left:25px;
@@ -49,8 +54,13 @@ page-goals {
         margin-top: 0.5em;
     }
 
-    .button-add {
-        padding: 0px 10px 6px 10px;
-        margin-top: -6px;
+    .date, .calendar {
+        font-family: Helvetica,monospace;
+        font-size: 1.3em;
+        white-space: normal;
+    }
+
+    .past-item, .date {
+        color: #c5c5c5;
     }
 }
