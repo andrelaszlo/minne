@@ -3,11 +3,14 @@
     <ion-icon name="menu"></ion-icon>
   </button>
   <div class="title">Hello {{ getUserName() }}!</div>
-
-  <ion-item>
+  <ion-item *ngIf="!goal">
     <ion-label class="subtitle" floating>What is your goal for this week?</ion-label>
-    <ion-input class="subtitle"></ion-input>
+    <ion-input class="subtitle" [ngModel]="goal" (keyup.enter)="setGoal($event.target.value)"></ion-input>
   </ion-item>
+  <div *ngIf="goal">
+    <div class="subtitle">Your goal this week is</div>
+    <div class="goal">{{ goal }}</div>
+  </div>
 </ion-content>
 
 <ion-footer>
