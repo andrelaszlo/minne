@@ -13,6 +13,7 @@ import { CalendarPage } from '../../pages/calendar/calendar';
 })
 export class GoalsPage {
 
+  public goal: string;
   public items: Observable<any>;
   public limitedItems: Observable<any>;
 
@@ -24,10 +25,19 @@ export class GoalsPage {
     public authProvider: AuthProvider
   ) {
     this.items = firebaseProvider.getLimitedItems();
+    firebaseProvider.getGoal().forEach(newGoal =>  this.goal = newGoal);
+  }
+
+  setGoal(goal) {
+    this.firebaseProvider.addGoal(goal);
   }
 
   getUserName() {
     return this.authProvider.getUser().displayName.split(" ")[0];
+  }
+
+  saveGoal(goal) {
+    this.firebaseProvider.addGoal(goal);
   }
 
   addNote() {
