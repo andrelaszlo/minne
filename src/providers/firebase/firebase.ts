@@ -69,19 +69,6 @@ export class FirebaseProvider {
     );
   }
 
-  // TODO: faster way?
-  getLimitedItems(): Observable<Note[]> {
-    let userId = this.authProvider.getUser().uid
-    return this.getNotesByQuery(
-      ref => ref
-        .where('user', '==', userId)
-        .where('archived', '==', false)
-        .where('date', ">=", moment().format())
-        .orderBy('date', 'asc')
-        .limit(2)
-    );
-  }
-
   saveItem(id, note): void {
     if (note['id']) {
       delete note['id'];
@@ -97,13 +84,17 @@ export class FirebaseProvider {
 
   addGoal(goal: string): void {
     let userId = this.authProvider.getUser().uid;
-    this.usersCollection.doc(userId).update({goal});
+    // TODO: make sure user is created in a central place instead
+    this.usersCollection.doc(userId).set({goal});
   }
 
   getGoal(): Observable<string> {
     let userId = this.authProvider.getUser().uid;
     return this.usersCollection.doc(userId).valueChanges().map(user => {
-      return user['goal'];
+      if (user && user['goal']) {
+        return user['goal'];
+      }
+      return null;
     });
   }
 
