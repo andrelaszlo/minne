@@ -55,8 +55,9 @@ export class CalendarPage {
         sameDay: 'LT',
         nextDay: 'LT',
         nextWeek: 'LT',
-        sameElse: function(date) {
-          return 'LLL';
+        // TODO: adapt to location
+        sameElse: function(now) {
+          return this.isBefore(now.endOf("year")) ? 'Do LT' : 'MM/DD LT';
         }
       });
   }

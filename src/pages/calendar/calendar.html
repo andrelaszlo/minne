@@ -10,16 +10,12 @@
       </ion-list-header>
       <ion-item-sliding *ngFor="let item of group.items">
         <ion-card ion-item (click)="showEditNote(item)" [ngClass]="{'past-item': isPast(item.date)}">
-          <ion-card-content>
+          <ion-col class="date">
+            {{ getTime(item.date) }}
+          </ion-col>
+          <ion-col class="content">
             {{ item.content }}
-          </ion-card-content>
-          <ion-row>
-            <ion-col center text-right>
-              <ion-note *ngIf="item.date">
-                {{ getTime(item.date) }}
-              </ion-note>
-            </ion-col>
-          </ion-row>
+          </ion-col>
         </ion-card>
 
         <ion-item-options side="left" (ionSwipe)="archive(item)">
