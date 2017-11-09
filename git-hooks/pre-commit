@@ -1,4 +1,8 @@
 #!/bin/sh
-echo -n "New version: "
-npm version --no-git-tag-version --git=echo patch &&
-    git add package.json package-lock.json
+branch=`git rev-parse --abbrev-ref HEAD`
+if [ "$branch" = "master" ]; then
+    echo -n "Bumped version to: "
+    npm version --no-git-tag-version --git=echo patch &&
+        git add package.json package-lock.json
+    echo "Use git's -n flag to make a commit without bumping the version"
+fi
