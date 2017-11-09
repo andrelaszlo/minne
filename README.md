@@ -1,5 +1,11 @@
 This is Minne (name tbd).
 
+After checkout, install the git hooks:
+
+```
+./install-hooks.sh
+```
+
 To build a signed apk (for release in HockeyApp, for example):
 
 ```
