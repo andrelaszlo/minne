@@ -16,10 +16,15 @@ export interface Note {
   archived: boolean;
 }
 
+export interface User {
+  goal: string;
+}
+
 @Injectable()
 export class FirebaseProvider {
 
   private notesCollection: AngularFirestoreCollection<Note>;
+  private usersCollection: AngularFirestoreCollection<User>;
 
   constructor(
     public http: Http,
@@ -28,6 +33,7 @@ export class FirebaseProvider {
     public angularFireStore: AngularFirestore
   ) {
     this.notesCollection = angularFireStore.collection<Note>('notes');
+    this.usersCollection = angularFireStore.collection<User>('users');
   }
 
   private getNotesByQuery(filterFn: QueryFn): Observable<Note[]> {
@@ -63,20 +69,7 @@ export class FirebaseProvider {
     );
   }
 
-  // TODO: faster way?
-  getLimitedItems(): Observable<Note[]> {
-    let userId = this.authProvider.getUser().uid
-    return this.getNotesByQuery(
-      ref => ref
-        .where('user', '==', userId)
-        .where('archived', '==', false)
-        .where('date', ">=", moment().format())
-        .orderBy('date', 'asc')
-        .limit(2)
-    );
-  }
-
-  saveItem(id, note) {
+  saveItem(id, note): void {
     if (note['id']) {
       delete note['id'];
     }
@@ -85,8 +78,24 @@ export class FirebaseProvider {
       .update(note);
   }
 
-  addItem(note: Note) {
+  addItem(note: Note): void {
     this.notesCollection.add(note);
+  }
+
+  addGoal(goal: string): void {
+    let userId = this.authProvider.getUser().uid;
+    // TODO: make sure user is created in a central place instead
+    this.usersCollection.doc(userId).set({goal});
+  }
+
+  getGoal(): Observable<string> {
+    let userId = this.authProvider.getUser().uid;
+    return this.usersCollection.doc(userId).valueChanges().map(user => {
+      if (user && user['goal']) {
+        return user['goal'];
+      }
+      return null;
+    });
   }
 
   archive(id, note) {

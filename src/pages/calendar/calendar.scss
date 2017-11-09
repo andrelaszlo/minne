@@ -1,18 +1,11 @@
 page-calendar {
-    ion-card-content, ion-note {
-        font-family:Helvetica,monospace;
-        white-space:normal;
+    .date, .content {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 1.5em;
+        white-space: normal;
     }
 
-    ion-card-content {
-        font-size:1.5em !important;
-    }
-
-    ion-note {
-        font-size:1em !important;
-    }
-
-    .past-item {
+    .past-item, .date {
         color: #c5c5c5;
     }
 }

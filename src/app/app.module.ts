@@ -1,3 +1,11 @@
+import { InboxPageModule } from '../pages/inbox/inbox.module';
+import { GoalsPageModule } from '../pages/goals/goals.module';
+import { EditPageModule } from '../pages/edit/edit.module';
+import { CalendarPageModule } from '../pages/calendar/calendar.module';
+import { ArchivePageModule } from '../pages/archive/archive.module';
+import { AddPageModule } from '../pages/add/add.module';
+import { PipesModule } from '../pipes/pipes.module';
+import { ComponentsModule } from '../components/components.module';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -48,15 +56,6 @@ const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    HumanTimePipe,
-    FormatToLocalPipe,
-    MainMenuComponent,
-    InboxPage,
-    ArchivePage,
-    AddPage,
-    EditPage,
-    CalendarPage,
-    GoalsPage
   ],
   imports: [
     AngularFirestoreModule,
@@ -66,19 +65,30 @@ const firebaseConfig = {
     AngularFireDatabaseModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    LoginPageModule
+
+    ComponentsModule,
+    PipesModule,
+
+    AddPageModule,
+    ArchivePageModule,
+    CalendarPageModule,
+    EditPageModule,
+    GoalsPageModule,
+    InboxPageModule,
+    LoginPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     MainMenuComponent,
-    InboxPage,
-    ArchivePage,
+  
     AddPage,
-    EditPage,
-    LoginPage,
+    ArchivePage,
     CalendarPage,
-    GoalsPage
+    EditPage,
+    GoalsPage,
+    InboxPage,
+    LoginPage,    
   ],
   providers: [
     StatusBar,

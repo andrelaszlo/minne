@@ -1,34 +1,60 @@
-<ion-content class="goals">
-  <button ion-button menuToggle outline icon-only class="menu-button">
-    <ion-icon name="menu"></ion-icon>
-  </button>
-  <div class="title">Hello {{ getUserName() }}!</div>
+<ion-header no-border>
+  <ion-navbar transparent>
+    <button ion-button menuToggle outline icon-only class="menu-button">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
 
-  <ion-item>
-    <ion-label class="subtitle" floating>What is your goal for this week?</ion-label>
-    <ion-input class="subtitle"></ion-input>
-  </ion-item>
-</ion-content>
+<ion-content>
+  <div class="goals">
+    <div class="title">Hello {{ getUserName() }}!</div>
+    <ion-item *ngIf="!goal">
+      <ion-label class="subtitle" floating>What is your goal for this week?</ion-label>
+      <ion-input class="subtitle" [ngModel]="goal" (keyup.enter)="setGoal($event.target.value)"></ion-input>
+    </ion-item>
+    <div *ngIf="goal">
+      <div class="subtitle">Your goal this week is</div>
+      <div class="goal">{{ goal }}</div>
+      <ion-item>
+        <ion-label class="subtitle" floating>What is the next step?</ion-label>
+        <ion-input class="subtitle"></ion-input>
+      </ion-item>
+    </div>
+  </div>
 
-<ion-footer>
-  <ion-list>
-    <ion-card *ngFor="let item of items | async" (click)="calendarRedirect()">
-      <ion-card-content>
-        {{ item.content }}
-      </ion-card-content>
-      <ion-row>
-        <ion-col center text-right>
-          <ion-note *ngIf="item.date">
-            {{ item.date | humanTime }}
-          </ion-note>
-        </ion-col>
-      </ion-row>
-    </ion-card>
+  <ion-list no-lines>
+    <ion-item-group *ngFor="let group of items | async">
+      <ion-list-header text-center>
+        {{ group.key }}
+      </ion-list-header>
+      <ion-item-sliding *ngFor="let item of group.items">
+        <ion-card ion-item (click)="showEditNote(item)" [ngClass]="{'past-item': isPast(item.date)}">
+          <ion-col class="date">
+            {{ getTime(item.date) }}
+          </ion-col>
+          <ion-col class="calendar">
+            {{ item.content }}
+          </ion-col>
+        </ion-card>
+
+        <ion-item-options side="left" (ionSwipe)="archive(item)">
+          <button ion-button expandable color="secondary" icon-only (click)="archive(item)">
+            <ion-icon name="checkmark"></ion-icon>
+          </button>
+        </ion-item-options>
+
+        <ion-item-options side="right">
+          <button ion-button (click)="showEditNote(item)" color="#00ffff" icon-only><ion-icon name="create"></ion-icon></button>
+          <button ion-button (click)="delete(item)" color="danger" icon-only><ion-icon name="trash"></ion-icon></button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-item-group>
   </ion-list>
 
-  <div class="button-add">
-    <button ion-button icon-only block (click)="addNote()">
+  <ion-fab bottom right #addFab>
+    <button ion-fab icon-only (click)="addNote(addFab)">
       <ion-icon name="add"></ion-icon>
     </button>
-  </div>
-</ion-footer>
+  </ion-fab>
+</ion-content>

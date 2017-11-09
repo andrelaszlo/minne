@@ -1,3 +1,4 @@
+import { ComponentsModule } from '../../components/components.module';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { CalendarPage } from './calendar';
@@ -8,6 +9,7 @@ import { CalendarPage } from './calendar';
   ],
   imports: [
     IonicPageModule.forChild(CalendarPage),
+    ComponentsModule,
   ],
 })
 export class CalendarPageModule {}
