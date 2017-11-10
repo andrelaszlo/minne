@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, ViewController, NavController, NavParams } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase'
 
+import * as moment from 'moment-timezone';
+
 @IonicPage()
 @Component({
   selector: 'page-edit',
@@ -18,6 +20,7 @@ export class EditPage {
     public firebaseProvider: FirebaseProvider) {
       this.note = navParams.get("note");
       this.id = this.note.id;
+      this.note.date = moment(this.note.date).format("YYYY-MM-DDTHH:mm");
   }
 
   saveNote() {

@@ -13,7 +13,7 @@
 <ion-content>
   <ion-item no-lines>
     <ion-label>Date</ion-label>
-    <ion-input type="datetime-local" [value]="today" (input)="date = $event.target.value"></ion-input>
+    <ion-input type="datetime-local" [value]="note.date" (input)="note.date = $event.target.value"></ion-input>
   </ion-item>
 
   <ion-item no-lines>
