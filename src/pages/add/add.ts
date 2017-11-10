@@ -14,6 +14,7 @@ import * as moment from 'moment-timezone';
 export class AddPage {
 
   note: any = {'content': ''};
+  today: string;
 
   constructor(
     public viewCtrl: ViewController,
@@ -23,6 +24,7 @@ export class AddPage {
     public authProvider: AuthProvider,
     public config: ConfigProvider
   ) {
+    this.today = moment().format("YYYY-MM-DDTHH:mm");
   }
 
   saveNote() {

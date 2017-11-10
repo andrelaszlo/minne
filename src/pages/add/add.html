@@ -5,7 +5,7 @@
     </ion-buttons>
 
     <ion-buttons end>
-        <button ion-button (click)="saveNote()">Save</button>
+      <button ion-button (click)="saveNote()">Save</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -13,12 +13,7 @@
 <ion-content>
   <ion-item no-lines>
     <ion-label>Date</ion-label>
-    <ion-datetime
-      displayFormat="MMM DD, YYYY HH:mm"
-      max="2030-01-01"
-      [ngModel]="note.date | formatToLocal"
-      (ngModelChange)="note.date=$event">>
-    </ion-datetime>
+    <ion-input type="datetime-local" [value]="today" (input)="date = $event.target.value"></ion-input>
   </ion-item>
 
   <ion-item no-lines>
