@@ -6,6 +6,7 @@ import * as moment from 'moment-timezone';
 import { FirebaseProvider, Note } from '../../providers/firebase/firebase';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Observable, Subject } from 'rxjs';
+import { PersistentObject } from '../../lib/collection-helpers';
 
 /*
   TODO
@@ -27,7 +28,9 @@ export class NotificationProvider {
     private authProvider: AuthProvider
   ) {
     //const EVERY_HOUR = 1000*60*60;
-    const EVERY_HOUR = 10000;
+    const EVERY_HOUR = 60000;
+    console.log("storage", storage);
+
 
     this.localNotifications.on("trigger", (notification) => console.log("*** Notification triggered", notification));
     this.localNotifications.on("schedule", (notification) => console.log("*** Notification scheduled", notification));
@@ -80,48 +83,70 @@ export class NotificationProvider {
 class StoredNotification {
   private notificationProvider: NotificationProvider;
   private note: Note;
-  private storage: Storage;
+  private notificationMapping: PersistentObject<Array<any>>;
   
   constructor(
     note: Note,
     notificationProvider: NotificationProvider
   ) {
     this.notificationProvider = notificationProvider;
-    this.storage = notificationProvider.storage;
-
     this.note = note;
+    this.notificationMapping = new PersistentObject<Array<number>>(this.notificationProvider.storage, this.getReferenceString(), () => new Array());
     this.updateNotifications();
   }
 
   private updateNotifications() {
     let type = 'default'; // TODO see below
     let notifications = this.getNotifications().then(notifications => {
+      console.log("Updating or ignoring", notifications);
       let found = false;
       for (let notificationItem of notifications) {
+        console.log("Checking existing notification", notificationItem);
         if (notificationItem.type == type) {
           found = true;
         }
       }
       if (!found) {
+        console.log("Not found, scheduling new", type, notifications);
         this.addNotification(this.note);
       }
-    });
+    }).catch(err => console.warn(err));
   }
 
-  private getNotifications(): Promise<any[]> {
-    let subject: Subject<any> = new Subject();
+  private getNotifications(): any {
+    /*
+    Well... this escalated quickly.
+
+    We need to check if all the stored notifications still exist. We get them from storage,
+    which returns a promise. But in the promise we need to loop through all ids and check
+    if the notification exists, which returns another promise.
+    And in the end we need a promise of an array of all the ids.
+
+    Solution: Make a new observable, get all the notifications, use Promise.all to wait for them
+    to finish then use toArray().toPromise().
+    */
+    let obs: Observable<any> = new Observable(observer => {
+      this.notificationMapping.do((notificationIds) => {
+        var promises = notificationIds.map(({id, type}) => {
+          this.notificationProvider.localNotifications.get(id)
+            .then(notification => {
+              let item = {id, type};
+              observer.next(item)
+              return null;
+            })
+            .catch(err => {
+              console.log("Could not get local notification, rescheduling", id, type);
+              let item = {id, type};
+              this.addNotification(this.note, true, id);
+              observer.next(item);
+              return null;
+            })
+        });
+        Promise.all(promises).then(results => observer.complete());
+      });
+    });
     
-    this.notificationMapping()
-      .then(notificationIds => {
-        notificationIds.forEach(([id, type]) => {
-            this.notificationProvider.localNotifications.get(id)
-              .then(notification => subject.next({id, notification, type}))
-        })
-        subject.complete();
-      })
-    
-    subject.forEach(item => console.log("subject item", item));
-    return subject.toArray().toPromise();
+    return obs.toArray().toPromise();
   }
 
   private getReferenceString(): string {
@@ -132,23 +157,15 @@ class StoredNotification {
     return 'notification-mapping-' + this.note.id;
   }
 
-  private notificationMapping(): any {
-    return new Promise((resolve, reject) => {
-      this.storage
-        .get(this.getReferenceString())
-        .then(value =>
-          resolve(value || []));
-    });
-  }
-
   private addNotificationToMapping(notificationId) {
     let item = {
       id: notificationId,
       type: 'default' // TODO: the plan is to use this to have a name for each type of notification, eg "10 minutes" or "default". Not sure yet.
     };
-    this.storage.get(this.getReferenceString()).then(list => {
-      list = (list || []).push(item)
-      this.storage.set(this.getReferenceString(), list);
+    this.notificationMapping.do(ids => {
+      console.log("Setting", ids, item);
+      ids.push(item);
+      return ids;
     });
   }
 
@@ -156,13 +173,17 @@ class StoredNotification {
     return Date.now() * 1000000 + Math.floor((Math.random() * 1000000));
   }
 
-  private addNotification(note: Note) {
-    let notificationId = this.getUniqueId();
+  private addNotification(note: Note, reschedule=false, id:number = null) {
+    console.log("add notification", reschedule, id);
+    let notificationId = id || this.getUniqueId();
     this.notificationProvider.localNotifications.schedule({
       id: notificationId,
       at: moment(note.date).subtract(10, 'minutes').toDate(),
       text: note.content,
     });
-    this.addNotificationToMapping(notificationId);
+    if (!reschedule) {
+      this.addNotificationToMapping(notificationId);
+    }
   }
 }
+
