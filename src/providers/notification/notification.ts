@@ -35,23 +35,19 @@ export class NotificationProvider {
     this.localNotifications.on("click", (notification) => this.localNotifications.clear(notification.id));
 
     this.authProvider.getUserPromise().then( user => {
-      this.refreshNotifications();
       setInterval(() => this.refreshNotifications(), EVERY_HOUR);
       this.getUpcomingEvents().forEach(items => {
-        console.log("Events updated", items);
         this.refreshNotificationItems(items);
       });
     });
   }
 
   public refreshNotifications() {
-    console.log("Refereshing notifications");
     this.getUpcomingEvents().take(1).forEach(items => this.refreshNotificationItems(items));
   }
 
   private refreshNotificationItems(items: any) {
-    console.log("Checking notifications for upcoming events", items);
-    this.localNotifications.cancelAll();      
+    console.log("Refreshing notification items", items);
     for (let item of items) {
       new StoredNotification(item, this);
     }
@@ -81,16 +77,17 @@ class StoredNotification {
   private updateNotifications() {
     let type = 'default'; // TODO see below
     let notifications = this.getNotifications().then(notifications => {
-      console.log("Updating or ignoring", notifications);
+      console.log("Checking existing notifications", this.note.id, notifications);
       let found = false;
       for (let notificationItem of notifications) {
-        console.log("Checking existing notification", notificationItem);
         if (notificationItem.type == type) {
           found = true;
+          console.log("Found existing notification", this.note.id, notificationItem.id);
+          break;
         }
       }
       if (!found) {
-        console.log("Not found, scheduling new", type, notifications);
+        console.log("No existing notification found, scheduling new", this.note.id);
         this.addNotification(this.note);
       }
     }).catch(err => console.warn(err));
@@ -115,10 +112,9 @@ class StoredNotification {
           this.notificationProvider.localNotifications.get(id)
             .then(notification => observer.next(item))
             .catch(err => {
-              console.log("Could not get local notification, rescheduling", id, type);
+              console.log("Could not get local notification, rescheduling", this.note.id, item.id);
               this.addNotification(this.note, true, id);
               observer.next(item);
-              return null;
             })
         });
         Promise.all(promises).then(results => observer.complete());

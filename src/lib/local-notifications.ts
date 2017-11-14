@@ -138,8 +138,8 @@ class BrowserNotifications implements LocalNotifications {
                 let notification = this.notifications[id];
                 if (notification) {
                     notification.close();
+                    this.fireCallback("clear", notification);
                 }
-                this.fireCallback("clear", notification);
                 this.scheduleNext();
             }
             resolve();
