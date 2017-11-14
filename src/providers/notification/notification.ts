@@ -73,7 +73,8 @@ class StoredNotification {
   ) {
     this.notificationProvider = notificationProvider;
     this.note = note;
-    this.notificationMapping = new PersistentObject<Array<number>>(this.notificationProvider.storage, this.getReferenceString(), () => new Array());
+    let referenceString = 'notification-mapping-' + this.note.id;
+    this.notificationMapping = new PersistentObject<Array<number>>(this.notificationProvider.storage, referenceString, () => new Array());
     this.updateNotifications();
   }
 
@@ -108,17 +109,13 @@ class StoredNotification {
     to finish then use toArray().toPromise().
     */
     let obs: Observable<any> = new Observable(observer => {
-      this.notificationMapping.do((notificationIds) => {
+      this.notificationMapping.get((notificationIds) => {
         var promises = notificationIds.map(({id, type}) => {
+          let item = {id, type};
           this.notificationProvider.localNotifications.get(id)
-            .then(notification => {
-              let item = {id, type};
-              observer.next(item)
-              return null;
-            })
+            .then(notification => observer.next(item))
             .catch(err => {
               console.log("Could not get local notification, rescheduling", id, type);
-              let item = {id, type};
               this.addNotification(this.note, true, id);
               observer.next(item);
               return null;
@@ -136,7 +133,7 @@ class StoredNotification {
       id: notificationId,
       type: 'default' // TODO: the plan is to use this to have a name for each type of notification, eg "10 minutes" or "default". Not sure yet.
     };
-    this.notificationMapping.do(ids => {
+    this.notificationMapping.update(ids => {
       ids.push(item);
       return ids;
     });

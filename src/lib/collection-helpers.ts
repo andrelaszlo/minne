@@ -40,13 +40,13 @@ export function dictionaryKeys(dict: any): Array<any>{
 
 /**
  * Stores anything in Ionic Storage.
- * 
+ *
  * Make a new PersistentObject by passing a Storage instance, the object
  * identifier and a constructor function that will be used when storage
  * is empty, the first time the object is used.
- * 
+ *
  * Here's a simple counter, starting at 0.
- * 
+ *
  * ```
  * let number = new PersistentObject<number>(storage, 'my-number', () => 0)
  * number.do(currentValue => currentValue++);
@@ -61,25 +61,25 @@ export class PersistentObject<T> {
     constructor(storage: Storage, identifier: string, construct: () => T) {
         this.storage = storage;
         this.id = this.STORAGE_PREFIX + identifier;
-        this.construct = () => {console.log("creating new"); return construct();};
+        this.construct = construct;
     }
 
-    do(fun: (T) => any): Promise<any> {
+    update(fun: (T) => any): Promise<any> {
         var currentVal;
-        return this.storage.get(this.id)
-            .then(item => {
-                currentVal = item != null ? item : this.construct();
-                return fun(currentVal);
-            })
+        return this.get(fun)
             .then(newVal => {
                 if (newVal) {
                     console.log("Updating value of", this, newVal);
                     this.storage.set(this.id, newVal);
                 } else {
                     console.log("Not updating value of", this, currentVal);
-                    //if (currentVal) this.storage.set(this.id, currentVal);
                 }
             });
+    }
+
+    get(fun: (T) => any): Promise<any> {
+        return this.storage.get(this.id)
+            .then(item =>fun(item != null ? item : this.construct()));
     }
 
 }
