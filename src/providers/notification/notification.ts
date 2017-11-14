@@ -74,23 +74,59 @@ class StoredNotification {
     this.updateNotifications();
   }
 
+  private getNotificationDateForConfig(config: any): Date {
+    return moment(this.note.date).subtract(10, 'minutes').toDate();
+  }
+
   private updateNotifications() {
-    let type = 'default'; // TODO see below
-    let notifications = this.getNotifications().then(notifications => {
-      console.log("Checking existing notifications", this.note.id, notifications);
+    let config = {
+      name: 'default'
+    }; // TODO see below
+    this.getNotifications().then(notifications => {
       let found = false;
+      let expiredNotifications = [];
+      let expectedTime = this.getNotificationDateForConfig(config);
       for (let notificationItem of notifications) {
-        if (notificationItem.type == type) {
-          found = true;
-          console.log("Found existing notification", this.note.id, notificationItem.id);
-          break;
+        if (notificationItem.type == config.name) {
+          if (notificationItem.notification) {
+            let notification = notificationItem.notification;
+            // Notification already exists
+            found = true;
+            console.log("Found existing notification", this.note.id, notificationItem.id);
+            // Refresh notification if necessary
+            if (notification.timestamp != expectedTime.getTime()) {
+              // Wrong time for this configuration, reschedule
+              console.log("Updating time for", expectedTime);
+              this.updateNotification(expectedTime, notificationItem.id);
+            }
+          } else if (!notificationItem.notification) {
+            // Add missing notification
+            found = true;
+            console.log("Notification missing, rescheduling", this.note.id);
+            this.addNotification(expectedTime, true);
+          } else if (notificationItem.timestamp < moment().toDate().getTime()) {
+            // Remove old notification
+            console.log("Removing old notification", notificationItem);
+            this.removeNotificationFromMapping(notificationItem.id);
+          }
         }
       }
       if (!found) {
-        console.log("No existing notification found, scheduling new", this.note.id);
-        this.addNotification(this.note);
+        console.log("Scheduling new notification", this.note.id);
+        this.addNotification(expectedTime);
       }
     }).catch(err => console.warn(err));
+  }
+
+  private removeNotificationFromMapping(notificationId) {
+    this.notificationMapping.update(notifications => {
+      for (let index in notifications) {
+        if (notifications[index].id == notificationId) {
+          notifications.splice(index, 1);
+        }
+        return notifications;
+      }
+    });
   }
 
   private getNotifications(): any {
@@ -106,14 +142,15 @@ class StoredNotification {
     to finish then use toArray().toPromise().
     */
     let obs: Observable<any> = new Observable(observer => {
-      this.notificationMapping.get((notificationIds) => {
-        var promises = notificationIds.map(({id, type}) => {
-          let item = {id, type};
+      this.notificationMapping.get((notifications) => {
+        var promises = notifications.map(({id, type}) => {
+          let item = {id, type, notification: null};
           this.notificationProvider.localNotifications.get(id)
-            .then(notification => observer.next(item))
+            .then(notification => {
+              item.notification = notification;
+              observer.next(item);
+            })
             .catch(err => {
-              console.log("Could not get local notification, rescheduling", this.note.id, item.id);
-              this.addNotification(this.note, true, id);
               observer.next(item);
             })
         });
@@ -124,9 +161,10 @@ class StoredNotification {
     return obs.toArray().toPromise();
   }
 
-  private addNotificationToMapping(notificationId) {
+  private addNotificationToMapping(notificationId: number, timestamp: number) {
     let item = {
       id: notificationId,
+      timestamp: timestamp,
       type: 'default' // TODO: the plan is to use this to have a name for each type of notification, eg "10 minutes" or "default". Not sure yet.
     };
     this.notificationMapping.update(ids => {
@@ -139,16 +177,24 @@ class StoredNotification {
     return Date.now() * 1000000 + Math.floor((Math.random() * 1000000));
   }
 
-  private addNotification(note: Note, reschedule=false, id:number = null) {
-    let notificationId = id || this.getUniqueId();
+  private addNotification(dateTime: Date, reAdd=false): void {
+    let notificationId = this.getUniqueId();
     this.notificationProvider.localNotifications.schedule({
       id: notificationId,
-      at: moment(note.date).subtract(10, 'minutes').toDate(),
-      text: note.content,
+      at: dateTime,
+      text: this.note.content,
     });
-    if (!reschedule) {
-      this.addNotificationToMapping(notificationId);
+    if (!reAdd) {
+      this.addNotificationToMapping(notificationId, dateTime.getTime());
     }
+  }
+
+  private updateNotification(dateTime: Date, id:number): void {
+    this.notificationProvider.localNotifications.update({
+      id: id,
+      at: dateTime,
+      text: this.note.content,
+    });
   }
 }
 
