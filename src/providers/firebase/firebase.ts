@@ -14,6 +14,7 @@ export interface Note {
   date: Date;
   content: string;
   archived: boolean;
+  endDate: Date;
 }
 
 export interface User {
