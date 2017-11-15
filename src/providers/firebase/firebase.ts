@@ -48,25 +48,41 @@ export class FirebaseProvider {
     return notes;
   }
 
-  getItems(includeArchived: boolean = false): Observable<Note[]> {
-    let userId = this.authProvider.getUser().uid
+  private getNotesByTime(afterTime?: any, order?: string): Observable<Note[]> {
+    let user = this.authProvider.getUser(false);
+    if (!user) {
+      console.log("User not logged in");
+      return Observable.empty();
+    }
+    let userId = user.uid;
     return this.getNotesByQuery(
-      ref => ref
-        .where('user', '==', userId)
-        .where('archived', '==', false)
-        .orderBy('date', 'desc')
+      ref => {
+        let query = ref
+          .where('user', '==', userId)
+          .where('archived', '==', false)
+        if (order == 'desc') {
+          query = query.orderBy('date', 'desc');
+        } else {
+          query = query.orderBy('date', 'asc');
+        }
+        if (afterTime) {
+          query = query.where('date', ">=", afterTime);
+        }
+        return query;
+      }
     );
   }
 
+  getItems(includeArchived: boolean = false): Observable<Note[]> {
+    return this.getNotesByTime();
+  }
+
   getSortedItems(): Observable<Note[]> {
-    let userId = this.authProvider.getUser().uid
-    return this.getNotesByQuery(
-      ref => ref
-        .where('user', '==', userId)
-        .where('archived', '==', false)
-        .where('date', ">=", moment().subtract(2, 'hours').format())
-        .orderBy('date', 'asc')
-    );
+    return this.getNotesByTime(moment().subtract(2, 'hours').format());
+  }
+
+  getUpcomingItems(): Observable<Note[]> {
+    return this.getNotesByTime(moment().format());
   }
 
   saveItem(id, note): void {
