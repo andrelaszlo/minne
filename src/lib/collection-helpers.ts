@@ -58,7 +58,7 @@ export class PersistentObject<T> {
     private construct: () => T;
     private STORAGE_PREFIX = 'persistent-object-';
 
-    constructor(storage: Storage, identifier: string, construct: () => T) {
+    constructor(storage: Storage, identifier: string, construct: () => T = () => null) {
         this.storage = storage;
         this.id = this.STORAGE_PREFIX + identifier;
         this.construct = construct;
@@ -79,7 +79,11 @@ export class PersistentObject<T> {
 
     get(fun: (T) => any): Promise<any> {
         return this.storage.get(this.id)
-            .then(item =>fun(item != null ? item : this.construct()));
+            .then(item => fun(item != null ? item : this.construct()));
+    }
+
+    asPromise(): Promise<T> {
+        return this.storage.get(this.id);
     }
 
 }

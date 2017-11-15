@@ -28,11 +28,18 @@ export class NotificationProvider {
   ) {
     const EVERY_HOUR = 1000*60*60;
 
-    this.localNotifications.on("trigger", (notification) => console.log("*** Notification triggered", notification));
     this.localNotifications.on("schedule", (notification) => console.log("*** Notification scheduled", notification));
     this.localNotifications.on("click", (notification) => console.log("*** Notification clicked", notification));
     this.localNotifications.on("clear", (notification) => console.log("*** Notification cleared", notification));
-    this.localNotifications.on("click", (notification) => this.localNotifications.clear(notification.id));
+    this.localNotifications.on("click", (notification) => {
+      console.log("*** Notification clicked", notification);
+      this.localNotifications.clear(notification.id);
+    });
+    this.localNotifications.on("trigger", (notification) => {
+      console.log("*** Notification triggered", notification);
+
+      this.setTriggered(notification.data.noteId, notification.data.type, notification.data.timestamp);
+    });
 
     this.authProvider.getUserPromise().then( user => {
       setInterval(() => this.refreshNotifications(), EVERY_HOUR);
@@ -42,12 +49,20 @@ export class NotificationProvider {
     });
   }
 
+  private setTriggered(noteId: string, configType: string, timestamp: number): Promise<boolean> {
+    console.log("Setting notification as triggered", noteId, configType, timestamp);
+    return new PersistentObject<boolean>(
+      this.storage,
+      `note-triggered-${noteId}-${configType}-${timestamp}`,
+      () => false
+    ).update(prev => true);
+  }
+
   public refreshNotifications() {
     this.getUpcomingEvents().take(1).forEach(items => this.refreshNotificationItems(items));
   }
 
   private refreshNotificationItems(items: any) {
-    console.log("Refreshing notification items", items);
     for (let item of items) {
       new StoredNotification(item, this);
     }
@@ -62,7 +77,7 @@ class StoredNotification {
   private notificationProvider: NotificationProvider;
   private note: Note;
   private notificationMapping: PersistentObject<Array<any>>;
-  
+
   constructor(
     note: Note,
     notificationProvider: NotificationProvider
@@ -157,14 +172,23 @@ class StoredNotification {
         Promise.all(promises).then(results => observer.complete());
       });
     });
-    
+
     return obs.toArray().toPromise();
+  }
+
+  private isTriggered(configType: string, timestamp: number): Promise<boolean> {
+    return new PersistentObject<boolean>(
+      this.notificationProvider.storage,
+      `note-triggered-${this.note.id}-${configType}-${timestamp}`,
+      () => false
+    ).asPromise();
   }
 
   private addNotificationToMapping(notificationId: number, timestamp: number) {
     let item = {
       id: notificationId,
       timestamp: timestamp,
+      noteId: this.note.id,
       type: 'default' // TODO: the plan is to use this to have a name for each type of notification, eg "10 minutes" or "default". Not sure yet.
     };
     this.notificationMapping.update(ids => {
@@ -178,15 +202,26 @@ class StoredNotification {
   }
 
   private addNotification(dateTime: Date, reAdd=false): void {
-    let notificationId = this.getUniqueId();
-    this.notificationProvider.localNotifications.schedule({
-      id: notificationId,
-      at: dateTime,
-      text: this.note.content,
+    this.isTriggered('default', dateTime.getTime()).then(isTriggered => {
+      if (isTriggered) {
+        console.log("Not adding new notification for already triggered alert", this.note.id, 'default', dateTime.getTime());
+        return;
+      }
+      let notificationId = this.getUniqueId();
+      this.notificationProvider.localNotifications.schedule({
+        id: notificationId,
+        at: dateTime,
+        text: this.note.content,
+        data: {
+          noteId: this.note.id,
+          type: 'default',
+          timestamp: dateTime.getTime()
+        },
+      });
+      if (!reAdd) {
+        this.addNotificationToMapping(notificationId, dateTime.getTime());
+      }
     });
-    if (!reAdd) {
-      this.addNotificationToMapping(notificationId, dateTime.getTime());
-    }
   }
 
   private updateNotification(dateTime: Date, id:number): void {
@@ -194,6 +229,11 @@ class StoredNotification {
       id: id,
       at: dateTime,
       text: this.note.content,
+      data: {
+        noteId: this.note.id,
+        type: 'default',
+        timestamp: dateTime.getTime()
+      }
     });
   }
 }
