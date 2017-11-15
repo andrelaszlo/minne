@@ -11,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
+import { Platform } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { InboxPage } from '../pages/inbox/inbox';
@@ -39,6 +40,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AuthProvider } from '../providers/auth/auth';
 import { ConfigProvider } from '../providers/config/config';
 import { NotificationProvider } from '../providers/notification/notification';
+import { localNotificationsFactory } from '../lib/local-notifications';
 
 
 const firebaseConfig = {
@@ -97,7 +99,7 @@ const firebaseConfig = {
     AuthProvider,
     ConfigProvider,
     NotificationProvider,
-    LocalNotifications
+    {provide: LocalNotifications, useFactory: localNotificationsFactory, deps: [Platform]}
   ]
 })
 export class AppModule {}
