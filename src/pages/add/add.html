@@ -12,12 +12,21 @@
 
 <ion-content>
   <ion-item no-lines>
-    <ion-label>Date</ion-label>
+    <ion-label>Start date</ion-label>
     <ion-datetime
       displayFormat="MMM DD, YYYY HH:mm"
       max="2030-01-01"
       [ngModel]="note.date | formatToLocal"
       (ngModelChange)="note.date=$event">>
+    </ion-datetime>
+  </ion-item>
+  <ion-item no-lines>
+    <ion-label>End date</ion-label>
+    <ion-datetime
+      displayFormat="MMM DD, YYYY HH:mm"
+      max="2030-01-01"
+      [ngModel]="note.endDate | formatToLocal"
+      (ngModelChange)="note.endDate=$event">>
     </ion-datetime>
   </ion-item>
 

@@ -23,6 +23,8 @@ export class AddPage {
     public authProvider: AuthProvider,
     public config: ConfigProvider
   ) {
+    this.note['date'] = moment();
+    this.note['endDate'] = moment().add(1, 'hours');
   }
 
   saveNote() {
@@ -31,10 +33,13 @@ export class AddPage {
     this.note['archived'] = !!this.note['archived'];
     var timezone = this.config.getTimeZone();
     var date = moment(this.note['date']);
+    var endDate = moment(this.note['endDate']);
     if (timezone) {
       date = date.tz(timezone);
+      endDate = endDate.tz(timezone);
     }
     this.note['date'] = date.format();
+    this.note['endDate'] = endDate.format();
     this.firebaseProvider.addItem(this.note);
     this.viewCtrl.dismiss();
   }
