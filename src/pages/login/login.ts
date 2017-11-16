@@ -26,7 +26,7 @@ export class LoginPage {
       if (this.platform.is('cordova')) {
         this.buildInfo = `${BuildInfo.displayName} ${BuildInfo.version} ${BuildInfo.buildType} built ${moment(BuildInfo.buildDate).calendar()}`;
       }
-    });
+    }).catch(err => console.log("Error in platform ready", err));
     this.appName = configProvider.applicationName;
   }
 

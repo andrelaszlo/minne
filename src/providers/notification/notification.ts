@@ -46,7 +46,7 @@ export class NotificationProvider {
       this.getUpcomingEvents().forEach(items => {
         this.refreshNotificationItems(items);
       });
-    });
+    }).catch(err => console.log("Error while getting user promise", err));
   }
 
   private setTriggered(noteId: string, configType: string, timestamp: number): Promise<boolean> {
@@ -169,7 +169,9 @@ class StoredNotification {
               observer.next(item);
             })
         });
-        Promise.all(promises).then(results => observer.complete());
+        Promise.all(promises)
+          .then(results => observer.complete())
+          .catch(err => console.log("Error while getting notifications", err));
       });
     });
 
@@ -202,26 +204,28 @@ class StoredNotification {
   }
 
   private addNotification(dateTime: Date, reAdd=false): void {
-    this.isTriggered('default', dateTime.getTime()).then(isTriggered => {
-      if (isTriggered) {
-        console.log("Not adding new notification for already triggered alert", this.note.id, 'default', dateTime.getTime());
-        return;
-      }
-      let notificationId = this.getUniqueId();
-      this.notificationProvider.localNotifications.schedule({
-        id: notificationId,
-        at: dateTime,
-        text: this.note.content,
-        data: {
-          noteId: this.note.id,
-          type: 'default',
-          timestamp: dateTime.getTime()
-        },
-      });
-      if (!reAdd) {
-        this.addNotificationToMapping(notificationId, dateTime.getTime());
-      }
-    });
+    this.isTriggered('default', dateTime.getTime())
+      .then(isTriggered => {
+        if (isTriggered) {
+          console.log("Not adding new notification for already triggered alert", this.note.id, 'default', dateTime.getTime());
+          return;
+        }
+        let notificationId = this.getUniqueId();
+        this.notificationProvider.localNotifications.schedule({
+          id: notificationId,
+          at: dateTime,
+          text: this.note.content,
+          data: {
+            noteId: this.note.id,
+            type: 'default',
+            timestamp: dateTime.getTime()
+          },
+        });
+        if (!reAdd) {
+          this.addNotificationToMapping(notificationId, dateTime.getTime());
+        }
+      })
+      .catch(err => console.log("Error while adding notification", err));
   }
 
   private updateNotification(dateTime: Date, id:number): void {

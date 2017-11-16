@@ -67,7 +67,7 @@ export class MyApp {
       moment.locale(this.configProvider.getLocale());
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-    });
+    }).catch(err => console.log("Platform ready error", err));
   }
 
   openPage(page) {

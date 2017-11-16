@@ -74,12 +74,13 @@ export class PersistentObject<T> {
                 } else {
                     console.log("Not updating value of", this, currentVal);
                 }
-            });
+            }).catch(err => console.log("Error in update", err));
     }
 
     get(fun: (T) => any): Promise<any> {
         return this.storage.get(this.id)
-            .then(item => fun(item != null ? item : this.construct()));
+            .then(item => fun(item != null ? item : this.construct()))
+            .catch(err => console.log("Error in get", err));
     }
 
     asPromise(): Promise<T> {
