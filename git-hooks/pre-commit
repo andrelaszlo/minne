@@ -1,8 +1,14 @@
 #!/bin/sh
 branch=`git rev-parse --abbrev-ref HEAD`
 if [ "$branch" = "master" ]; then
-    echo -n "Bumped version to: "
-    npm version --no-git-tag-version --git=echo patch &&
-        git add package.json package-lock.json
-    echo "Use git's -n flag to make a commit without bumping the version"
+    version=$(npm version --no-git-tag-version --git=echo patch | sed s/v//)
+    exit_status=$?
+    if [ $exit_status -eq 0 ] ; then
+        sed -i -E "s/(<widget.*version=\")([^\"]+)(\")/\1${version}\3/" config.xml 
+        echo "Bumped version to: $version"
+        echo "Use git's -n flag to make a commit without bumping the version"
+        git add config.xml package.json package-lock.json
+    else
+        echo "Problem bumping version"
+    fi
 fi
