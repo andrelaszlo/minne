@@ -74,6 +74,15 @@ export class FirebaseProvider {
     );
   }
 
+  getFreeHours(): string {
+    let freeHours = '0';
+    let todayItems = this.getNotesByTime(moment().startOf('day'));
+    for (let item in todayItems) {
+      moment.utc(moment(item['endDate'],"DD/MM/YYYY HH:mm:ss").diff(moment(item['date'],"DD/MM/YYYY HH:mm:ss"))).format("HH:mm:ss");
+    }
+    return "";
+  }
+
   getItems(includeArchived: boolean = false): Observable<Note[]> {
     return this.getNotesByTime();
   }
