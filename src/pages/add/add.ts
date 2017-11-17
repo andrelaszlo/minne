@@ -27,6 +27,11 @@ export class AddPage {
     this.note['endDate'] = moment().add(1, 'hours');
   }
 
+  changeDate(newDate) {
+    this.note.date = newDate;
+    this.note['endDate'] = moment(newDate).add(1, 'hours');
+  }
+
   saveNote() {
     // TODO: move all this note logic to a provider or something
     this.note['user'] = this.authProvider.getUser().uid;
