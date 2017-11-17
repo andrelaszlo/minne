@@ -17,7 +17,7 @@
       displayFormat="MMM DD, YYYY HH:mm"
       max="2030-01-01"
       [ngModel]="note.date | formatToLocal"
-      (ngModelChange)="note.date=$event">>
+      (ngModelChange)="changeDate($event)">>
     </ion-datetime>
   </ion-item>
   <ion-item no-lines>
