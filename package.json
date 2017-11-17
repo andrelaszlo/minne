@@ -1,6 +1,6 @@
 {
   "name": "minne",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "Narjis Hachilif and André Laszlo",
   "homepage": "http://example.com/",
   "private": true,
@@ -26,6 +26,7 @@
     "@ionic-native/status-bar": "4.3.0",
     "@ionic-native/user-agent": "^4.3.2",
     "@ionic/storage": "^2.0.1",
+    "@types/node": "^8.0.53",
     "angularfire": "^2.3.0",
     "angularfire2": "^5.0.0-rc.3",
     "cordova-android": "6.3.0",
