@@ -59,8 +59,8 @@ export class FirebaseProvider {
     return this.getNotesByQuery(
       ref => {
         let query = ref
-        .where('user', '==', userId)
-        .where('archived', '==', false)
+          .where('user', '==', userId)
+          .where('archived', '==', false)
         if (order == 'desc') {
           query = query.orderBy('date', 'desc');
         } else {
@@ -109,8 +109,8 @@ export class FirebaseProvider {
       delete note['id'];
     }
     this.angularFireStore
-    .doc<Note>(`notes/${id}`)
-    .update(note);
+      .doc<Note>(`notes/${id}`)
+      .update(note);
   }
 
   addItem(note: Note): void {
@@ -144,8 +144,8 @@ export class FirebaseProvider {
       throw new Error('The note id was not found');
     }
     this.angularFireStore
-    .doc<Note>(`notes/${note.id}`)
-    .delete();
+      .doc<Note>(`notes/${note.id}`)
+      .delete();
   }
 
 }
