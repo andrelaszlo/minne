@@ -19,6 +19,12 @@ page-goals {
         }
     }
 
+    .calendar-list {
+        ion-label {
+            text-overflow: clip;
+        }
+    }
+
     .goals {
         height: 60%;
         min-height: 300px;
