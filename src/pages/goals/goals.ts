@@ -18,6 +18,7 @@ export class GoalsPage {
   public goal: string;
   public items: Observable<any>;
   public limitedItems: Observable<any>;
+  public freeHours: number;
 
   constructor(
     public navCtrl: NavController,
@@ -52,11 +53,8 @@ export class GoalsPage {
       return result;
     });
     firebaseProvider.getGoal().forEach(newGoal =>  this.goal = newGoal);
-
-    firebaseProvider.getFreeHours().then(freeHours => {
-      console.log('free hours', freeHours);
-    }).catch(error => console.log("Error getting number of free hours", error));
-    
+    this.firebaseProvider.getFreeHours().forEach(hours => this.freeHours = hours)
+      .catch(error => console.log("Error getting number of free hours", error));
   }
 
   setGoal(goal) {
@@ -65,10 +63,6 @@ export class GoalsPage {
 
   getUserName() {
     return this.authProvider.getUser().displayName.split(" ")[0];
-  }
-
-  saveGoal(goal) {
-    this.firebaseProvider.addGoal(goal);
   }
 
   getTime(date: Date) {
@@ -87,6 +81,7 @@ export class GoalsPage {
   showEditNote(note) {
     let modal = this.modalCtrl.create(EditPage, { note });
     modal.present();
+
   }
 
   archive(note) {

@@ -59,8 +59,8 @@ export class FirebaseProvider {
     return this.getNotesByQuery(
       ref => {
         let query = ref
-          .where('user', '==', userId)
-          .where('archived', '==', false)
+        .where('user', '==', userId)
+        .where('archived', '==', false)
         if (order == 'desc') {
           query = query.orderBy('date', 'desc');
         } else {
@@ -77,22 +77,20 @@ export class FirebaseProvider {
     );
   }
 
-  getFreeHours(): Promise<number> {
-    let result = new Promise<number>((resolve, reject) => {
-      let startToday = moment().startOf('day').format();
-      let endToday = moment().endOf('day').format();
-      this.getNotesByTime(startToday, endToday).forEach(notes => {
-        let totalHours = 8;
-        for (let note of notes) {
-          let startDate = moment(note['date']);
-          let endDate = moment(note['endDate']);
-          let itemDuration = endDate.diff(startDate, 'hours', true);
-          totalHours = totalHours - itemDuration;
-        }
-        resolve(Math.max(0, totalHours));
-      });
+  getFreeHours(): Observable<number> {
+    let startToday = moment().startOf('day').format();
+    let endToday = moment().endOf('day').format();
+    return this.getNotesByTime(startToday, endToday).map(notes => {
+      let totalHours = 8;
+      for (let note of notes) {
+        let startDate = moment(note['date']);
+        let endDate = moment(note['endDate']);
+        let itemDuration = endDate.diff(startDate, 'hours', true);
+        totalHours = totalHours - itemDuration;
+      }
+      return Math.max(0, totalHours);
     });
-    return result;
+
   }
 
   getItems(includeArchived: boolean = false): Observable<Note[]> {
@@ -112,8 +110,8 @@ export class FirebaseProvider {
       delete note['id'];
     }
     this.angularFireStore
-      .doc<Note>(`notes/${id}`)
-      .update(note);
+    .doc<Note>(`notes/${id}`)
+    .update(note);
   }
 
   addItem(note: Note): void {
@@ -147,8 +145,8 @@ export class FirebaseProvider {
       throw new Error('The note id was not found');
     }
     this.angularFireStore
-      .doc<Note>(`notes/${note.id}`)
-      .delete();
+    .doc<Note>(`notes/${note.id}`)
+    .delete();
   }
 
 }
