@@ -53,7 +53,7 @@ export class GoalsPage {
       return result;
     });
     firebaseProvider.getGoal().forEach(newGoal =>  this.goal = newGoal);
-    this.firebaseProvider.getFreeHours().forEach(hours => this.freeHours = hours)
+    this.firebaseProvider.getFreeHours(true).forEach(hours => this.freeHours = hours)
       .catch(error => console.log("Error getting number of free hours", error));
   }
 
