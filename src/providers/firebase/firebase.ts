@@ -78,19 +78,18 @@ export class FirebaseProvider {
   }
 
   getFreeHours(): Observable<number> {
-    let startToday = moment().startOf('day').format();
-    let endToday = moment().endOf('day').format();
-    return this.getNotesByTime(startToday, endToday).map(notes => {
-      let totalHours = 8;
+    let now = moment();
+    let endToday = moment(20, "HH");
+    return this.getNotesByTime(now.format(), endToday.format()).map(notes => {
+      let totalHours = endToday.diff(now, 'hours');
       for (let note of notes) {
         let startDate = moment(note['date']);
         let endDate = moment(note['endDate']);
-        let itemDuration = endDate.diff(startDate, 'hours', true);
+        let itemDuration = endDate.diff(startDate, 'hours');
         totalHours = totalHours - itemDuration;
       }
       return Math.max(0, totalHours);
     });
-
   }
 
   getItems(includeArchived: boolean = false): Observable<Note[]> {

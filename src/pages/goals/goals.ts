@@ -81,7 +81,6 @@ export class GoalsPage {
   showEditNote(note) {
     let modal = this.modalCtrl.create(EditPage, { note });
     modal.present();
-
   }
 
   archive(note) {

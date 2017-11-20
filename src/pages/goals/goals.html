@@ -14,7 +14,9 @@
       <ion-input class="subtitle" [ngModel]="goal" (keyup.enter)="setGoal($event.target.value)"></ion-input>
     </ion-item>
     <div *ngIf="goal">
-      <div class="subtitle">You have {{ freeHours }} hours today to achieve your goal:</div>
+      <div class="subtitle" *ngIf="freeHours > 1">You have {{ freeHours }} hours today to achieve your goal:</div>
+      <div class="subtitle" *ngIf="freeHours === 1">You have {{ freeHours }} hour today to achieve your goal:</div>
+      <div class="subtitle" *ngIf="freeHours === 0 || !freeHours">Your goal this week is:</div>
       <div class="goal">{{ goal }}</div>
       <!--<ion-item>
         <ion-label class="subtitle" floating>What is the next step?</ion-label>
