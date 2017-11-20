@@ -49,7 +49,7 @@ export class FirebaseProvider {
     return notes;
   }
 
-  private getNotesByTime(afterTime?: any, order?: string): Observable<Note[]> {
+  private getNotesByTime(afterTime?: any, beforeTime?: any, order?: string): Observable<Note[]> {
     let user = this.authProvider.getUser(false);
     if (!user) {
       console.log("User not logged in");
@@ -69,9 +69,27 @@ export class FirebaseProvider {
         if (afterTime) {
           query = query.where('date', ">=", afterTime);
         }
+        if (beforeTime) {
+          query = query.where('date', "<=", beforeTime);
+        }
         return query;
       }
     );
+  }
+
+  getFreeHours(now, date?): Observable<number> {
+    let startDay = now ? moment() : moment(date).startOf('day').add(8, 'hours');
+    let endDay = now ? moment(20, "HH") : moment(date).startOf('day').add(20, 'hours');
+    return this.getNotesByTime(startDay.format(), endDay.format()).map(notes => {
+      let totalHours = endDay.diff(startDay, 'hours');
+      for (let note of notes) {
+        let startDate = moment(note['date']);
+        let endDate = moment(note['endDate']);
+        let itemDuration = endDate.diff(startDate, 'hours');
+        totalHours = totalHours - itemDuration;
+      }
+      return Math.max(0, totalHours);
+    });
   }
 
   getItems(includeArchived: boolean = false): Observable<Note[]> {
