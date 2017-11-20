@@ -49,7 +49,7 @@ export class FirebaseProvider {
     return notes;
   }
 
-  private getNotesByTime(afterTime?: any, order?: string): Observable<Note[]> {
+  private getNotesByTime(afterTime?: any, beforeTime?: any, order?: string): Observable<Note[]> {
     let user = this.authProvider.getUser(false);
     if (!user) {
       console.log("User not logged in");
@@ -69,18 +69,30 @@ export class FirebaseProvider {
         if (afterTime) {
           query = query.where('date', ">=", afterTime);
         }
+        if (beforeTime) {
+          query = query.where('date', "<=", beforeTime);
+        }
         return query;
       }
     );
   }
 
-  getFreeHours(): string {
-    let freeHours = '0';
-    let todayItems = this.getNotesByTime(moment().startOf('day'));
-    for (let item in todayItems) {
-      moment.utc(moment(item['endDate'],"DD/MM/YYYY HH:mm:ss").diff(moment(item['date'],"DD/MM/YYYY HH:mm:ss"))).format("HH:mm:ss");
-    }
-    return "";
+  getFreeHours(): Promise<number> {
+    let result = new Promise<number>((resolve, reject) => {
+      let startToday = moment().startOf('day').format();
+      let endToday = moment().endOf('day').format();
+      this.getNotesByTime(startToday, endToday).forEach(notes => {
+        let totalHours = 8;
+        for (let note of notes) {
+          let startDate = moment(note['date']);
+          let endDate = moment(note['endDate']);
+          let itemDuration = endDate.diff(startDate, 'hours', true);
+          totalHours = totalHours - itemDuration;
+        }
+        resolve(Math.max(0, totalHours));
+      });
+    });
+    return result;
   }
 
   getItems(includeArchived: boolean = false): Observable<Note[]> {

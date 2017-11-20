@@ -52,6 +52,11 @@ export class GoalsPage {
       return result;
     });
     firebaseProvider.getGoal().forEach(newGoal =>  this.goal = newGoal);
+
+    firebaseProvider.getFreeHours().then(freeHours => {
+      console.log('free hours', freeHours);
+    }).catch(error => console.log("Error getting number of free hours", error));
+    
   }
 
   setGoal(goal) {
