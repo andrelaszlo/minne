@@ -7,7 +7,7 @@ if [ "$branch" = "master" ]; then
         sed -i -E "s/(<widget.*version=\")([^\"]+)(\")/\1${version}\3/" config.xml 
         echo "Bumped version to: $version"
         echo "Use git's -n flag to make a commit without bumping the version"
-        git add package.json package-lock.json
+        git add config.xml package.json package-lock.json
     else
         echo "Problem bumping version"
     fi
