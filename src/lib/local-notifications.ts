@@ -92,9 +92,13 @@ class BrowserNotifications implements LocalNotifications {
         // Schedule the next upcoming notification, if any
         if (earliestDeadline) {
             let timeout = Math.max(0, moment(earliestDeadline.at).diff(now));
-            console.debug("Scheduling next wakeup in", timeout);
-            let self = this;
-            this.timer = setTimeout(function () { self.scheduleNext(); }, timeout);
+            if (timeout > 2**31) {
+                console.debug("Timeout too large, ignoring next wakeup. Timeout was ", timeout);
+            } else {
+                console.debug("Scheduling next wakeup in", timeout);
+                let self = this;
+                this.timer = setTimeout(function () { self.scheduleNext(); }, timeout);
+            }
         } else {
             console.debug("Nothing to schedule");
         }
