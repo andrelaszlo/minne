@@ -34,23 +34,25 @@ export class GoalsPage {
       var lastGroup = null;
       var result = [];
       var temp = [];
+      var lastFreeHours = null;
       for (let item of items) {
-        var group = this.getDayName(item);
+        var group = moment(item.date).format('ddd, MMM DD');
         if (lastGroup == null) {
           lastGroup = group;
           temp.push(item);
         } else if (group != lastGroup) {
           if (temp.length) {
-            result.push({'key': lastGroup, 'items': temp});
+            result.push({'key': lastGroup, 'items': temp, 'hours': lastFreeHours});
             temp = [item];
           }
           lastGroup = group;
         } else {
           temp.push(item);
         }
+        lastFreeHours = this.firebaseProvider.getFreeHours(item.date);
       }
       if (temp.length) {
-        result.push({'key': lastGroup, 'items': temp});
+        result.push({'key': lastGroup, 'items': temp, 'hours': lastFreeHours});
       }
       return result;
     });
