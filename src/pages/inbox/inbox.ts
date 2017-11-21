@@ -3,19 +3,21 @@ import { IonicPage, NavController, NavParams, ModalController, AlertController, 
 
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { EditPage } from '../edit/edit'
 import { AddPage } from '../../pages/add/add'
 
-@IonicPage()
+@IonicPage({
+  name: 'inbox'
+})
 @Component({
   selector: 'page-inbox',
   templateUrl: 'inbox.html',
 })
 export class InboxPage {
-  
+
   public items: Observable<any>;
-  
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -26,7 +28,7 @@ export class InboxPage {
   ) {
     this.items = firebaseProvider.getItems();
   }
-  
+
   showEditNote(note) {
     let modal = this.modalCtrl.create(EditPage, { note });
     modal.present();
@@ -61,5 +63,5 @@ export class InboxPage {
     let modal = this.modalCtrl.create(AddPage);
     modal.present();
   }
-  
+
 }

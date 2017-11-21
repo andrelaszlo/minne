@@ -1,46 +1,69 @@
-import { InboxPageModule } from '../pages/inbox/inbox.module';
-import { GoalsPageModule } from '../pages/goals/goals.module';
-import { EditPageModule } from '../pages/edit/edit.module';
-import { CalendarPageModule } from '../pages/calendar/calendar.module';
-import { ArchivePageModule } from '../pages/archive/archive.module';
-import { AddPageModule } from '../pages/add/add.module';
-import { PipesModule } from '../pipes/pipes.module';
-import { ComponentsModule } from '../components/components.module';
-import { LocalNotifications } from '@ionic-native/local-notifications';
+// RX
+import 'rxjs/add/observable/empty';
+import 'rxjs/add/operator/groupBy';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap'; // flatMap still exists as an alias
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/toArray';
+
+// Angular
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
+
+// Ionic
+import { LocalNotifications } from '@ionic-native/local-notifications';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { Platform } from 'ionic-angular';
-
-import { MyApp } from './app.component';
-import { InboxPage } from '../pages/inbox/inbox';
-import { ArchivePage } from '../pages/archive/archive';
-import { AddPage } from '../pages/add/add';
-import { EditPage } from '../pages/edit/edit';
-import { LoginPage } from '../pages/login/login';
-import { CalendarPage } from '../pages/calendar/calendar';
-import { GoalsPage } from '../pages/goals/goals';
-import { LoginPageModule } from '../pages/login/login.module';
-
-import { HumanTimePipe } from '../pipes/human-time/human-time';
-import { FormatToLocalPipe } from '../pipes/format-to-local/format-to-local';
-
-import { MainMenuComponent } from '../components/main-menu/main-menu';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HttpModule } from '@angular/http';
+// Firebase
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { FirebaseProvider } from '../providers/firebase/firebase';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+
+// Main app imports
+import { MyApp } from './app.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { ComponentsModule } from '../components/components.module';
+import { localNotificationsFactory } from '../lib/local-notifications';
+
+// Components
+import { MainMenuComponent } from '../components/main-menu/main-menu';
+import { TabImport } from '../pages/config/tab-import';
+
+// Page modules
+import { AddPageModule } from '../pages/add/add.module';
+import { ArchivePageModule } from '../pages/archive/archive.module';
+import { CalendarPageModule } from '../pages/calendar/calendar.module';
+import { ConfigPageModule } from '../pages/config/config.module';
+import { EditPageModule } from '../pages/edit/edit.module';
+import { GoalsPageModule } from '../pages/goals/goals.module';
+import { InboxPageModule } from '../pages/inbox/inbox.module';
+import { LoginPageModule } from '../pages/login/login.module';
+
+// Pages
+import { AddPage } from '../pages/add/add';
+import { ArchivePage } from '../pages/archive/archive';
+import { CalendarPage } from '../pages/calendar/calendar';
+import { ConfigPage } from '../pages/config/config';
+import { EditPage } from '../pages/edit/edit';
+import { GoalsPage } from '../pages/goals/goals';
+import { InboxPage } from '../pages/inbox/inbox';
+import { LoginPage } from '../pages/login/login';
+
+// Pipes
+import { HumanTimePipe } from '../pipes/human-time/human-time';
+import { FormatToLocalPipe } from '../pipes/format-to-local/format-to-local';
+
+// Providers
+import { FirebaseProvider } from '../providers/firebase/firebase';
 import { AuthProvider } from '../providers/auth/auth';
 import { ConfigProvider } from '../providers/config/config';
 import { NotificationProvider } from '../providers/notification/notification';
-import { localNotificationsFactory } from '../lib/local-notifications';
 
 
 const firebaseConfig = {
@@ -52,6 +75,11 @@ const firebaseConfig = {
   messagingSenderId: "***REMOVED***"
 };
 
+export const googleConfig = {
+  secret: '***REMOVED***',
+  id: '***REMOVED******REMOVED***'
+}
+
 
 @NgModule({
   declarations: [
@@ -61,9 +89,11 @@ const firebaseConfig = {
     AngularFirestoreModule,
     BrowserModule,
     HttpModule,
+    IonicModule.forRoot(MyApp,{
+      preloadModules: true
+    }),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
 
     ComponentsModule,
@@ -72,6 +102,7 @@ const firebaseConfig = {
     AddPageModule,
     ArchivePageModule,
     CalendarPageModule,
+    ConfigPageModule,
     EditPageModule,
     GoalsPageModule,
     InboxPageModule,
@@ -81,14 +112,17 @@ const firebaseConfig = {
   entryComponents: [
     MyApp,
     MainMenuComponent,
-  
+
     AddPage,
     ArchivePage,
     CalendarPage,
+    ConfigPage,
     EditPage,
     GoalsPage,
     InboxPage,
-    LoginPage,    
+    LoginPage,
+
+    TabImport
   ],
   providers: [
     StatusBar,

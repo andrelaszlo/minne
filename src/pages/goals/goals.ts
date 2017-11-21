@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, FabContainer, ModalController, AlertController } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AuthProvider } from '../../providers/auth/auth';
-import { Observable } from 'rxjs';
-import 'rxjs/add/operator/groupBy'
+import { Observable } from 'rxjs/Observable';
 import * as moment from 'moment-timezone';
 import { AddPage } from '../../pages/add/add';
 import { EditPage } from '../edit/edit';
 
-@IonicPage()
+@IonicPage({
+  name: 'goals',
+  priority: 'high'
+})
 @Component({
   selector: 'page-goals',
   templateUrl: 'goals.html',

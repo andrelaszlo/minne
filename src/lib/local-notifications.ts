@@ -1,4 +1,3 @@
-import { Map } from 'rxjs/util/Map';
 import { Injectable } from '@angular/core';
 import { Item, Platform } from 'ionic-angular';
 import { LocalNotifications, ILocalNotification } from '@ionic-native/local-notifications';

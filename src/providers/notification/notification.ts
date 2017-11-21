@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { ILocalNotification, LocalNotifications } from '@ionic-native/local-notifications';
-import 'rxjs/add/operator/map';
 import * as moment from 'moment-timezone';
 import { FirebaseProvider, Note } from '../../providers/firebase/firebase';
 import { AuthProvider } from '../../providers/auth/auth';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { PersistentObject } from '../../lib/collection-helpers';
 
 /*

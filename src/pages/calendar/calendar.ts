@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, FabContainer, ModalController, AlertController } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
-import { Observable } from 'rxjs';
-import 'rxjs/add/operator/groupBy'
+import { Observable } from 'rxjs/Observable';
 import * as moment from 'moment-timezone';
 import { AddPage } from '../../pages/add/add';
 import { EditPage } from '../edit/edit';
 
-@IonicPage()
+@IonicPage({
+  name: 'calendar'
+})
 @Component({
   selector: 'page-calendar',
   templateUrl: 'calendar.html',
@@ -17,7 +18,7 @@ export class CalendarPage {
   public items: Observable<any>;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public firebaseProvider: FirebaseProvider,
     public modalCtrl: ModalController,

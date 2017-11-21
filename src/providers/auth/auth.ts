@@ -3,7 +3,6 @@ import { Http } from '@angular/http';
 import * as firebaseAuth from '@firebase/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthProvider {
@@ -18,6 +17,7 @@ export class AuthProvider {
     switch(provider) {
       case 'google':
         authProvider = new firebase.auth.GoogleAuthProvider();
+        authProvider.addScope('https://www.googleapis.com/auth/calendar.readonly');
         break;
       case 'facebook':
         authProvider = new firebase.auth.FacebookAuthProvider();
@@ -30,6 +30,7 @@ export class AuthProvider {
         break;
     }
 
+    console.log("Sign in with redirect");
     // Signin with popup is not supported in Cordova
     this.auth.auth.signInWithRedirect(authProvider)
       .then( result => {
@@ -38,11 +39,8 @@ export class AuthProvider {
         var token = result.credential.accessToken;
         // The signed-in user info.
         var user = result.user;
-        console.log("sign in info", token, user);
-      }).catch(function(error) {
-        // Handle Errors here.
-        console.log(error.message);
-      });
+        console.log("sign in info", token, user, result);
+      }).catch(error => console.log("signin error", error.message));
   }
 
   logout() {
