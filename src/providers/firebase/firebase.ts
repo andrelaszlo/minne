@@ -83,10 +83,12 @@ export class FirebaseProvider {
   }
 
   getFreeHours(date?): Observable<number> {
-    let startDay = date ? moment(date).startOf('day').add(8, 'hours') : moment();
-    let endDay = date ? moment(date).startOf('day').add(20, 'hours') : moment(20, "HH");
-    return this.getNotesByTime(startDay.format(), endDay.format()).map(notes => {
-      let totalHours = endDay.diff(startDay, 'hours');
+    let startDay = moment(date).startOf('day').add(8, 'hours');
+    let endDay = moment(date).startOf('day').add(18, 'hours');
+    let start = date || moment().isBefore(moment(8, 'hours')) ? startDay : moment();
+    let end = date ? endDay : moment(18, "HH");
+    return this.getNotesByTime(start.format(), end.format()).map(notes => {
+      let totalHours = end.diff(start, 'hours');
       for (let note of notes) {
         let startDate = moment(note['date']);
         let endDate = moment(note['endDate']);
