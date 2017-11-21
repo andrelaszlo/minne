@@ -17,7 +17,7 @@ export class TabImport {
     public navParams: NavParams,
     private firebaseProvider: FirebaseProvider
   ) {
-    firebaseProvider.hasGoogleAccessToken().forEach(tokenStatus => this.hasGoogleAccessToken = tokenStatus);
+    firebaseProvider.getUserField('googleAccessToken').forEach(token => this.hasGoogleAccessToken = !!token);
   }
 
   importGoogleCal() {

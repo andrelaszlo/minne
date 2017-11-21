@@ -20,11 +20,19 @@ export interface User {
   goal: string;
 }
 
+export interface Job {
+  userId: string;
+  type: string;
+  payload: any;
+}
+
+
 @Injectable()
 export class FirebaseProvider {
 
   private notesCollection: AngularFirestoreCollection<Note>;
   private usersCollection: AngularFirestoreCollection<User>;
+  private jobsCollection: AngularFirestoreCollection<Job>;  
 
   constructor(
     public http: Http,
@@ -34,6 +42,7 @@ export class FirebaseProvider {
   ) {
     this.notesCollection = angularFireStore.collection<Note>('notes');
     this.usersCollection = angularFireStore.collection<User>('users');
+    this.jobsCollection = angularFireStore.collection<Job>('jobs');
   }
 
   private getNotesByQuery(filterFn: QueryFn): Observable<Note[]> {
@@ -76,9 +85,9 @@ export class FirebaseProvider {
     );
   }
 
-  private updateUser(updates: any) {
-    let userId = this.authProvider.getUserPromise().then(user => {
-      this.usersCollection.doc(user.uid).set(updates, {merge: true});
+  private updateUser(updates: any): Promise<void> {
+    return this.authProvider.getUserPromise().then(user => {
+      return this.usersCollection.doc(user.uid).set(updates, {merge: true});
     });
   }
 
@@ -122,10 +131,6 @@ export class FirebaseProvider {
     this.notesCollection.add(note);
   }
 
-  addGoal(goal: string): void {
-    this.updateUser({goal});
-  }
-
   getGoal(): Observable<string> {
     let userId = this.authProvider.getUser().uid;
     return this.usersCollection.doc(userId).valueChanges().map(user => {
@@ -151,21 +156,38 @@ export class FirebaseProvider {
       .delete();
   }
 
-  setGoogleAccessToken(token: string) {
-    this.updateUser({googleAccessToken: token});
+  addJob(type, payload) {
+    this.authProvider.getUserPromise().then(user => {
+      let job: Job = {
+        userId: user.id,
+        type: 'import',
+        payload: payload
+      }
+      this.jobsCollection.add(job);
+    });
   }
 
-  hasGoogleAccessToken(): Observable<boolean> {
+  /**
+   * Update a field on the logged in user
+   * @param field The field to change, for example 'goal'
+   * @param value The value to set, for example 'world domination'
+   */
+  setUserField(field: string, value: any): Promise<void> {
+    let update = {};
+    update[field] = value;
+    return this.updateUser(update);
+  }
+
+  /**
+   * Get an observable of a field on the signed in user object
+   * @param field The field of the user object to subscribe to changes of
+   */
+  getUserField(field: string): Observable<any> {
     return Observable.fromPromise(this.authProvider.getUserPromise()).flatMap(user =>
       this.usersCollection.doc(user.uid).valueChanges().map(user => {
-        if (user['googleAccessToken']) {
-          return true;
-        } else {
-          return false;
-        }
+        return user[field];
       })
     );
-
   }
 
 }
