@@ -32,7 +32,7 @@ export class FirebaseProvider {
 
   private notesCollection: AngularFirestoreCollection<Note>;
   private usersCollection: AngularFirestoreCollection<User>;
-  private jobsCollection: AngularFirestoreCollection<Job>;  
+  private jobsCollection: AngularFirestoreCollection<Job>;
 
   constructor(
     public http: Http,
@@ -156,14 +156,15 @@ export class FirebaseProvider {
       .delete();
   }
 
-  addJob(type, payload) {
-    this.authProvider.getUserPromise().then(user => {
+  addJob(type, payload): Promise<Job> {
+    return this.authProvider.getUserPromise().then(user => {
       let job: Job = {
-        userId: user.id,
+        userId: user.uid,
         type: 'import',
         payload: payload
       }
       this.jobsCollection.add(job);
+      return job;
     });
   }
 

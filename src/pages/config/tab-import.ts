@@ -10,17 +10,22 @@ declare var gapi;
 })
 export class TabImport {
 
-  hasGoogleAccessToken: boolean = false;
+  googleAccessToken: string = null;
+  importing: boolean = true;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private firebaseProvider: FirebaseProvider
   ) {
-    firebaseProvider.getUserField('googleAccessToken').forEach(token => this.hasGoogleAccessToken = !!token);
+    firebaseProvider.getUserField('googleAccessToken').forEach(token => {this.googleAccessToken = token;});
+    firebaseProvider.getUserField('importing').forEach(importStatus => {this.importing = !!importStatus;});
   }
 
   importGoogleCal() {
-
+    this.firebaseProvider.addJob('import', {googleAccessToken: this.googleAccessToken})
+      .then(job => {
+        this.firebaseProvider.setUserField('importing', true);
+      });
   }
 }

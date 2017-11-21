@@ -1,10 +1,17 @@
-<ion-content *ngIf="hasGoogleAccessToken">
+<ion-content *ngIf="googleAccessToken">
     <p>
         You are signed in to Google Calendar so you can import your existing events.
     </p>
-    <button ion-button #authorizeButton (click)="importGoogleCal()">Import my calendars</button>
+    <button ion-button icon-left #authorizeButton *ngIf="!importing" (click)="importGoogleCal()">
+        <ion-icon name="cloud-download"></ion-icon>
+        Import my calendars
+    </button>
+    <ion-spinner *ngIf="importing"></ion-spinner>
+    <p *ngIf="importing">
+        Hang on while we import your Google calendars.
+    </p>
 </ion-content>
 
-<ion-content *ngIf="!hasGoogleAccessToken">
-    <p>You are not signed in using Google, so you can't import Google Calendar events.</p>  
+<ion-content *ngIf="!googleAccessToken">
+    <p>You are not signed in using Google, so you can't import Google Calendar events.</p>
 </ion-content>
