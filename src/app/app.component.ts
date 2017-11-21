@@ -1,10 +1,10 @@
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
 import * as moment from 'moment';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, ViewController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -17,6 +17,7 @@ import { LoginPage } from '../pages/login/login';
 import { ArchivePage } from '../pages/archive/archive';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { GoalsPage } from '../pages/goals/goals';
+import { FirebaseProvider } from '../providers/firebase/firebase';
 
 @Component({
   templateUrl: 'app.html'
@@ -37,6 +38,7 @@ export class MyApp {
     public authProvider: AuthProvider,
     public configProvider: ConfigProvider,
     public notificationProvider: NotificationProvider,
+    public firebaseProvider: FirebaseProvider,
     afAuth: AngularFireAuth,
   ) {
     this.pages = [
@@ -47,12 +49,28 @@ export class MyApp {
       { title: 'Archive', icon: 'folder', component: ArchivePage },
     ];
 
+    firebase.auth().getRedirectResult().then(function(result) {
+      if (result.credential) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        // Make sure that the scope you need is added, see AuthenticationProvider
+        var token = result.credential.accessToken;
+        if (token) {
+          firebaseProvider.setGoogleAccessToken(token);
+        }
+      }
+    }).catch(function(error) {
+      console.error("Login error", error.code, error.message, error.email, error.credential);
+    });
+
     const authObserver = afAuth.authState.subscribe( user => {
       this.user = user;
+      console.log("Logged in as", user);
       if (!user) {
-        this.rootPage = 'LoginPage';
-      } else {
+        this.rootPage = 'login';
+      } else if (this.nav.getActive().component === LoginPage) {
         this.rootPage = GoalsPage;
+      } else {
+        console.log("Logged in, not redirecting from", this.nav.getActive().component);
       }
     });
 
@@ -74,6 +92,10 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  goToPage(page) {
+    this.nav.push(page);
   }
 
   logout() {

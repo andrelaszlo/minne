@@ -6,7 +6,9 @@ import { ConfigProvider} from '../../providers/config/config';
 
 import * as moment from 'moment-timezone';
 
-@IonicPage()
+@IonicPage({
+  name: 'add'
+})
 @Component({
   selector: 'page-add',
   templateUrl: 'add.html',

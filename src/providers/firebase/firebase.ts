@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { QueryFn } from 'angularfire2/firestore/interfaces';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { AuthProvider } from '../auth/auth';
 import * as moment from 'moment-timezone';
 
@@ -77,6 +76,12 @@ export class FirebaseProvider {
     );
   }
 
+  private updateUser(updates: any) {
+    let userId = this.authProvider.getUserPromise().then(user => {
+      this.usersCollection.doc(user.uid).set(updates, {merge: true});
+    });
+  }
+
   getFreeHours(date?): Observable<number> {
     let startDay = date ? moment(date).startOf('day').add(8, 'hours') : moment();
     let endDay = date ? moment(date).startOf('day').add(20, 'hours') : moment(20, "HH");
@@ -118,9 +123,7 @@ export class FirebaseProvider {
   }
 
   addGoal(goal: string): void {
-    let userId = this.authProvider.getUser().uid;
-    // TODO: make sure user is created in a central place instead
-    this.usersCollection.doc(userId).set({goal});
+    this.updateUser({goal});
   }
 
   getGoal(): Observable<string> {
@@ -146,6 +149,23 @@ export class FirebaseProvider {
     this.angularFireStore
       .doc<Note>(`notes/${note.id}`)
       .delete();
+  }
+
+  setGoogleAccessToken(token: string) {
+    this.updateUser({googleAccessToken: token});
+  }
+
+  hasGoogleAccessToken(): Observable<boolean> {
+    return Observable.fromPromise(this.authProvider.getUserPromise()).flatMap(user =>
+      this.usersCollection.doc(user.uid).valueChanges().map(user => {
+        if (user['googleAccessToken']) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+    );
+
   }
 
 }

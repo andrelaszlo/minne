@@ -4,7 +4,9 @@ import { FirebaseProvider } from '../../providers/firebase/firebase';
 
 import * as moment from 'moment-timezone';
 
-@IonicPage()
+@IonicPage({
+  name: 'edit'
+})
 @Component({
   selector: 'page-edit',
   templateUrl: '../add/add.html',

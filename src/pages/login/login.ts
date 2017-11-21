@@ -6,7 +6,9 @@ import * as moment from 'moment-timezone';
 
 declare var BuildInfo: any;
 
-@IonicPage()
+@IonicPage({
+  name: 'login'
+})
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
