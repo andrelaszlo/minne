@@ -21,6 +21,7 @@ export class GoalsPage {
   public items: Observable<any>;
   public limitedItems: Observable<any>;
   public freeHours: number;
+  public days: any[];
 
   constructor(
     public navCtrl: NavController,
@@ -30,13 +31,14 @@ export class GoalsPage {
     public authProvider: AuthProvider,
     public alertCtrl: AlertController
   ) {
+    this.days = this.getDays();
     this.items = firebaseProvider.getSortedItems().map(items => {
       var lastGroup = null;
       var result = [];
       var temp = [];
       var lastFreeHours = null;
       for (let item of items) {
-        var group = moment(item.date).format('ddd, MMM DD');
+        var group = moment(item.date).format('ddd, MMM DD YYYY');
         if (lastGroup == null) {
           lastGroup = group;
           temp.push(item);
@@ -119,6 +121,17 @@ export class GoalsPage {
 
   isPast(when: any) {
     return moment(when).isBefore(moment());
+  }
+
+  public getDays() {
+    var days = [];
+    var now = moment().startOf('day');
+    var lastDate = moment("2019-01-01").startOf('day');
+    while (now.isSame(lastDate) || now.isBefore(lastDate)) {
+      days.push(now.clone().format('ddd, MMM DD YYYY'));
+      now.add(1, 'day');
+    }
+    return days;
   }
 
   private getDayName(note) {

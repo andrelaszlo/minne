@@ -27,32 +27,42 @@
   </div>
 
   <ion-list class="calendar-list" no-lines>
-    <ion-item-group *ngFor="let group of items | async">
-      <ion-list-header text-center>
-        <div>{{ group.key }}</div>
-        <div>{{ group.hours | async }} free hours</div>
-      </ion-list-header>
-      <ion-item-sliding *ngFor="let item of group.items" title="{{item.id}}">
-        <ion-card ion-item (click)="showEditNote(item)" [ngClass]="{'past-item': isPast(item.date)}">
-          <ion-col class="date">
-            {{ getTime(item.date) }}
-          </ion-col>
-          <ion-col class="calendar">
-            {{ item.content }}
-          </ion-col>
-        </ion-card>
-
-        <ion-item-options side="left" (ionSwipe)="archive(item)">
-          <button ion-button expandable color="secondary" icon-only (click)="archive(item)">
-            <ion-icon name="checkmark"></ion-icon>
-          </button>
-        </ion-item-options>
-
-        <ion-item-options side="right">
-          <button ion-button (click)="showEditNote(item)" color="#00ffff" icon-only><ion-icon name="create"></ion-icon></button>
-          <button ion-button (click)="delete(item)" color="danger" icon-only><ion-icon name="trash"></ion-icon></button>
-        </ion-item-options>
-      </ion-item-sliding>
+    <ion-item-group>
+      <div *ngFor="let day of days">
+        <div>
+          <ion-list-header text-center>
+            <div>{{ day }}</div>
+            <div>10 free hours</div>
+          </ion-list-header>
+        </div>
+        <!--<div *ngIf="">
+          <ion-list-header text-center>
+            <div>{{ group.key }}</div>
+            <div>{{ group.hours | async }} free hours</div>
+          </ion-list-header>
+          <ion-item-sliding *ngFor="let item of group.items" title="{{item.id}}">
+            <ion-card ion-item (click)="showEditNote(item)" [ngClass]="{'past-item': isPast(item.date)}">
+              <ion-col class="date">
+                {{ getTime(item.date) }}
+              </ion-col>
+              <ion-col class="calendar">
+                {{ item.content }}
+              </ion-col>
+            </ion-card>
+    
+            <ion-item-options side="left" (ionSwipe)="archive(item)">
+              <button ion-button expandable color="secondary" icon-only (click)="archive(item)">
+                <ion-icon name="checkmark"></ion-icon>
+              </button>
+            </ion-item-options>
+    
+            <ion-item-options side="right">
+              <button ion-button (click)="showEditNote(item)" color="#00ffff" icon-only><ion-icon name="create"></ion-icon></button>
+              <button ion-button (click)="delete(item)" color="danger" icon-only><ion-icon name="trash"></ion-icon></button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </div>-->
+      </div>
     </ion-item-group>
   </ion-list>
 
