@@ -18,9 +18,10 @@ import { EditPage } from '../edit/edit';
 export class GoalsPage {
 
   public goal: string;
-  public items: Observable<any>;
+  public items: any = {};
   public limitedItems: Observable<any>;
   public freeHours: number;
+  public days: any[];
 
   constructor(
     public navCtrl: NavController,
@@ -30,31 +31,18 @@ export class GoalsPage {
     public authProvider: AuthProvider,
     public alertCtrl: AlertController
   ) {
-    this.items = firebaseProvider.getSortedItems().map(items => {
-      var lastGroup = null;
-      var result = [];
-      var temp = [];
-      var lastFreeHours = null;
+    this.days = this.getDays();
+    firebaseProvider.getSortedItems().forEach(items => {
+      var result = {};
       for (let item of items) {
-        var group = moment(item.date).format('ddd, MMM DD');
-        if (lastGroup == null) {
-          lastGroup = group;
-          temp.push(item);
-        } else if (group != lastGroup) {
-          if (temp.length) {
-            result.push({'key': lastGroup, 'items': temp, 'hours': lastFreeHours});
-            temp = [item];
-          }
-          lastGroup = group;
-        } else {
-          temp.push(item);
+        let hours;
+        let key = moment(item.date).format('ddd, MMM DD YYYY');
+        if (!result[key]) {
+          result[key] = {items: [], hours: this.firebaseProvider.getFreeHours(item.date)};
         }
-        lastFreeHours = this.firebaseProvider.getFreeHours(item.date);
+        result[key].items.push(item);
       }
-      if (temp.length) {
-        result.push({'key': lastGroup, 'items': temp, 'hours': lastFreeHours});
-      }
-      return result;
+      this.items = result;
     });
     firebaseProvider.getGoal().forEach(newGoal =>  this.goal = newGoal);
     this.firebaseProvider.getFreeHours().forEach(hours => this.freeHours = hours)
@@ -119,6 +107,17 @@ export class GoalsPage {
 
   isPast(when: any) {
     return moment(when).isBefore(moment());
+  }
+
+  getDays() {
+    var days = [];
+    var now = moment().startOf('day');
+    var lastDate = moment().add(1, 'year').startOf('day');
+    while (now.isSame(lastDate) || now.isBefore(lastDate)) {
+      days.push(now.clone().format('ddd, MMM DD YYYY'));
+      now.add(1, 'day');
+    }
+    return days;
   }
 
   private getDayName(note) {
