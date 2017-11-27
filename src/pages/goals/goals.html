@@ -29,18 +29,18 @@
   <ion-list class="calendar-list" no-lines>
     <ion-item-group>
       <div *ngFor="let day of days">
-        <div>
+        <div *ngIf="!items[day]">
           <ion-list-header text-center>
             <div>{{ day }}</div>
             <div>10 free hours</div>
           </ion-list-header>
         </div>
-        <!--<div *ngIf="">
+        <div *ngIf="items[day]">
           <ion-list-header text-center>
-            <div>{{ group.key }}</div>
-            <div>{{ group.hours | async }} free hours</div>
+            <div>{{ day }}</div>
+            <div>{{ items[day].hours | async }} free hours</div>
           </ion-list-header>
-          <ion-item-sliding *ngFor="let item of group.items" title="{{item.id}}">
+          <ion-item-sliding *ngFor="let item of items[day].items" title="{{item.id}}">
             <ion-card ion-item (click)="showEditNote(item)" [ngClass]="{'past-item': isPast(item.date)}">
               <ion-col class="date">
                 {{ getTime(item.date) }}
@@ -61,7 +61,7 @@
               <button ion-button (click)="delete(item)" color="danger" icon-only><ion-icon name="trash"></ion-icon></button>
             </ion-item-options>
           </ion-item-sliding>
-        </div>-->
+        </div>
       </div>
     </ion-item-group>
   </ion-list>
