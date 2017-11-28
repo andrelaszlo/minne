@@ -31,14 +31,14 @@
       <div *ngFor="let day of days">
         <div *ngIf="!items[day]">
           <ion-list-header text-center>
-            <div>{{ day }}</div>
+            <div>{{ day | humanTime }}</div>
             <div>10 free hours</div>
           </ion-list-header>
-          <button ion-button small outline full color="light" (click)="addNewNote()"><ion-icon name="add" color="dark"></ion-icon></button>
+          <button ion-button small outline full color="light" (click)="addNewNote(day)"><ion-icon name="add" color="dark"></ion-icon></button>
         </div>
         <div *ngIf="items[day]">
           <ion-list-header text-center>
-            <div>{{ day }}</div>
+            <div>{{ day | humanTime }}</div>
             <div>{{ items[day].hours | async }} free hours</div>
           </ion-list-header>
           <ion-item-sliding *ngFor="let item of items[day].items" title="{{item.id}}">
@@ -62,7 +62,7 @@
               <button ion-button (click)="delete(item)" color="danger" icon-only><ion-icon name="trash"></ion-icon></button>
             </ion-item-options>
           </ion-item-sliding>
-          <button ion-button small outline full color="light" (click)="addNewNote()"><ion-icon name="add" color="dark"></ion-icon></button>
+          <button ion-button small outline full color="light" (click)="addNewNote(day)"><ion-icon name="add" color="dark"></ion-icon></button>
         </div>
       </div>
     </ion-item-group>
