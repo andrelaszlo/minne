@@ -57,16 +57,7 @@ export class GoalsPage {
   }
 
   getTime(date: Date) {
-    return moment(date)
-    .calendar(null, {
-      sameDay: 'LT',
-      nextDay: 'LT',
-      nextWeek: 'LT',
-      // TODO: adapt to location
-      sameElse: function(now) {
-        return this.isBefore(now.endOf("year")) ? 'Do LT' : 'MM/DD LT';
-      }
-    });
+    return moment(date).format('LT');
   }
 
   showEditNote(note) {
