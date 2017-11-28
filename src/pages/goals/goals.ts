@@ -35,8 +35,7 @@ export class GoalsPage {
     firebaseProvider.getSortedItems().forEach(items => {
       var result = {};
       for (let item of items) {
-        let hours;
-        let key = moment(item.date).format('ddd, MMM DD YYYY');
+        let key = moment(item.date).startOf('day').format();
         if (!result[key]) {
           result[key] = {items: [], hours: this.firebaseProvider.getFreeHours(item.date)};
         }
@@ -58,16 +57,7 @@ export class GoalsPage {
   }
 
   getTime(date: Date) {
-    return moment(date)
-    .calendar(null, {
-      sameDay: 'LT',
-      nextDay: 'LT',
-      nextWeek: 'LT',
-      // TODO: adapt to location
-      sameElse: function(now) {
-        return this.isBefore(now.endOf("year")) ? 'Do LT' : 'MM/DD LT';
-      }
-    });
+    return moment(date).format('LT');
   }
 
   showEditNote(note) {
@@ -105,6 +95,13 @@ export class GoalsPage {
     modal.present();
   }
 
+  addNewNote(day) {
+    let modal = this.modalCtrl.create(AddPage, {
+      startDay: day
+    });
+    modal.present();
+  }
+
   isPast(when: any) {
     return moment(when).isBefore(moment());
   }
@@ -114,26 +111,9 @@ export class GoalsPage {
     var now = moment().startOf('day');
     var lastDate = moment().add(1, 'year').startOf('day');
     while (now.isSame(lastDate) || now.isBefore(lastDate)) {
-      days.push(now.clone().format('ddd, MMM DD YYYY'));
+      days.push(now.clone().format());
       now.add(1, 'day');
     }
     return days;
   }
-
-  private getDayName(note) {
-    return moment(note.date)
-    .calendar(null, {
-      sameDay: '[Today]',
-      nextDay: '[Tomorrow]',
-      nextWeek: 'dddd',
-      sameElse: function(date) {
-        let endOfYear = moment().endOf("year");
-        if (this.isAfter(endOfYear)) {
-          return 'Y';
-        }
-        return 'MMMM';
-      }
-    });
-  }
-
 }
