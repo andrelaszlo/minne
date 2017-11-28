@@ -27,7 +27,12 @@ export class AddPage {
     public authProvider: AuthProvider,
     public config: ConfigProvider
   ) {
-    this.note['date'] = moment(this.navParams.get("startDay")).add(8, 'hours');
+    let startDay = this.navParams.get("startDay");
+    if (startDay == moment().startOf('day').format()) {
+      this.note['date'] = moment();
+    } else {
+      this.note['date'] = moment(this.navParams.get("startDay")).add(8, 'hours');
+    }
     this.note['endDate'] = moment(this.note['date']).add(1, 'hours');
   }
 
