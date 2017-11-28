@@ -17,6 +17,7 @@ export class AddPage {
 
   note: any = {'content': ''};
   isEvent;
+  isTodo;
 
   constructor(
     public viewCtrl: ViewController,
@@ -49,6 +50,8 @@ export class AddPage {
     this.note['date'] = date.format();
     this.note['endDate'] = endDate.format();
     this.note['isEvent'] = this.isEvent ? true : false;
+    this.note['isTodo'] = this.isTodo ? true : false;
+    this.note['isChecked'] = !!this.note['isChecked'];
     this.firebaseProvider.addItem(this.note);
     this.viewCtrl.dismiss();
   }

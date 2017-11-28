@@ -15,6 +15,7 @@ export class EditPage {
   public note: any = {'content': null};
   public id: string = null;
   public isEvent;
+  public isTodo;
 
   constructor(
     public navCtrl: NavController,
@@ -24,6 +25,7 @@ export class EditPage {
       this.note = navParams.get("note");
       this.id = this.note.id;
       this.isEvent = this.note['isEvent'];
+      this.isTodo = this.note['isTodo'];
   }
 
   changeDate(newDate) {
@@ -33,6 +35,7 @@ export class EditPage {
 
   saveNote() {
     this.note['isEvent'] = this.isEvent ? true : false;
+    this.note['isTodo'] = this.isTodo ? true : false;
     this.firebaseProvider.saveItem(this.note.id, this.note);
     this.viewCtrl.dismiss();
   }

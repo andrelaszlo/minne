@@ -18,6 +18,7 @@ export interface Note {
   endDate: Date;
   isTodo: boolean;
   isEvent: boolean;
+  isChecked: boolean;
 }
 
 export interface User {
@@ -151,6 +152,11 @@ export class FirebaseProvider {
 
   archive(id, note) {
     note['archived'] = true;
+    this.saveItem(id, note);
+  }
+
+  toggleCheck(id, note, toggleState) {
+    note['isChecked'] = toggleState;
     this.saveItem(id, note);
   }
 

@@ -116,4 +116,9 @@ export class GoalsPage {
     }
     return days;
   }
+
+  toggleTodo(event, note) {
+    let toggleState = event.target.checked;
+    this.firebaseProvider.toggleCheck(note.id, note, toggleState);
+  }
 }
