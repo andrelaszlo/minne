@@ -35,7 +35,6 @@ export class GoalsPage {
     firebaseProvider.getSortedItems().forEach(items => {
       var result = {};
       for (let item of items) {
-        let hours;
         let key = moment(item.date).format('ddd, MMM DD YYYY');
         if (!result[key]) {
           result[key] = {items: [], hours: this.firebaseProvider.getFreeHours(item.date)};
@@ -101,6 +100,11 @@ export class GoalsPage {
 
   addNote(fab: FabContainer) {
     fab.close();
+    let modal = this.modalCtrl.create(AddPage);
+    modal.present();
+  }
+
+  addNewNote() {
     let modal = this.modalCtrl.create(AddPage);
     modal.present();
   }

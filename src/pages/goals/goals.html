@@ -34,6 +34,7 @@
             <div>{{ day }}</div>
             <div>10 free hours</div>
           </ion-list-header>
+          <button ion-button small outline full color="light" (click)="addNewNote()"><ion-icon name="add" color="dark"></ion-icon></button>
         </div>
         <div *ngIf="items[day]">
           <ion-list-header text-center>
@@ -61,14 +62,15 @@
               <button ion-button (click)="delete(item)" color="danger" icon-only><ion-icon name="trash"></ion-icon></button>
             </ion-item-options>
           </ion-item-sliding>
+          <button ion-button small outline full color="light" (click)="addNewNote()"><ion-icon name="add" color="dark"></ion-icon></button>
         </div>
       </div>
     </ion-item-group>
   </ion-list>
 
-  <ion-fab bottom right #addFab>
+  <!--<ion-fab bottom right #addFab>
     <button ion-fab icon-only (click)="addNote(addFab)">
       <ion-icon name="add"></ion-icon>
     </button>
-  </ion-fab>
+  </ion-fab>-->
 </ion-content>
