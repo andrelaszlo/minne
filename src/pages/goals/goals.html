@@ -43,7 +43,7 @@
           </ion-list-header>
           <ion-item-sliding *ngFor="let item of items[day].items" title="{{item.id}}">
             <ion-card ion-item (click)="showEditNote(item)" [ngClass]="{'past-item': isPast(item.date)}">
-              <ion-col class="date">
+              <ion-col *ngIf="item.isEvent" class="date">
                 {{ getTime(item.date) }}
               </ion-col>
               <ion-col class="calendar">

@@ -16,6 +16,7 @@ import * as moment from 'moment-timezone';
 export class AddPage {
 
   note: any = {'content': ''};
+  isEvent;
 
   constructor(
     public viewCtrl: ViewController,
@@ -47,6 +48,7 @@ export class AddPage {
     }
     this.note['date'] = date.format();
     this.note['endDate'] = endDate.format();
+    this.note['isEvent'] = this.isEvent ? true : false;
     this.firebaseProvider.addItem(this.note);
     this.viewCtrl.dismiss();
   }
