@@ -15,11 +15,17 @@ export class HumanTimePipe implements PipeTransform {
     if (timezone) {
       date = date.tz(timezone);
     }
-    return date.calendar(null, {sameElse: this.formatOthers});
-  }
-
-  private formatOthers() {
-    var thisYear = null;
-    return 'MMM Do';
+    return date.calendar(null, {
+      sameDay: '[Today]',
+      nextDay: '[Tomorrow]',
+      nextWeek: 'dddd',
+      sameElse: function(date) {
+        let endOfYear = moment().endOf("year");
+        if (this.isAfter(endOfYear)) {
+          return 'ddd, MMM DD Y';
+        }
+        return 'ddd, MMM DD';
+      }
+    });
   }
 }
