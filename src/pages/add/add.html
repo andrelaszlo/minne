@@ -12,26 +12,38 @@
 
 <ion-content>
   <ion-item no-lines>
-    <ion-label>Start date</ion-label>
-    <ion-datetime
-      displayFormat="MMM DD, YYYY HH:mm"
-      max="2030-01-01"
-      [ngModel]="note.date | formatToLocal"
-      (ngModelChange)="changeDate($event)">>
-    </ion-datetime>
-  </ion-item>
-  <ion-item no-lines>
-    <ion-label>End date</ion-label>
-    <ion-datetime
-      displayFormat="MMM DD, YYYY HH:mm"
-      max="2030-01-01"
-      [ngModel]="note.endDate | formatToLocal"
-      (ngModelChange)="note.endDate=$event">>
-    </ion-datetime>
-  </ion-item>
-
-  <ion-item no-lines>
     <ion-label floating>Note content</ion-label>
     <ion-textarea rows="7" [(ngModel)]="note.content"></ion-textarea>
   </ion-item>
 </ion-content>
+
+<ion-footer>
+  <ion-item>
+    <ion-label>Todo</ion-label>
+    <ion-toggle [(ngModel)]="isTodo"></ion-toggle>
+  </ion-item>
+  <ion-item>
+    <ion-label>Add time</ion-label>
+    <ion-toggle [(ngModel)]="isEvent"></ion-toggle>
+  </ion-item>
+  <div *ngIf="isEvent">
+    <ion-item no-lines>
+      <ion-label>Start date</ion-label>
+      <ion-datetime
+        displayFormat="MMM DD, YYYY HH:mm"
+        max="2030-01-01"
+        [ngModel]="note.date | formatToLocal"
+        (ngModelChange)="changeDate($event)">>
+      </ion-datetime>
+    </ion-item>
+    <ion-item no-lines>
+      <ion-label>End date</ion-label>
+      <ion-datetime
+        displayFormat="MMM DD, YYYY HH:mm"
+        max="2030-01-01"
+        [ngModel]="note.endDate | formatToLocal"
+        (ngModelChange)="note.endDate=$event">>
+      </ion-datetime>
+    </ion-item>
+  </div>
+</ion-footer>

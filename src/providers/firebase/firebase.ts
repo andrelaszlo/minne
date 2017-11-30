@@ -6,6 +6,7 @@ import { QueryFn } from 'angularfire2/firestore/interfaces';
 import { Observable } from 'rxjs/Observable';
 import { AuthProvider } from '../auth/auth';
 import * as moment from 'moment-timezone';
+import {Query} from '@firebase/firestore';
 
 export interface Note {
   id: string;
@@ -14,6 +15,9 @@ export interface Note {
   content: string;
   archived: boolean;
   endDate: Date;
+  isTodo: boolean;
+  isEvent: boolean;
+  isChecked: boolean;
 }
 
 export interface User {
@@ -48,7 +52,7 @@ export class FirebaseProvider {
     return notes;
   }
 
-  private getNotesByTime(afterTime?: any, beforeTime?: any, order?: string): Observable<Note[]> {
+  private getNotesByTime(afterTime?: any, beforeTime?: any, order?: string, customFilter?: (Query) => Query): Observable<Note[]> {
     let user = this.authProvider.getUser(false);
     if (!user) {
       console.log("User not logged in");
@@ -71,6 +75,9 @@ export class FirebaseProvider {
         if (beforeTime) {
           query = query.where('date', "<=", beforeTime);
         }
+        if (customFilter) {
+          query = customFilter(query);
+        }
         return query;
       }
     );
@@ -91,7 +98,7 @@ export class FirebaseProvider {
       start = moment();
     }
 
-    return this.getNotesByTime(start.format(), end.format()).map(notes => {
+    return this.getNotesByTime(start.format(), end.format(), null, (query) => query.where('isEvent', "==", true)).map(notes => {
       let totalHours = end.diff(start, 'hours');
       for (let note of notes) {
         let startDate = moment(note['date']);
@@ -144,6 +151,11 @@ export class FirebaseProvider {
 
   archive(id, note) {
     note['archived'] = true;
+    this.saveItem(id, note);
+  }
+
+  toggleCheck(id, note, toggleState) {
+    note['isChecked'] = toggleState;
     this.saveItem(id, note);
   }
 
