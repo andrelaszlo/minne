@@ -16,6 +16,8 @@ import * as moment from 'moment-timezone';
 export class AddPage {
 
   note: any = {'content': ''};
+  isEvent: boolean;
+  isTodo: boolean;
 
   constructor(
     public viewCtrl: ViewController,
@@ -25,7 +27,12 @@ export class AddPage {
     public authProvider: AuthProvider,
     public config: ConfigProvider
   ) {
-    this.note['date'] = moment(this.navParams.get("startDay")).add(8, 'hours');
+    let startDay = this.navParams.get("startDay");
+    if (startDay == moment().startOf('day').format()) {
+      this.note['date'] = moment();
+    } else {
+      this.note['date'] = moment(this.navParams.get("startDay")).add(8, 'hours');
+    }
     this.note['endDate'] = moment(this.note['date']).add(1, 'hours');
   }
 
@@ -47,6 +54,9 @@ export class AddPage {
     }
     this.note['date'] = date.format();
     this.note['endDate'] = endDate.format();
+    this.note['isEvent'] = this.isEvent ? true : false;
+    this.note['isTodo'] = this.isTodo ? true : false;
+    this.note['isChecked'] = !!this.note['isChecked'];
     this.firebaseProvider.addItem(this.note);
     this.viewCtrl.dismiss();
   }
