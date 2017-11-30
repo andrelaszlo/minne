@@ -108,7 +108,7 @@ export class FirebaseProvider {
   }
 
   getSortedItems(): Observable<Note[]> {
-    return this.getNotesByTime(moment().subtract(2, 'hours').format());
+    return this.getNotesByTime(moment().startOf('day').format());
   }
 
   getUpcomingItems(): Observable<Note[]> {
