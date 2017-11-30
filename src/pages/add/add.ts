@@ -16,8 +16,8 @@ import * as moment from 'moment-timezone';
 export class AddPage {
 
   note: any = {'content': ''};
-  isEvent;
-  isTodo;
+  isEvent: boolean;
+  isTodo: boolean;
 
   constructor(
     public viewCtrl: ViewController,

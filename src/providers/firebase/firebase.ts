@@ -6,7 +6,6 @@ import { QueryFn } from 'angularfire2/firestore/interfaces';
 import { Observable } from 'rxjs/Observable';
 import { AuthProvider } from '../auth/auth';
 import * as moment from 'moment-timezone';
-import firebase from 'firebase';
 import {Query} from '@firebase/firestore';
 
 export interface Note {

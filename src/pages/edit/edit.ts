@@ -14,8 +14,8 @@ import * as moment from 'moment-timezone';
 export class EditPage {
   public note: any = {'content': null};
   public id: string = null;
-  public isEvent;
-  public isTodo;
+  public isEvent: boolean;
+  public isTodo: boolean;
 
   constructor(
     public navCtrl: NavController,
