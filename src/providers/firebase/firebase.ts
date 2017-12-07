@@ -94,7 +94,7 @@ export class FirebaseProvider {
     let end = moment(date).startOf('day').add(18, 'hours');
 
     // Start from now if it is today after the start of the day
-    if (date == start || moment().isAfter(start)) {
+    if (moment().isAfter(start) && moment().isBefore(end)) {
       start = moment();
     }
 
