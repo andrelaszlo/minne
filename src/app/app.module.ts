@@ -64,6 +64,7 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
 import { AuthProvider } from '../providers/auth/auth';
 import { ConfigProvider } from '../providers/config/config';
 import { NotificationProvider } from '../providers/notification/notification';
+import { AnalyticsProvider } from '../providers/analytics/analytics';
 
 
 const firebaseConfig = {
@@ -78,7 +79,9 @@ const firebaseConfig = {
 export const googleConfig = {
   secret: 'x0HHBrJ5EeYYtuiVWf5hBItv',
   id: '302862142744-67d0sa7tqc0itcboe0m5fq61oeo5kjc9.apps.googleusercontent.com'
-}
+};
+
+export const googleAnalyticsTrackingId = 'UA-110874991-1';
 
 
 @NgModule({
@@ -89,7 +92,7 @@ export const googleConfig = {
     AngularFirestoreModule,
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp,{
+    IonicModule.forRoot(MyApp, {
       preloadModules: true
     }),
     AngularFireModule.initializeApp(firebaseConfig),
@@ -127,13 +130,14 @@ export const googleConfig = {
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     FirebaseProvider,
     AngularFireAuth,
     AuthProvider,
     ConfigProvider,
     NotificationProvider,
-    {provide: LocalNotifications, useFactory: localNotificationsFactory, deps: [Platform]}
+    { provide: LocalNotifications, useFactory: localNotificationsFactory, deps: [Platform] },
+    AnalyticsProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }

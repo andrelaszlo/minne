@@ -27,7 +27,7 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: Array<{title: string, icon: string, component: any}>;
+  pages: Array<{ title: string, icon: string, component: any }>;
 
   user: any;
 
@@ -62,7 +62,7 @@ export class MyApp {
       console.error("Login error", error.code, error.message, error.email, error.credential);
     });
 
-    const authObserver = afAuth.authState.subscribe( user => {
+    const authObserver = afAuth.authState.subscribe(user => {
       this.user = user;
       console.log("Logged in as", user);
       if (!user) {
