@@ -35,7 +35,7 @@ export async function importJob(db, userId, accessToken): Promise<any> {
     }
   }
 
-  console.log("Imported ${importedEvents.length} events");
+  console.log(`Imported ${importedEvents.length} events`);
   try {
     await saveEvents(db, userId, importedEvents);
   } catch (err) {
@@ -93,7 +93,8 @@ function listCalendars(auth): Promise<any[]> {
   });
 }
 
-async function saveEvents(db, userId, events): Promise<any> {
+async function saveEvents(db, userId, events: any[]): Promise<any> {
+  console.log(`Starting save of ${events.length} events`);
   const convertConfig = {user: userId};
   for (const event of events) {
     try {
