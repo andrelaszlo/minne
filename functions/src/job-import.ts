@@ -29,7 +29,7 @@ export async function importJob(db, userId, accessToken): Promise<any> {
     try {
       const events = await listEvents(auth, calendar.id);
       console.log(`Got ${events.length} events from ${title}`);
-      importedEvents.concat(events);
+      importedEvents.push(...events);
     } catch (err) {
       console.warn(`Error listing events in ${title}`, err);
     }
