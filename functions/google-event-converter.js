@@ -17,11 +17,13 @@ function parseTime(event, field) {
      end: { dateTime: '2017-11-06T19:30:00+01:00' },
    */
   let timeObj = event[field]; // eg 'start' or 'end'
-  console.log("timeObj", timeObj);
+  if (!timeObj) {
+    console.warn(`Undefined field ${field} in event`, event);
+  }
   if (timeObj['dateTime']) {
     return moment(timeObj['dateTime']).toDate();
   } else if (timeObj['date']) {
-    return moment(timeObj['date']);
+    return moment(timeObj['date']).toDate();
   } else {
     throw event;
   }
@@ -60,7 +62,7 @@ function convert(config, event) {
   note.isImported = true;
   note.isTodo = guessTodo(note.content);
   note.tags = ['imported', 'google'];
-  note._googleEvent = event;
+  note._googleEvent = JSON.parse(JSON.stringify(event));
   return note;
 }
 

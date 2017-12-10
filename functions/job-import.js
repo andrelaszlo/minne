@@ -8,13 +8,27 @@ var CLIENT_ID = '442132493927-qrp39t94cog9j2o9c2rn0djn6um8iv4q.apps.googleuserco
 var CLIENT_SECRET = '9wJYogkqMVG_NIr-BFlt8q-t';
 var REDIRECT_URL = 'https://calico-dev.firebaseapp.com/__/auth/handler'; // Not sure if needed
 
-function importJob(userId, accessToken) {
+async function importJob(db, userId, accessToken) {
   console.log("Running import job for user", userId);
 
   let auth = createAuth(accessToken);
   let calendar = google.calendar('v3');
 
-  listCalendars(auth);
+  let calendars = await listCalendars(auth);
+
+  let importedEvents = [];
+  for (let calendar of calendars) {
+    let title = calendar.summary + (calendar.hidden ? " [hidden]":"");
+    console.log(`Listing events in ${title}`);
+    let events = await listEvents(auth, calendar.id);
+    console.log(`Got ${events.length} events from ${title}`);
+    importedEvents.concat(events);
+  }
+
+  console.log("importedEvents", importedEvents.length);
+  await saveEvents(db, userId, importedEvents);
+
+  await setImported(db, userId);
 }
 
 function createAuth(accessToken) {
@@ -27,58 +41,60 @@ function createAuth(accessToken) {
   return oauth2Client;
 }
 
-function listEvents(auth, id, title) {
+function listEvents(auth, id) {
   var calendar = google.calendar('v3');
-  calendar.events.list({
-    auth: auth,
-    calendarId: id,
-    timeMin: moment().subtract(1, 'month').toDate().toISOString(),
-    timeMin: moment().subtract(1, 'month').toDate().toISOString(),
-    //maxResults: 10,
-    singleEvents: true,
-    orderBy: 'startTime'
-  }, function(err, response) {
-    if (err) {
-      console.log('The API returned an error: ' + err, id, title);
-      return;
-    }
-    var events = response.items;
-    if (events.length == 0) {
-      console.log(title + ': No upcoming events found.');
-    } else {
-      console.log(title + ':');
-      for (var i = 0; i < events.length; i++) {
-        var event = events[i];
-        var start = event.start.dateTime || event.start.date;
-        console.log('%s - %s', start, event.summary);
+  return new Promise((accept, reject) => {
+    calendar.events.list({
+      auth: auth,
+      calendarId: id,
+      timeMin: moment().subtract(1, 'month').toDate().toISOString(),
+      timeMax: moment().add(2, 'years').toDate().toISOString(),
+      singleEvents: true,
+      orderBy: 'startTime'
+    }, function(err, response) {
+      if (err) {
+        reject(err);
       }
-    }
+      accept(response.items);
+    });
   });
 }
 
 function listCalendars(auth) {
   var calendar = google.calendar('v3');
-  calendar.calendarList.list({
-    auth: auth,
-    //showHidden: true
-    minAccessRole: 'owner'
-  }, function(err, response) {
-    if (err) {
-      console.log('The API returned an error: ' + err);
-      return;
-    }
-    var calendars = response.items;
-    if (calendars.length == 0) {
-      console.log('No calendars found.');
-    } else {
-      console.log('Returned calendars:');
-      for (var i = 0; i < calendars.length; i++) {
-        var calendar = calendars[i];
-        var title = calendar.summary + (calendar.hidden ? " [hidden]":"");
-        listEvents(auth, calendar.id, title);
+  return new Promise((resolve, reject) => {
+    calendar.calendarList.list({
+      auth: auth,
+      //showHidden: true
+      minAccessRole: 'owner'
+    }, function(err, response) {
+      if (err) {
+        console.log('The API returned an error', err);
+        reject(err);
       }
-    }
+      var calendars = response.items;
+      console.log(`Returned ${calendars.length} calendars`);
+      resolve(calendars);
+    });    
   });
+}
+
+async function saveEvents(db, userId, events) {
+  var convertConfig = {user: userId};
+  for (var event of events) {
+    try {
+      var converted = converter.convert(convertConfig, event);
+      console.log('Saving converted event', converted);
+      await db.collection('notes').add(converted);
+    } catch (err) {
+      console.warn('Error converting/saving event', err);
+    }
+  }
+  console.log(`Imported ${count} events`);
+}
+
+function setImported(db, userId) {
+  return db.collection('users').doc(userId).update({importing: false});
 }
 
 module.exports = {
