@@ -15,7 +15,7 @@ function parseTime(event, field) {
      start: { dateTime: '2017-11-06T18:30:00+01:00' },
      end: { dateTime: '2017-11-06T19:30:00+01:00' },
    */
-  let timeObj = event[field]; // eg 'start' or 'end'
+  const timeObj = event[field]; // eg 'start' or 'end'
   if (!timeObj) {
     console.warn(`Undefined field ${field} in event`, event);
   }
@@ -41,7 +41,7 @@ function guessTodo(description) {
     /(^|\W)todo\W/i,
     /(^|\W)todo\W/i,
   ];
-  for (let re of regexes) {
+  for (const re of regexes) {
     if (description.match(re)) {
       return true;
     }
@@ -50,7 +50,7 @@ function guessTodo(description) {
 }
 
 export function convert(config, event) {
-  let note: any = {};
+  const note: any = {};
   note.user = config.user;
   note.archived = false;
   note.date = parseTime(event, 'start');
