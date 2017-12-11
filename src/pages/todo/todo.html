@@ -6,7 +6,7 @@
   <ion-list>
     <ion-item-sliding *ngFor="let item of items | async">
       <ion-card ion-item (click)="showEditNote(item)">
-        <ion-card-content style="height:auto">
+        <ion-card-content style="height:auto" title="{{item.id}}">
           {{ item.content }}
         </ion-card-content>
         <ion-row >
