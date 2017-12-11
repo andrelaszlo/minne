@@ -99,7 +99,6 @@ async function saveEvents(db, userId, events: any[]): Promise<any> {
   for (const event of events) {
     try {
       const converted = convert(convertConfig, event);
-      console.log('Saving converted event', converted);
       await db.collection('notes').add(converted);
     } catch (err) {
       console.warn('Error converting/saving event', err);
