@@ -44,21 +44,19 @@
         </ion-list-header>
         <ion-item-sliding *ngFor="let item of items[day].items" title="{{item.id}}">
           <ion-card ion-item [ngClass]="{'past-item': item.isEvent && isPast(item.date)}">
-            <ion-col *ngIf="item.isTodo">
-              <input type="checkbox" (change)="toggleTodo($event, item)" [checked]="item.isChecked">
-              <label *ngIf="item.isEvent" class="date" [class.strikethrough]="item.isChecked" (click)="showEditNote(item)">
-                {{ getTime(item.date) }}
-              </label>
-              <label class="calendar" [class.strikethrough]="item.isChecked" (click)="showEditNote(item)">
-                {{ item.content }}
-              </label>
-            </ion-col>
-            <ion-col *ngIf="item.isEvent && !item.isTodo" (click)="showEditNote(item)" class="date">
-              {{ getTime(item.date) }}
-            </ion-col>
-            <ion-col *ngIf="!item.isTodo" (click)="showEditNote(item)" class="calendar">
-              {{ item.content }}
-            </ion-col>
+            <ion-row>
+              <ion-col col-3 class="date-col">
+                <label *ngIf="item.isEvent" class="date" [class.strikethrough]="item.isChecked" (click)="showEditNote(item)">
+                  {{ getTime(item.date) }}
+                </label>
+              </ion-col>
+              <ion-col col-9 class="calendar">
+                <input *ngIf="item.isTodo" type="checkbox" (change)="toggleTodo($event, item)" [checked]="item.isChecked">
+                <label [class.strikethrough]="item.isChecked" (click)="showEditNote(item)">
+                  {{ item.content }}
+                </label>
+              </ion-col>
+            </ion-row>
           </ion-card>
 
           <ion-item-options side="left" (ionSwipe)="archive(item)">
