@@ -135,7 +135,7 @@ export class FirebaseProvider {
   }
 
   getUpcomingItems(): Observable<Note[]> {
-    return this.getNotesByTime(moment());
+    return this.getNotesByTime(moment(), moment().add(2, 'days'));
   }
 
   /**
