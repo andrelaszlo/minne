@@ -10,7 +10,7 @@ const CLIENT_ID = '***REMOVED***-qrp39t94cog9j2o9c2rn0djn6um8iv4***REMOVED***';
 const CLIENT_SECRET = '***REMOVED***';
 const REDIRECT_URL = 'https://calico-dev.firebaseapp.com/__/auth/handler'; // Not sure if needed
 
-const ID_PREFIX = 'gcal_';
+const ID_PREFIX = 'gcal';
 
 export async function importJob(db, userId, accessToken): Promise<any> {
   console.log("Running import job for user", userId);
@@ -111,7 +111,7 @@ async function saveEvents(db, userId, events: any[]): Promise<any> {
   for (const event of events) {
     try {
       const converted = convert(userId, event);
-      const docId = `${ID_PREFIX}${converted._googleEvent.id}`;
+      const docId = `${ID_PREFIX}:${userId}:${converted._googleEvent.id}`;
       await db.collection('notes').doc(docId).set(converted, {merge: true});
     } catch (err) {
       console.warn('Error converting/saving event', err, event);
