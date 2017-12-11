@@ -38,25 +38,22 @@
       </ng-template>
 
       <ng-template [ngIf]="items[day]">
+
         <ion-list-header text-center>
           <div>{{ day | humanTime }}</div>
           <div>{{ items[day].hours }} free hours</div>
         </ion-list-header>
+
         <ion-item-sliding *ngFor="let item of items[day].items" title="{{item.id}}">
-          <ion-card ion-item [ngClass]="{'past-item': item.isEvent && isPast(item.date)}">
-            <ion-row>
-              <ion-col col-3 class="date-col">
-                <label *ngIf="item.isEvent" class="date" [class.strikethrough]="item.isChecked" (click)="showEditNote(item)">
-                  {{ getTime(item.date) }}
-                </label>
-              </ion-col>
-              <ion-col col-9 class="calendar">
-                <input *ngIf="item.isTodo" type="checkbox" (change)="toggleTodo($event, item)" [checked]="item.isChecked">
-                <label [class.strikethrough]="item.isChecked" (click)="showEditNote(item)">
-                  {{ item.content }}
-                </label>
-              </ion-col>
-            </ion-row>
+
+          <ion-card ion-item [ngClass]="{'past-item': item.isEvent && isPast(item.date)}" class="note-content">
+            <label *ngIf="item.isEvent && !item.isFullDay" class="date" [class.strikethrough]="item.isChecked" (click)="showEditNote(item)">
+              {{ getTime(item.date) }}
+            </label>
+            <input *ngIf="item.isTodo" type="checkbox" (change)="toggleTodo($event, item)" [checked]="item.isChecked">
+            <label [class.strikethrough]="item.isChecked" (click)="showEditNote(item)">
+              {{ item.content }}
+            </label>
           </ion-card>
 
           <ion-item-options side="left" (ionSwipe)="archive(item)">
@@ -69,8 +66,11 @@
             <button ion-button (click)="showEditNote(item)" color="#00ffff" icon-only><ion-icon name="create"></ion-icon></button>
             <button ion-button (click)="delete(item)" color="danger" icon-only><ion-icon name="trash"></ion-icon></button>
           </ion-item-options>
+
         </ion-item-sliding>
+
         <button ion-button small outline class="add-button" (click)="addNewNote(day)"><ion-icon name="add" color="dark"></ion-icon></button>
+
       </ng-template>
 
     </ion-item-group>
