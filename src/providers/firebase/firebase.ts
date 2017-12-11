@@ -167,7 +167,11 @@ export class FirebaseProvider {
   }
 
   getGoal(): Observable<string> {
-    let userId = this.authProvider.getUser().uid;
+    let user = this.authProvider.getUser(false);
+    if (!user) {
+      return Observable.empty();
+    }
+    let userId = user.uid;
     return this.usersCollection.doc(userId).valueChanges().map(user => {
       if (user && user['goal']) {
         return user['goal'];
