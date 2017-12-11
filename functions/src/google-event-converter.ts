@@ -56,9 +56,6 @@ export function convert(userId, event) {
   note.date = parseTime(event, 'start');
   note.endDate = parseTime(event, 'end');
   note.isFullDay = isFullDay(event);
-  if (note.isFullDay) {
-    note.isEvent = false;
-  }
   note.content = event.summary.trim();
   note.isImported = true;
   note.isTodo = guessTodo(note.content);
