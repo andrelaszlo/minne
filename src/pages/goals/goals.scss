@@ -81,4 +81,17 @@ page-goals {
     .strikethrough {
         text-decoration: line-through;
     }
+
+    button.add-button {
+        border: none;
+        margin-bottom: 1.5em; // Between notes, bottom
+        ion-icon {
+            color: rgb(211, 59, 59);
+        }
+    }
+
+    ion-list-header {
+        border-top: 1px solid #f4f4f4 !important;
+        padding-top: 1.5em; // Between notes, top
+    }
 }
