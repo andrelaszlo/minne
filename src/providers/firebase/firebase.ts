@@ -67,32 +67,30 @@ export class FirebaseProvider {
   }
 
   private getNotesByTime(afterTime?: any, beforeTime?: any, order?: string, customFilter?: (Query) => Query): Observable<Note[]> {
-    let user = this.authProvider.getUser(false);
-    if (!user) {
-      console.log("User not logged in");
-      return Observable.empty();
-    }
-    let userId = user.uid;
-    return this.getNotesByQuery(
-      ref => {
-        let query = ref
-          .where('user', '==', userId)
-          .where('archived', '==', false)
-        if (order == 'desc') {
-          query = query.orderBy('date', 'desc');
-        } else {
-          query = query.orderBy('date', 'asc');
-        }
-        if (afterTime) {
-          query = query.where('date', ">=", this.anyToUTC(afterTime));
-        }
-        if (beforeTime) {
-          query = query.where('date', "<=", this.anyToUTC(beforeTime));
-        }
-        if (customFilter) {
-          query = customFilter(query);
-        }
-        return query;
+    return Observable.fromPromise(this.authProvider.getUserPromise())
+      .flatMap(user => {
+        let userId = user.uid;
+        return this.getNotesByQuery(ref => {
+            let query = ref
+              .where('user', '==', userId)
+              .where('archived', '==', false)
+            if (order == 'desc') {
+              query = query.orderBy('date', 'desc');
+            } else {
+              query = query.orderBy('date', 'asc');
+            }
+            if (afterTime) {
+              query = query.where('date', ">=", this.anyToUTC(afterTime));
+            }
+            if (beforeTime) {
+              query = query.where('date', "<=", this.anyToUTC(beforeTime));
+            }
+            if (customFilter) {
+              query = customFilter(query);
+            }
+            return query;
+          }
+        );
       }
     );
   }
@@ -103,35 +101,13 @@ export class FirebaseProvider {
     });
   }
 
-  getFreeHours(date?): Observable<number> {
-    let start = moment(date).startOf('day').add(8, 'hours');
-    let end = moment(date).startOf('day').add(18, 'hours');
-
-    // Start from now if it is today after the start of the day
-    if (moment().isAfter(start) && moment().isBefore(end)) {
-      start = moment();
-    }
-
-
-    return this.getNotesByTime(start, end, null, (query) => query.where('isEvent', "==", true)).map(notes => {
-
-      let totalHours = end.diff(start, 'hours');
-      for (let note of notes) {
-        let startDate = moment(note['date']);
-        let endDate = moment(note['endDate']);
-        let itemDuration = endDate.diff(startDate, 'hours');
-        totalHours = totalHours - itemDuration;
-      }
-      return Math.max(0, totalHours);
-    });
-  }
-
   getItems(includeArchived: boolean = false): Observable<Note[]> {
     return this.getNotesByTime();
   }
 
   getSortedItems(): Observable<Note[]> {
-    return this.getNotesByTime(moment().startOf('day'));
+    // TODO: make sure end date is synched with GoalsPage.getDays
+    return this.getNotesByTime(moment().startOf('day'), moment().add(1, 'year').startOf('day'));
   }
 
   getUpcomingItems(): Observable<Note[]> {
