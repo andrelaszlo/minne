@@ -53,6 +53,8 @@ export class CalendarPage {
   getTime(date: Date) {
     return moment(date)
       .calendar(null, {
+        lastDay: 'Do LT',
+        lastWeek: 'Do LT',
         sameDay: 'LT',
         nextDay: 'LT',
         nextWeek: 'LT',
@@ -105,6 +107,8 @@ export class CalendarPage {
   private getDayName(note) {
     return moment(note.date)
       .calendar(null, {
+        lastDay: 'MMMM',
+        lastWeek: 'MMMM',
         sameDay: '[Today]',
         nextDay: '[Tomorrow]',
         nextWeek: 'dddd',
