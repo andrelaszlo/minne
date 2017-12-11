@@ -111,11 +111,10 @@ async function saveEvents(db, userId, events: any[]): Promise<any> {
   for (const event of events) {
     try {
       const converted = convert(userId, event);
-      console.log("Saving converted event", converted);
       const docId = `${ID_PREFIX}${converted._googleEvent.id}`;
-      await db.collection('notes').doc(docId).set(converted);
+      await db.collection('notes').doc(docId).set(converted, {merge: true});
     } catch (err) {
-      console.warn('Error converting/saving event', err);
+      console.warn('Error converting/saving event', err, event);
     }
   }
 }
