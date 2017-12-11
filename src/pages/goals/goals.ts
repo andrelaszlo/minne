@@ -150,7 +150,7 @@ export class GoalsPage {
 
     let totalHours = end.diff(start, 'hours');
     for (let note of day.items) {
-      if (!note.isEvent) {
+      if (!note.isEvent || note.isFullDay) {
         continue;
       }
       let startDate = moment(note['date']);
