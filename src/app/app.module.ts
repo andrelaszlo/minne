@@ -1,5 +1,6 @@
 // RX
 import 'rxjs/add/observable/empty';
+import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/groupBy';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap'; // flatMap still exists as an alias

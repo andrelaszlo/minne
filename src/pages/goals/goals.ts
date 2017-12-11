@@ -35,17 +35,28 @@ export class GoalsPage {
     firebaseProvider.getSortedItems().forEach(items => {
       var result = {};
       for (let item of items) {
-        let key = moment(item.date).startOf('day').format();
+        let date = moment(item.date).startOf('day');
+        let key = date.format();
         if (!result[key]) {
-          result[key] = {items: [], hours: this.firebaseProvider.getFreeHours(item.date)};
+          result[key] = {items: [], date: date};
         }
         result[key].items.push(item);
       }
+      for (let key in result) {
+        let item = result[key];
+        item['hours'] = this.getFreeHours(item); //this.firebaseProvider.getFreeHours(item.date)
+      }
+
+      let todayKey = moment().startOf('day').format();
+      if (result[todayKey]) {
+        this.freeHours = result[todayKey]['hours'];
+      } else {
+        this.freeHours = 10;
+      }
+
       this.items = result;
     });
     firebaseProvider.getUserField('goal').forEach(newGoal => this.goal = newGoal);
-    this.firebaseProvider.getFreeHours().forEach(hours => this.freeHours = hours)
-      .catch(error => console.log("Error getting number of free hours", error));
   }
 
   setGoal(goal) {
@@ -125,5 +136,28 @@ export class GoalsPage {
   toggleTodo(event, note) {
     let toggleState = event.target.checked;
     this.firebaseProvider.toggleCheck(note.id, note, toggleState);
+  }
+
+  getFreeHours(day: any): number {
+    let date = day.date;
+    let start = moment(date).startOf('day').add(8, 'hours');
+    let end = moment(date).startOf('day').add(18, 'hours');
+
+    // Start from now if it is today after the start of the day
+    if (moment().isAfter(start) && moment().isSame(start, 'day')) {
+      start = moment();
+    }
+
+    let totalHours = end.diff(start, 'hours');
+    for (let note of day.items) {
+      if (!note.isEvent) {
+        continue;
+      }
+      let startDate = moment(note['date']);
+      let endDate = moment(note['endDate']);
+      let itemDuration = endDate.diff(startDate, 'hours');
+      totalHours = totalHours - itemDuration;
+    }
+    return Math.max(0, totalHours);
   }
 }
