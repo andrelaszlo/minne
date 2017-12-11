@@ -1,6 +1,6 @@
 {
   "name": "minne",
-  "version": "0.0.20",
+  "version": "0.0.22",
   "author": "Narjis Hachilif and André Laszlo",
   "homepage": "http://example.com/",
   "private": true,
@@ -9,7 +9,8 @@
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
+    "ionic:serve": "ionic-app-scripts serve",
+    "repl": "./cli.js"
   },
   "dependencies": {
     "@angular/common": "5.0.0",
@@ -48,6 +49,7 @@
     "cordova-universal-links-plugin": "^1.2.1",
     "de.appplant.cordova.plugin.local-notification": "^0.8.5",
     "firebase": "^4.6.2",
+    "firebase-admin": "^5.5.1",
     "google-auth-library": "^0.12.0",
     "googleapis": "^22.2.0",
     "ionic-angular": "^3.9.2",

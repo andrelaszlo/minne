@@ -10,7 +10,7 @@ var REDIRECT_URL = 'https://calico-dev.firebaseapp.com/__/auth/handler'; // Not 
 //var REDIRECT_URL = 'https://calico-fs-dev-aaf97.firebaseapp.com/__/auth/handler'; // Not sure if needed
 
 
-id_token="ya29.GlsKBQ4XXg9tXJfolVfsdAc190A_0tuYsoXgDyNDFuGtyRNBq3C1Y_g4ISNlOqOlPBvIY3N1SH5VT9rA9CuGzaT_pKqeMeN3JZQT_H6x9EfNtfrI0TL2eFtY8hnv";
+id_token="ya29.GlwTBRef8IBZFh8wrdsp2kGVSWFzZckJxj42Iht57llZdTiZRLCQQWQddreNpwqiJEol5gS5dCz-8p9XtaZ2L3wLfhyri_-LDS1I5lxq33AfMuAyTdFlfn3NRM8x5w";
 
 var auth = new googleAuth();
 
@@ -36,13 +36,14 @@ function listEvents(auth, id, title) {
     }
     var events = response.items;
     if (events.length == 0) {
-      console.log(title + ': No upcoming events found.');
+      //console.log(title + ': No upcoming events found.');
     } else {
-      console.log(title + ':');
+      //console.log(title + ':');
       for (var i = 0; i < events.length; i++) {
         var event = events[i];
         var start = event.start.dateTime || event.start.date;
-        console.log('%s - %s', start, event.summary);
+        //console.log('%s - %s', start, event.summary);
+        console.log(JSON.stringify(event));
       }
     }
   });
@@ -62,7 +63,7 @@ function listCalendars(auth) {
     if (calendars.length == 0) {
       console.log('No calendars found.');
     } else {
-      console.log('Returned calendars:');
+      //console.log('Returned calendars:');
       for (var i = 0; i < calendars.length; i++) {
         var calendar = calendars[i];
         var title = calendar.summary + (calendar.hidden ? " [hidden]":"");

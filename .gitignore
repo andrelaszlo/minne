@@ -1,6 +1,9 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
+serviceAccountKey.json
+
+.#*
 *~
 *.sw[mnpcod]
 *.log
@@ -12,6 +15,7 @@ log.txt
 .vscode/
 npm-debug.log*
 
+functions/lib/*
 .idea/
 .sourcemaps/
 .sass-cache/

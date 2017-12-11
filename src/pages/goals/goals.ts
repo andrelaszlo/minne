@@ -43,13 +43,13 @@ export class GoalsPage {
       }
       this.items = result;
     });
-    firebaseProvider.getGoal().forEach(newGoal =>  this.goal = newGoal);
+    firebaseProvider.getUserField('goal').forEach(newGoal => this.goal = newGoal);
     this.firebaseProvider.getFreeHours().forEach(hours => this.freeHours = hours)
       .catch(error => console.log("Error getting number of free hours", error));
   }
 
   setGoal(goal) {
-    this.firebaseProvider.addGoal(goal);
+    this.firebaseProvider.setUserField('goal', goal);
   }
 
   getUserName() {

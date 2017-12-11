@@ -1,0 +1,1651 @@
+[
+  {
+    "kind": "calendar#event",
+    "etag": "\"3016972630612000\"",
+    "id": "0hmp5r43g4cd73aa3r66qtst6s",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=MGhtcDVyNDNnNGNkNzNhYTNyNjZxdHN0NnMgNGJmZDlnZGo1ZXJ2NTJhNjQ4amgzNjljNDhAZw",
+    "created": "2017-10-20T07:58:35.000Z",
+    "updated": "2017-10-20T07:58:35.306Z",
+    "summary": "todo: plombier",
+    "creator": {
+      "email": "anne-gaelle@imagination-machine.com"
+    },
+    "organizer": {
+      "email": "4bfd9gdj5erv52a648jh369c48@group.calendar.google.com",
+      "displayName": "Imagination Machine",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-10-30T12:30:00+01:00"
+    },
+    "end": {
+      "dateTime": "2017-10-30T14:00:00+01:00"
+    },
+    "iCalUID": "0hmp5r43g4cd73aa3r66qtst6s@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3016972630612000\"",
+    "id": "0hmp5r43g4cd73aa3r66qtst6s",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=MGhtcDVyNDNnNGNkNzNhYTNyNjZxdHN0NnMgNGJmZDlnZGo1ZXJ2NTJhNjQ4amgzNjljNDhAZw",
+    "created": "2017-10-20T07:58:35.000Z",
+    "updated": "2017-10-20T07:58:35.306Z",
+    "summary": "Colunch Halloween @ la Cantine",
+    "creator": {
+      "email": "anne-gaelle@imagination-machine.com"
+    },
+    "organizer": {
+      "email": "4bfd9gdj5erv52a648jh369c48@group.calendar.google.com",
+      "displayName": "Imagination Machine",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-10-30T12:30:00+01:00"
+    },
+    "end": {
+      "dateTime": "2017-10-30T14:00:00+01:00"
+    },
+    "iCalUID": "0hmp5r43g4cd73aa3r66qtst6s@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3018573823352000\"",
+    "id": "3bpki0vddlfh89c83l5j1g7cto",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=M2Jwa2kwdmRkbGZoODljODNsNWoxZzdjdG8gNGJmZDlnZGo1ZXJ2NTJhNjQ4amgzNjljNDhAZw",
+    "created": "2017-10-29T13:54:27.000Z",
+    "updated": "2017-10-29T14:21:51.676Z",
+    "summary": "IM Monday Happy Hour",
+    "description": "Salut tout le monde,\n\nlet's go have a drink on monday !! \nMonday ?! We know, it's not a Happy-Hour day ! Crazy us !\n\nBut, if you need to be convinced to come, we've got many excuses and things to celebrate : \n- there has been a successful poker release last week\n-  the launch of Vite mon Marché is coming\n-  it's almost Halloween\n- it's almost the raclette season\n-  it's monday (this excuse alone should be enough)\n- winter is coming (and you know what winter in Nantes means... #umbrella)\n- 56 days before Christmas\n- ... if you are still hesitating, please know that, this is it : we've bought our domain name ! You won't hear us yelling / groaning \"oh nooooon c'est déjà pris en fait !! Raaaah pu!#$% !!\"\n\nAllez, rdv lundi, 18h, au café Chez Louisette (rue louis blanc) !\nA demain,\n\nLa Jho-team \n",
+    "location": "CHEZ LOUISETTE, 1 Rue Louis Blanc, 44200 Nantes, France",
+    "colorId": "4",
+    "creator": {
+      "email": "coline.mazeyrat@gmail.com",
+      "displayName": "Coline MAZEYRAT"
+    },
+    "organizer": {
+      "email": "4bfd9gdj5erv52a648jh369c48@group.calendar.google.com",
+      "displayName": "Imagination Machine",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-10-30T18:00:00+01:00"
+    },
+    "end": {
+      "dateTime": "2017-10-30T19:00:00+01:00"
+    },
+    "iCalUID": "3bpki0vddlfh89c83l5j1g7cto@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3016289766568000\"",
+    "id": "4im2otjvg1h3l8s0fvelv5glis",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=NGltMm90anZnMWgzbDhzMGZ2ZWx2NWdsaXMgNGJmZDlnZGo1ZXJ2NTJhNjQ4amgzNjljNDhAZw",
+    "created": "2017-10-16T09:08:03.000Z",
+    "updated": "2017-10-16T09:08:03.284Z",
+    "summary": "Masterclass Julien HERVOUET",
+    "creator": {
+      "email": "anne-gaelle@imagination-machine.com"
+    },
+    "organizer": {
+      "email": "4bfd9gdj5erv52a648jh369c48@group.calendar.google.com",
+      "displayName": "Imagination Machine",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-10-31T15:00:00+01:00"
+    },
+    "end": {
+      "dateTime": "2017-10-31T16:00:00+01:00"
+    },
+    "iCalUID": "4im2otjvg1h3l8s0fvelv5glis@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3018185248194000\"",
+    "id": "2huct64s7jgpla5kk2qk3akvtq",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=Mmh1Y3Q2NHM3amdwbGE1a2sycWszYWt2dHEgNGJmZDlnZGo1ZXJ2NTJhNjQ4amgzNjljNDhAZw",
+    "created": "2017-10-27T08:23:44.000Z",
+    "updated": "2017-10-27T08:23:44.097Z",
+    "summary": "FIKA!",
+    "creator": {
+      "email": "anne-gaelle@imagination-machine.com"
+    },
+    "organizer": {
+      "email": "4bfd9gdj5erv52a648jh369c48@group.calendar.google.com",
+      "displayName": "Imagination Machine",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-11-02T15:30:00+01:00"
+    },
+    "end": {
+      "dateTime": "2017-11-02T16:00:00+01:00"
+    },
+    "iCalUID": "2huct64s7jgpla5kk2qk3akvtq@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3020313786386000\"",
+    "id": "28t4cvfaieoeds298ctjq2e04a",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=Mjh0NGN2ZmFpZW9lZHMyOThjdGpxMmUwNGEgNGJmZDlnZGo1ZXJ2NTJhNjQ4amgzNjljNDhAZw",
+    "created": "2017-11-08T11:02:28.000Z",
+    "updated": "2017-11-08T16:01:33.193Z",
+    "summary": "Fik.... errr, Masterclass! ;)",
+    "creator": {
+      "email": "anne-gaelle@imagination-machine.com"
+    },
+    "organizer": {
+      "email": "4bfd9gdj5erv52a648jh369c48@group.calendar.google.com",
+      "displayName": "Imagination Machine",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-11-09T14:30:00+01:00"
+    },
+    "end": {
+      "dateTime": "2017-11-09T16:00:00+01:00"
+    },
+    "iCalUID": "28t4cvfaieoeds298ctjq2e04a@google.com",
+    "sequence": 1,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3011831351014000\"",
+    "id": "3l4rcms712kj841et4iv296pe2_20171109T170000Z",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=M2w0cmNtczcxMmtqODQxZXQ0aXYyOTZwZTJfMjAxNzExMDlUMTcwMDAwWiA0YmZkOWdkajVlcnY1MmE2NDhqaDM2OWM0OEBn",
+    "created": "2017-09-20T13:54:35.000Z",
+    "updated": "2017-09-20T13:54:35.507Z",
+    "summary": "IM Thursday Happy Hour",
+    "location": "Changes every week",
+    "creator": {
+      "email": "jrnachtigal@gmail.com",
+      "displayName": "Julian Nachtigal"
+    },
+    "organizer": {
+      "email": "4bfd9gdj5erv52a648jh369c48@group.calendar.google.com",
+      "displayName": "Imagination Machine",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-11-09T18:00:00+01:00",
+      "timeZone": "Europe/Paris"
+    },
+    "end": {
+      "dateTime": "2017-11-09T20:00:00+01:00",
+      "timeZone": "Europe/Paris"
+    },
+    "recurringEventId": "3l4rcms712kj841et4iv296pe2",
+    "originalStartTime": {
+      "dateTime": "2017-11-09T18:00:00+01:00",
+      "timeZone": "Europe/Paris"
+    },
+    "iCalUID": "3l4rcms712kj841et4iv296pe2@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3021295901330000\"",
+    "id": "1m4vja95bkn1rl9sd9kmrjrets",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=MW00dmphOTVia24xcmw5c2Q5a21yanJldHMgNGJmZDlnZGo1ZXJ2NTJhNjQ4amgzNjljNDhAZw",
+    "created": "2017-11-14T08:25:50.000Z",
+    "updated": "2017-11-14T08:25:50.665Z",
+    "summary": "FIKA du jour bonjour",
+    "colorId": "11",
+    "creator": {
+      "email": "coline.mazeyrat@gmail.com",
+      "displayName": "Coline MAZEYRAT"
+    },
+    "organizer": {
+      "email": "4bfd9gdj5erv52a648jh369c48@group.calendar.google.com",
+      "displayName": "Imagination Machine",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-11-15T15:30:00+01:00"
+    },
+    "end": {
+      "dateTime": "2017-11-15T15:45:00+01:00"
+    },
+    "iCalUID": "1m4vja95bkn1rl9sd9kmrjrets@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3022540008288000\"",
+    "id": "6nvso3abtfq8qo0keten9tuu85",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=Nm52c28zYWJ0ZnE4cW8wa2V0ZW45dHV1ODUgNGJmZDlnZGo1ZXJ2NTJhNjQ4amgzNjljNDhAZw",
+    "created": "2017-11-21T13:13:10.000Z",
+    "updated": "2017-11-21T13:13:24.144Z",
+    "summary": "Lunch at le reflet",
+    "creator": {
+      "email": "julie@imagination-machine.com"
+    },
+    "organizer": {
+      "email": "4bfd9gdj5erv52a648jh369c48@group.calendar.google.com",
+      "displayName": "Imagination Machine",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-11-23T12:00:00+01:00"
+    },
+    "end": {
+      "dateTime": "2017-11-23T13:15:00+01:00"
+    },
+    "iCalUID": "6nvso3abtfq8qo0keten9tuu85@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3011831351014000\"",
+    "id": "3l4rcms712kj841et4iv296pe2_20171123T170000Z",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=M2w0cmNtczcxMmtqODQxZXQ0aXYyOTZwZTJfMjAxNzExMjNUMTcwMDAwWiA0YmZkOWdkajVlcnY1MmE2NDhqaDM2OWM0OEBn",
+    "created": "2017-09-20T13:54:35.000Z",
+    "updated": "2017-09-20T13:54:35.507Z",
+    "summary": "IM Thursday Happy Hour",
+    "location": "Changes every week",
+    "creator": {
+      "email": "jrnachtigal@gmail.com",
+      "displayName": "Julian Nachtigal"
+    },
+    "organizer": {
+      "email": "4bfd9gdj5erv52a648jh369c48@group.calendar.google.com",
+      "displayName": "Imagination Machine",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-11-23T18:00:00+01:00",
+      "timeZone": "Europe/Paris"
+    },
+    "end": {
+      "dateTime": "2017-11-23T20:00:00+01:00",
+      "timeZone": "Europe/Paris"
+    },
+    "recurringEventId": "3l4rcms712kj841et4iv296pe2",
+    "originalStartTime": {
+      "dateTime": "2017-11-23T18:00:00+01:00",
+      "timeZone": "Europe/Paris"
+    },
+    "iCalUID": "3l4rcms712kj841et4iv296pe2@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3023019178256000\"",
+    "id": "1ikbjdmhntbq8b5ee6du614kh1",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=MWlrYmpkbWhudGJxOGI1ZWU2ZHU2MTRraDEgNGJmZDlnZGo1ZXJ2NTJhNjQ4amgzNjljNDhAZw",
+    "created": "2017-11-24T07:46:29.000Z",
+    "updated": "2017-11-24T07:46:29.128Z",
+    "summary": "Fika // Birthday Julie + Last day Maxime",
+    "description": "Une petite brioche entre nous :)",
+    "creator": {
+      "email": "julie@imagination-machine.com"
+    },
+    "organizer": {
+      "email": "4bfd9gdj5erv52a648jh369c48@group.calendar.google.com",
+      "displayName": "Imagination Machine",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-11-24T10:00:00+01:00"
+    },
+    "end": {
+      "dateTime": "2017-11-24T10:15:00+01:00"
+    },
+    "iCalUID": "1ikbjdmhntbq8b5ee6du614kh1@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"2872409365080000\"",
+    "id": "6dfpbaop9hccdcfuna35s1sj4c_20171118",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=NmRmcGJhb3A5aGNjZGNmdW5hMzVzMXNqNGNfMjAxNzExMTggcTRnOGdhcjE3bnAwNWQwZzltZXBpaDlua29AZw",
+    "created": "2012-11-24T14:08:35.000Z",
+    "updated": "2015-07-06T17:44:42.540Z",
+    "summary": "Johannes födelsedag",
+    "creator": {
+      "email": "andre.laszlo@gmail.com",
+      "displayName": "André Laszlo"
+    },
+    "organizer": {
+      "email": "q4g8gar17np05d0g9mepih9nko@group.calendar.google.com",
+      "displayName": "Födelsedagar",
+      "self": true
+    },
+    "start": {
+      "date": "2017-11-18"
+    },
+    "end": {
+      "date": "2017-11-19"
+    },
+    "recurringEventId": "6dfpbaop9hccdcfuna35s1sj4c",
+    "originalStartTime": {
+      "date": "2017-11-18"
+    },
+    "transparency": "transparent",
+    "iCalUID": "6dfpbaop9hccdcfuna35s1sj4c@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "email",
+          "minutes": 4740
+        },
+        {
+          "method": "popup",
+          "minutes": 10
+        },
+        {
+          "method": "sms",
+          "minutes": 1860
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"2872409365080000\"",
+    "id": "7ta6o3punkdibpljrn0so2mf34_20171209",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=N3RhNm8zcHVua2RpYnBsanJuMHNvMm1mMzRfMjAxNzEyMDkgcTRnOGdhcjE3bnAwNWQwZzltZXBpaDlua29AZw",
+    "created": "2007-03-20T17:03:03.000Z",
+    "updated": "2015-07-06T17:44:42.540Z",
+    "summary": "Marie Carlssons födelsedag",
+    "description": "1977-12-09",
+    "creator": {
+      "email": "andre.laszlo@gmail.com",
+      "displayName": "André Laszlo"
+    },
+    "organizer": {
+      "email": "q4g8gar17np05d0g9mepih9nko@group.calendar.google.com",
+      "displayName": "Födelsedagar",
+      "self": true
+    },
+    "start": {
+      "date": "2017-12-09"
+    },
+    "end": {
+      "date": "2017-12-10"
+    },
+    "recurringEventId": "7ta6o3punkdibpljrn0so2mf34",
+    "originalStartTime": {
+      "date": "2017-12-09"
+    },
+    "transparency": "transparent",
+    "iCalUID": "7ta6o3punkdibpljrn0so2mf34@google.com",
+    "sequence": 0,
+    "guestsCanInviteOthers": false,
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "email",
+          "minutes": 4740
+        },
+        {
+          "method": "popup",
+          "minutes": 10
+        },
+        {
+          "method": "sms",
+          "minutes": 1860
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"2907332149954000\"",
+    "id": "r8ovaf36kqmog40odhh4q8fgqs_20180110",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=cjhvdmFmMzZrcW1vZzQwb2RoaDRxOGZncXNfMjAxODAxMTAgcTRnOGdhcjE3bnAwNWQwZzltZXBpaDlua29AZw",
+    "created": "2016-01-24T20:07:54.000Z",
+    "updated": "2016-01-24T20:07:54.977Z",
+    "summary": "Edvin",
+    "description": "Hanna och Anders son Edvin",
+    "creator": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo"
+    },
+    "organizer": {
+      "email": "q4g8gar17np05d0g9mepih9nko@group.calendar.google.com",
+      "displayName": "Födelsedagar",
+      "self": true
+    },
+    "start": {
+      "date": "2018-01-10"
+    },
+    "end": {
+      "date": "2018-01-11"
+    },
+    "recurringEventId": "r8ovaf36kqmog40odhh4q8fgqs",
+    "originalStartTime": {
+      "date": "2018-01-10"
+    },
+    "transparency": "transparent",
+    "iCalUID": "r8ovaf36kqmog40odhh4q8fgqs@google.com",
+    "sequence": 0,
+    "hangoutLink": "https://plus.google.com/hangouts/_/laszlo.nu/edvin?hceid=cTRnOGdhcjE3bnAwNWQwZzltZXBpaDlua29AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ.r8ovaf36kqmog40odhh4q8fgqs",
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "email",
+          "minutes": 4740
+        },
+        {
+          "method": "popup",
+          "minutes": 10
+        },
+        {
+          "method": "sms",
+          "minutes": 1860
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"2872409365080000\"",
+    "id": "99cfocq1kqaobprivqthjc5qmk_20180123",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=OTljZm9jcTFrcWFvYnByaXZxdGhqYzVxbWtfMjAxODAxMjMgcTRnOGdhcjE3bnAwNWQwZzltZXBpaDlua29AZw",
+    "created": "2007-08-13T08:43:41.000Z",
+    "updated": "2015-07-06T17:44:42.540Z",
+    "summary": "ATs födelsedag",
+    "description": "1985-01-23",
+    "creator": {
+      "email": "andre.laszlo@gmail.com",
+      "displayName": "André Laszlo"
+    },
+    "organizer": {
+      "email": "q4g8gar17np05d0g9mepih9nko@group.calendar.google.com",
+      "displayName": "Födelsedagar",
+      "self": true
+    },
+    "start": {
+      "date": "2018-01-23"
+    },
+    "end": {
+      "date": "2018-01-24"
+    },
+    "recurringEventId": "99cfocq1kqaobprivqthjc5qmk",
+    "originalStartTime": {
+      "date": "2018-01-23"
+    },
+    "transparency": "transparent",
+    "iCalUID": "99cfocq1kqaobprivqthjc5qmk@google.com",
+    "sequence": 0,
+    "guestsCanInviteOthers": false,
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "email",
+          "minutes": 4740
+        },
+        {
+          "method": "popup",
+          "minutes": 10
+        },
+        {
+          "method": "sms",
+          "minutes": 1860
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"2963984133660000\"",
+    "id": "je4o1c27ocr4dm0bdkgs58bpmg_20180201",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=amU0bzFjMjdvY3I0ZG0wYmRrZ3M1OGJwbWdfMjAxODAyMDEgcTRnOGdhcjE3bnAwNWQwZzltZXBpaDlua29AZw",
+    "created": "2009-02-03T10:34:22.000Z",
+    "updated": "2016-12-17T16:27:46.830Z",
+    "summary": "Maximilians födelsedag",
+    "description": "2008-02-01 {birthday_e}",
+    "creator": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo"
+    },
+    "organizer": {
+      "email": "q4g8gar17np05d0g9mepih9nko@group.calendar.google.com",
+      "displayName": "Födelsedagar",
+      "self": true
+    },
+    "start": {
+      "date": "2018-02-01"
+    },
+    "end": {
+      "date": "2018-02-02"
+    },
+    "recurringEventId": "je4o1c27ocr4dm0bdkgs58bpmg",
+    "originalStartTime": {
+      "date": "2018-02-01"
+    },
+    "transparency": "transparent",
+    "iCalUID": "je4o1c27ocr4dm0bdkgs58bpmg@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "email",
+          "minutes": 4740
+        },
+        {
+          "method": "popup",
+          "minutes": 10
+        },
+        {
+          "method": "sms",
+          "minutes": 1860
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"2872409365080000\"",
+    "id": "hpqpo4bda8vo0177v6qrepelj8_20180210",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=aHBxcG80YmRhOHZvMDE3N3Y2cXJlcGVsajhfMjAxODAyMTAgcTRnOGdhcjE3bnAwNWQwZzltZXBpaDlua29AZw",
+    "created": "2007-08-13T08:45:02.000Z",
+    "updated": "2015-07-06T17:44:42.540Z",
+    "summary": "Pärs födelsedag",
+    "description": "1985-02-10",
+    "creator": {
+      "email": "andre.laszlo@gmail.com",
+      "displayName": "André Laszlo"
+    },
+    "organizer": {
+      "email": "q4g8gar17np05d0g9mepih9nko@group.calendar.google.com",
+      "displayName": "Födelsedagar",
+      "self": true
+    },
+    "start": {
+      "date": "2018-02-10"
+    },
+    "end": {
+      "date": "2018-02-11"
+    },
+    "recurringEventId": "hpqpo4bda8vo0177v6qrepelj8",
+    "originalStartTime": {
+      "date": "2018-02-10"
+    },
+    "transparency": "transparent",
+    "iCalUID": "hpqpo4bda8vo0177v6qrepelj8@google.com",
+    "sequence": 0,
+    "guestsCanInviteOthers": false,
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "email",
+          "minutes": 4740
+        },
+        {
+          "method": "popup",
+          "minutes": 10
+        },
+        {
+          "method": "sms",
+          "minutes": 1860
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"2872409365080000\"",
+    "id": "0ligb0e1bmi6ipnitop5jk367s_20180214",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=MGxpZ2IwZTFibWk2aXBuaXRvcDVqazM2N3NfMjAxODAyMTQgcTRnOGdhcjE3bnAwNWQwZzltZXBpaDlua29AZw",
+    "created": "2011-07-09T14:20:00.000Z",
+    "updated": "2015-07-06T17:44:42.540Z",
+    "summary": "Narjis födelsedag",
+    "description": "870214",
+    "creator": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo"
+    },
+    "organizer": {
+      "email": "q4g8gar17np05d0g9mepih9nko@group.calendar.google.com",
+      "displayName": "Födelsedagar",
+      "self": true
+    },
+    "start": {
+      "date": "2018-02-14"
+    },
+    "end": {
+      "date": "2018-02-15"
+    },
+    "recurringEventId": "0ligb0e1bmi6ipnitop5jk367s",
+    "originalStartTime": {
+      "date": "2018-02-14"
+    },
+    "transparency": "transparent",
+    "iCalUID": "0ligb0e1bmi6ipnitop5jk367s@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "email",
+          "minutes": 4740
+        },
+        {
+          "method": "popup",
+          "minutes": 10
+        },
+        {
+          "method": "sms",
+          "minutes": 1860
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"2862555794917000\"",
+    "id": "1mltdib6rngjp3e47ifdhtsaa8_20180307",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=MW1sdGRpYjZybmdqcDNlNDdpZmRodHNhYThfMjAxODAzMDcgcTRnOGdhcjE3bnAwNWQwZzltZXBpaDlua29AZw",
+    "created": "2015-03-14T16:38:32.000Z",
+    "updated": "2015-07-06T17:44:42.540Z",
+    "summary": "Valdemars födelsedag ",
+    "description": "2015",
+    "creator": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo"
+    },
+    "organizer": {
+      "email": "q4g8gar17np05d0g9mepih9nko@group.calendar.google.com",
+      "displayName": "Födelsedagar",
+      "self": true
+    },
+    "start": {
+      "date": "2018-03-07"
+    },
+    "end": {
+      "date": "2018-03-08"
+    },
+    "endTimeUnspecified": true,
+    "recurringEventId": "1mltdib6rngjp3e47ifdhtsaa8",
+    "originalStartTime": {
+      "date": "2018-03-07"
+    },
+    "transparency": "transparent",
+    "iCalUID": "1mltdib6rngjp3e47ifdhtsaa8@google.com",
+    "sequence": 1,
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "popup",
+          "minutes": 10
+        },
+        {
+          "method": "email",
+          "minutes": 4740
+        },
+        {
+          "method": "sms",
+          "minutes": 1860
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"2872409365080000\"",
+    "id": "l5kbg2867lo4vp8nnf07986gts_20180312",
+    "status": "tentative",
+    "htmlLink": "https://www.google.com/calendar/event?eid=bDVrYmcyODY3bG80dnA4bm5mMDc5ODZndHNfMjAxODAzMTIgcTRnOGdhcjE3bnAwNWQwZzltZXBpaDlua29AZw",
+    "created": "2012-03-13T07:14:45.000Z",
+    "updated": "2015-07-06T17:44:42.540Z",
+    "summary": "Oves födelsedag",
+    "creator": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo"
+    },
+    "organizer": {
+      "email": "q4g8gar17np05d0g9mepih9nko@group.calendar.google.com",
+      "displayName": "Födelsedagar",
+      "self": true
+    },
+    "start": {
+      "date": "2018-03-12"
+    },
+    "end": {
+      "date": "2018-03-13"
+    },
+    "recurringEventId": "l5kbg2867lo4vp8nnf07986gts",
+    "originalStartTime": {
+      "date": "2018-03-12"
+    },
+    "iCalUID": "l5kbg2867lo4vp8nnf07986gts@google.com",
+    "sequence": 1,
+    "attendees": [
+      {
+        "email": "q4g8gar17np05d0g9mepih9nko@group.calendar.google.com",
+        "displayName": "Födelsedagar",
+        "organizer": true,
+        "self": true,
+        "responseStatus": "accepted"
+      }
+    ],
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "popup",
+          "minutes": 10
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"2872409365080000\"",
+    "id": "ode84k1ofamde38siagiaogrig_20180414",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=b2RlODRrMW9mYW1kZTM4c2lhZ2lhb2dyaWdfMjAxODA0MTQgcTRnOGdhcjE3bnAwNWQwZzltZXBpaDlua29AZw",
+    "created": "2007-03-20T16:42:52.000Z",
+    "updated": "2015-07-06T17:44:42.540Z",
+    "summary": "jenny födelsedag",
+    "description": "1977-04-14",
+    "creator": {
+      "email": "andre.laszlo@gmail.com",
+      "displayName": "André Laszlo"
+    },
+    "organizer": {
+      "email": "q4g8gar17np05d0g9mepih9nko@group.calendar.google.com",
+      "displayName": "Födelsedagar",
+      "self": true
+    },
+    "start": {
+      "date": "2018-04-14"
+    },
+    "end": {
+      "date": "2018-04-15"
+    },
+    "recurringEventId": "ode84k1ofamde38siagiaogrig",
+    "originalStartTime": {
+      "date": "2018-04-14"
+    },
+    "transparency": "transparent",
+    "iCalUID": "ode84k1ofamde38siagiaogrig@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "email",
+          "minutes": 4740
+        },
+        {
+          "method": "popup",
+          "minutes": 10
+        },
+        {
+          "method": "sms",
+          "minutes": 1860
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3007374079420000\"",
+    "id": "151p444bfpu2klof84rgngar97",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=MTUxcDQ0NGJmcHUya2xvZjg0cmduZ2FyOTcgNm00c3Zjcmc3Z2RxYjVpN3JoN3FsbDZwZmtAZw",
+    "created": "2017-08-20T17:27:07.000Z",
+    "updated": "2017-08-25T18:50:39.710Z",
+    "summary": "Mamma och Ove i Nantes",
+    "creator": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo"
+    },
+    "organizer": {
+      "email": "6m4svcrg7gdqb5i7rh7qll6pfk@group.calendar.google.com",
+      "displayName": "André and Narjis",
+      "self": true
+    },
+    "start": {
+      "date": "2017-10-26"
+    },
+    "end": {
+      "date": "2017-10-31"
+    },
+    "transparency": "transparent",
+    "iCalUID": "151p444bfpu2klof84rgngar97@google.com",
+    "sequence": 0,
+    "hangoutLink": "https://plus.google.com/hangouts/_/calendar/Nm00c3Zjcmc3Z2RxYjVpN3JoN3FsbDZwZmtAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ.151p444bfpu2klof84rgngar97",
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "sms",
+          "minutes": 450
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3016296394810000\"",
+    "id": "74mq1bhso7h1vtfehmo07knmuk_20171030T090000Z",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=NzRtcTFiaHNvN2gxdnRmZWhtbzA3a25tdWtfMjAxNzEwMzBUMDkwMDAwWiA2bTRzdmNyZzdnZHFiNWk3cmg3cWxsNnBma0Bn",
+    "created": "2017-10-16T10:03:17.000Z",
+    "updated": "2017-10-16T10:03:17.405Z",
+    "summary": "Weekly standup",
+    "creator": {
+      "email": "hnarjis@gmail.com",
+      "displayName": "Narjis Hachilif"
+    },
+    "organizer": {
+      "email": "6m4svcrg7gdqb5i7rh7qll6pfk@group.calendar.google.com",
+      "displayName": "André and Narjis",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-10-30T10:00:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "end": {
+      "dateTime": "2017-10-30T10:15:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "recurringEventId": "74mq1bhso7h1vtfehmo07knmuk",
+    "originalStartTime": {
+      "dateTime": "2017-10-30T10:00:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "iCalUID": "74mq1bhso7h1vtfehmo07knmuk@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3018716577692000\"",
+    "id": "79g1c1ri1jue92r38cffmu1gbu",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=NzlnMWMxcmkxanVlOTJyMzhjZmZtdTFnYnUgNm00c3Zjcmc3Z2RxYjVpN3JoN3FsbDZwZmtAZw",
+    "created": "2017-10-30T10:11:28.000Z",
+    "updated": "2017-10-30T10:11:28.846Z",
+    "summary": "Lunch med Mamma och Ove",
+    "location": "La Grande Barge, 8 Rue Grande Biesse, 44200 Nantes, Frankrike",
+    "creator": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo"
+    },
+    "organizer": {
+      "email": "6m4svcrg7gdqb5i7rh7qll6pfk@group.calendar.google.com",
+      "displayName": "André and Narjis",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-10-30T13:00:00+01:00"
+    },
+    "end": {
+      "dateTime": "2017-10-30T14:00:00+01:00"
+    },
+    "iCalUID": "79g1c1ri1jue92r38cffmu1gbu@google.com",
+    "sequence": 0,
+    "hangoutLink": "https://plus.google.com/hangouts/_/calendar/Nm00c3Zjcmc3Z2RxYjVpN3JoN3FsbDZwZmtAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ.79g1c1ri1jue92r38cffmu1gbu",
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3016829763526000\"",
+    "id": "0r6lhi3uiqm93h9rahb8lu5gq6_20171031T090000Z",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=MHI2bGhpM3VpcW05M2g5cmFoYjhsdTVncTZfMjAxNzEwMzFUMDkwMDAwWiA2bTRzdmNyZzdnZHFiNWk3cmg3cWxsNnBma0Bn",
+    "created": "2017-10-19T12:06:59.000Z",
+    "updated": "2017-10-19T12:08:01.763Z",
+    "summary": "Meeting with Rob",
+    "creator": {
+      "email": "hnarjis@gmail.com",
+      "displayName": "Narjis Hachilif"
+    },
+    "organizer": {
+      "email": "6m4svcrg7gdqb5i7rh7qll6pfk@group.calendar.google.com",
+      "displayName": "André and Narjis",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-10-31T10:00:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "end": {
+      "dateTime": "2017-10-31T11:30:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "recurringEventId": "0r6lhi3uiqm93h9rahb8lu5gq6",
+    "originalStartTime": {
+      "dateTime": "2017-10-31T10:00:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "iCalUID": "0r6lhi3uiqm93h9rahb8lu5gq6@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3019231832672000\"",
+    "id": "1nk1c9a2k4porf2mc32jt65lqd",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=MW5rMWM5YTJrNHBvcmYybWMzMmp0NjVscWQgNm00c3Zjcmc3Z2RxYjVpN3JoN3FsbDZwZmtAZw",
+    "created": "2017-10-30T09:48:03.000Z",
+    "updated": "2017-11-02T09:45:16.336Z",
+    "summary": "Meeting with Olivier de Trogoff",
+    "creator": {
+      "email": "hnarjis@gmail.com",
+      "displayName": "Narjis Hachilif"
+    },
+    "organizer": {
+      "email": "6m4svcrg7gdqb5i7rh7qll6pfk@group.calendar.google.com",
+      "displayName": "André and Narjis",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-11-02T12:50:00+01:00"
+    },
+    "end": {
+      "dateTime": "2017-11-02T13:50:00+01:00"
+    },
+    "iCalUID": "1nk1c9a2k4porf2mc32jt65lqd@google.com",
+    "sequence": 4,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3012886202653000\"",
+    "id": "72grem2r2hvmhd15bd33krupa3_20171103T090000Z",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=NzJncmVtMnIyaHZtaGQxNWJkMzNrcnVwYTNfMjAxNzExMDNUMDkwMDAwWiA2bTRzdmNyZzdnZHFiNWk3cmg3cWxsNnBma0Bn",
+    "created": "2017-09-14T09:59:07.000Z",
+    "updated": "2017-09-26T16:25:01.366Z",
+    "summary": "Cours de français",
+    "creator": {
+      "email": "hnarjis@gmail.com",
+      "displayName": "Narjis Hachilif"
+    },
+    "organizer": {
+      "email": "6m4svcrg7gdqb5i7rh7qll6pfk@group.calendar.google.com",
+      "displayName": "André and Narjis",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-11-03T10:00:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "end": {
+      "dateTime": "2017-11-03T11:30:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "recurringEventId": "72grem2r2hvmhd15bd33krupa3",
+    "originalStartTime": {
+      "dateTime": "2017-11-03T10:00:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "iCalUID": "72grem2r2hvmhd15bd33krupa3@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "popup",
+          "minutes": 60
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3016296394810000\"",
+    "id": "74mq1bhso7h1vtfehmo07knmuk_20171106T090000Z",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=NzRtcTFiaHNvN2gxdnRmZWhtbzA3a25tdWtfMjAxNzExMDZUMDkwMDAwWiA2bTRzdmNyZzdnZHFiNWk3cmg3cWxsNnBma0Bn",
+    "created": "2017-10-16T10:03:17.000Z",
+    "updated": "2017-10-16T10:03:17.405Z",
+    "summary": "Weekly standup",
+    "creator": {
+      "email": "hnarjis@gmail.com",
+      "displayName": "Narjis Hachilif"
+    },
+    "organizer": {
+      "email": "6m4svcrg7gdqb5i7rh7qll6pfk@group.calendar.google.com",
+      "displayName": "André and Narjis",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-11-06T10:00:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "end": {
+      "dateTime": "2017-11-06T10:15:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "recurringEventId": "74mq1bhso7h1vtfehmo07knmuk",
+    "originalStartTime": {
+      "dateTime": "2017-11-06T10:00:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "iCalUID": "74mq1bhso7h1vtfehmo07knmuk@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3018714569600000\"",
+    "id": "60hnd5pkjjjk0fc7dqa35vbu66",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=NjBobmQ1cGtqamprMGZjN2RxYTM1dmJ1NjYgNm00c3Zjcmc3Z2RxYjVpN3JoN3FsbDZwZmtAZw",
+    "created": "2017-10-27T13:01:49.000Z",
+    "updated": "2017-10-30T09:54:44.800Z",
+    "summary": "Plombier",
+    "location": "13 Rue de l'Arche Sèche, 44000 Nantes, France",
+    "creator": {
+      "email": "hnarjis@gmail.com",
+      "displayName": "Narjis Hachilif"
+    },
+    "organizer": {
+      "email": "6m4svcrg7gdqb5i7rh7qll6pfk@group.calendar.google.com",
+      "displayName": "André and Narjis",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-11-06T18:30:00+01:00"
+    },
+    "end": {
+      "dateTime": "2017-11-06T19:30:00+01:00"
+    },
+    "iCalUID": "60hnd5pkjjjk0fc7dqa35vbu66@google.com",
+    "sequence": 1,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3019441635568000\"",
+    "id": "0r6lhi3uiqm93h9rahb8lu5gq6_20171107T090000Z",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=MHI2bGhpM3VpcW05M2g5cmFoYjhsdTVncTZfMjAxNzExMDdUMDkwMDAwWiA2bTRzdmNyZzdnZHFiNWk3cmg3cWxsNnBma0Bn",
+    "created": "2017-10-19T12:06:59.000Z",
+    "updated": "2017-11-03T14:53:37.784Z",
+    "summary": "Meeting with Rob",
+    "creator": {
+      "email": "hnarjis@gmail.com",
+      "displayName": "Narjis Hachilif"
+    },
+    "organizer": {
+      "email": "6m4svcrg7gdqb5i7rh7qll6pfk@group.calendar.google.com",
+      "displayName": "André and Narjis",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-11-07T11:00:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "end": {
+      "dateTime": "2017-11-07T12:30:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "recurringEventId": "0r6lhi3uiqm93h9rahb8lu5gq6",
+    "originalStartTime": {
+      "dateTime": "2017-11-07T10:00:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "iCalUID": "0r6lhi3uiqm93h9rahb8lu5gq6@google.com",
+    "sequence": 1,
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3012886202653000\"",
+    "id": "72grem2r2hvmhd15bd33krupa3_20171108T090000Z",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=NzJncmVtMnIyaHZtaGQxNWJkMzNrcnVwYTNfMjAxNzExMDhUMDkwMDAwWiA2bTRzdmNyZzdnZHFiNWk3cmg3cWxsNnBma0Bn",
+    "created": "2017-09-14T09:59:07.000Z",
+    "updated": "2017-09-26T16:25:01.366Z",
+    "summary": "Cours de français",
+    "creator": {
+      "email": "hnarjis@gmail.com",
+      "displayName": "Narjis Hachilif"
+    },
+    "organizer": {
+      "email": "6m4svcrg7gdqb5i7rh7qll6pfk@group.calendar.google.com",
+      "displayName": "André and Narjis",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-11-08T10:00:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "end": {
+      "dateTime": "2017-11-08T11:30:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "recurringEventId": "72grem2r2hvmhd15bd33krupa3",
+    "originalStartTime": {
+      "dateTime": "2017-11-08T10:00:00+01:00",
+      "timeZone": "Europe/Stockholm"
+    },
+    "iCalUID": "72grem2r2hvmhd15bd33krupa3@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "popup",
+          "minutes": 60
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3018221308074000\"",
+    "id": "2katse3ms9io160kt91jdcpkih",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=MmthdHNlM21zOWlvMTYwa3Q5MWpkY3BraWggYW5kcmVAbGFzemxvLm51",
+    "created": "2017-10-24T13:22:02.000Z",
+    "updated": "2017-10-27T13:24:14.164Z",
+    "summary": "Mamma och Ove NTE→ARN",
+    "creator": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "organizer": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-10-30T17:15:00+01:00"
+    },
+    "end": {
+      "dateTime": "2017-10-30T22:55:00+01:00"
+    },
+    "iCalUID": "2katse3ms9io160kt91jdcpkih@google.com",
+    "sequence": 1,
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "popup",
+          "minutes": 10
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3018881104232000\"",
+    "id": "0u5shuuu5d8gikd5c9k9qdsrhj",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=MHU1c2h1dXU1ZDhnaWtkNWM5azlxZHNyaGogYW5kcmVAbGFzemxvLm51",
+    "created": "2017-10-31T09:02:27.000Z",
+    "updated": "2017-10-31T09:02:32.116Z",
+    "summary": "Cours Français",
+    "creator": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "organizer": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-10-31T11:30:00+01:00"
+    },
+    "end": {
+      "dateTime": "2017-10-31T13:00:00+01:00"
+    },
+    "iCalUID": "0u5shuuu5d8gikd5c9k9qdsrhj@google.com",
+    "sequence": 0,
+    "hangoutLink": "https://plus.google.com/hangouts/_/laszlo.nu/andre?hceid=YW5kcmVAbGFzemxvLm51.0u5shuuu5d8gikd5c9k9qdsrhj",
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"2890365019440000\"",
+    "id": "p695hjsl6l0co1uibnv426qntc_20171102",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=cDY5NWhqc2w2bDBjbzF1aWJudjQyNnFudGNfMjAxNzExMDIgYW5kcmVAbGFzemxvLm51",
+    "created": "2015-10-18T15:35:09.000Z",
+    "updated": "2015-10-18T15:35:09.761Z",
+    "summary": "Sätt glöggen",
+    "creator": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "organizer": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "start": {
+      "date": "2017-11-02"
+    },
+    "end": {
+      "date": "2017-11-03"
+    },
+    "recurringEventId": "p695hjsl6l0co1uibnv426qntc",
+    "originalStartTime": {
+      "date": "2017-11-02"
+    },
+    "transparency": "transparent",
+    "iCalUID": "p695hjsl6l0co1uibnv426qntc@google.com",
+    "sequence": 0,
+    "hangoutLink": "https://plus.google.com/hangouts/_/laszlo.nu/andre?hceid=YW5kcmVAbGFzemxvLm51.p695hjsl6l0co1uibnv426qntc",
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "email",
+          "minutes": 900
+        },
+        {
+          "method": "popup",
+          "minutes": 10
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3021005369413000\"",
+    "id": "65h3gd1nckqj6bb36dgj4b9kcoo38b9oc4rj4b9ic8ojedpmcooj6dr3cg",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=NjVoM2dkMW5ja3FqNmJiMzZkZ2o0YjlrY29vMzhiOW9jNHJqNGI5aWM4b2plZHBtY29vajZkcjNjZyBhbmRyZUBsYXN6bG8ubnU",
+    "created": "2017-11-12T16:04:44.000Z",
+    "updated": "2017-11-12T16:04:44.746Z",
+    "summary": "Freeroll",
+    "creator": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "organizer": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2017-11-12T20:45:00+01:00",
+      "timeZone": "Europe/Paris"
+    },
+    "end": {
+      "dateTime": "2017-11-12T21:45:00+01:00",
+      "timeZone": "Europe/Paris"
+    },
+    "iCalUID": "65h3gd1nckqj6bb36dgj4b9kcoo38b9oc4rj4b9ic8ojedpmcooj6dr3cg@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "popup",
+          "minutes": 50
+        },
+        {
+          "method": "popup",
+          "minutes": 10
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"2979123319885000\"",
+    "id": "6thj8e9mcgo3ebb46gqm4b9k6coj6b9pcdj68bb26kq64cpg70q32ob170_20171115",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=NnRoajhlOW1jZ28zZWJiNDZncW00YjlrNmNvajZiOXBjZGo2OGJiMjZrcTY0Y3BnNzBxMzJvYjE3MF8yMDE3MTExNSBhbmRyZUBsYXN6bG8ubnU",
+    "created": "2017-03-15T07:07:39.000Z",
+    "updated": "2017-03-15T07:07:39.964Z",
+    "summary": "Byt filter ",
+    "creator": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "organizer": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "start": {
+      "date": "2017-11-15"
+    },
+    "end": {
+      "date": "2017-11-16"
+    },
+    "recurringEventId": "6thj8e9mcgo3ebb46gqm4b9k6coj6b9pcdj68bb26kq64cpg70q32ob170",
+    "originalStartTime": {
+      "date": "2017-11-15"
+    },
+    "iCalUID": "6thj8e9mcgo3ebb46gqm4b9k6coj6b9pcdj68bb26kq64cpg70q32ob170@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "popup",
+          "minutes": 720
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3021659269276000\"",
+    "id": "3t0qc4jr1iu1auq0mdji0hmdch",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=M3QwcWM0anIxaXUxYXVxMG1kamkwaG1kY2ggYW5kcmVAbGFzemxvLm51",
+    "created": "2017-11-15T15:46:27.000Z",
+    "updated": "2017-11-16T10:53:54.638Z",
+    "summary": "RDV Track tech W2D",
+    "location": "La Cantine, 21 Boulevard Gaston Doumergue, 44200 Nantes, France",
+    "creator": {
+      "email": "lise@lacantine.co"
+    },
+    "organizer": {
+      "email": "lise@lacantine.co"
+    },
+    "start": {
+      "dateTime": "2017-11-27T12:30:00+01:00"
+    },
+    "end": {
+      "dateTime": "2017-11-27T14:00:00+01:00"
+    },
+    "iCalUID": "3t0qc4jr1iu1auq0mdji0hmdch@google.com",
+    "sequence": 0,
+    "attendees": [
+      {
+        "email": "leny@troopers.email",
+        "responseStatus": "accepted"
+      },
+      {
+        "email": "benoit.vasseur@thetribe.io",
+        "displayName": "benoit.vasseur@vamboisset-media.fr",
+        "responseStatus": "accepted"
+      },
+      {
+        "email": "lise@lacantine.co",
+        "organizer": true,
+        "responseStatus": "accepted"
+      },
+      {
+        "email": "jeff@purple.com",
+        "displayName": "purplecomforwards@purple.com",
+        "responseStatus": "needsAction"
+      },
+      {
+        "email": "baptiste@matierenoire.io",
+        "responseStatus": "accepted"
+      },
+      {
+        "email": "andre@laszlo.nu",
+        "displayName": "André Laszlo",
+        "self": true,
+        "responseStatus": "accepted"
+      },
+      {
+        "email": "johann@matierenoire.io",
+        "responseStatus": "accepted"
+      },
+      {
+        "email": "hnarjis@gmail.com",
+        "displayName": "Narjis Hachilif",
+        "responseStatus": "accepted"
+      }
+    ],
+    "hangoutLink": "https://meet.google.com/rrc-rbma-kdv",
+    "reminders": {
+      "useDefault": true
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"2992520429380000\"",
+    "id": "1i12ahp0ahaoj0jderlsseal20_20171129",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=MWkxMmFocDBhaGFvajBqZGVybHNzZWFsMjBfMjAxNzExMjkgYW5kcmVAbGFzemxvLm51",
+    "created": "2017-05-31T19:50:14.000Z",
+    "updated": "2017-05-31T19:50:14.690Z",
+    "summary": "Kolla investeringar (Avanza, Lendify, etc)",
+    "creator": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "organizer": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "start": {
+      "date": "2017-11-29"
+    },
+    "end": {
+      "date": "2017-11-30"
+    },
+    "recurringEventId": "1i12ahp0ahaoj0jderlsseal20",
+    "originalStartTime": {
+      "date": "2017-11-29"
+    },
+    "transparency": "transparent",
+    "iCalUID": "1i12ahp0ahaoj0jderlsseal20@google.com",
+    "sequence": 0,
+    "hangoutLink": "https://plus.google.com/hangouts/_/laszlo.nu/andre?hceid=YW5kcmVAbGFzemxvLm51.1i12ahp0ahaoj0jderlsseal20",
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "popup",
+          "minutes": 10
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"2709032321858000\"",
+    "id": "2csh7a3a0nnujv8oh3keih0d8s_20171203",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=MmNzaDdhM2Ewbm51anY4b2gza2VpaDBkOHNfMjAxNzEyMDMgYW5kcmVAbGFzemxvLm51",
+    "created": "2012-12-03T06:29:20.000Z",
+    "updated": "2012-12-03T06:29:20.929Z",
+    "summary": "Uppdatera Boplats",
+    "creator": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "organizer": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "start": {
+      "date": "2017-12-03"
+    },
+    "end": {
+      "date": "2017-12-04"
+    },
+    "recurringEventId": "2csh7a3a0nnujv8oh3keih0d8s",
+    "originalStartTime": {
+      "date": "2017-12-03"
+    },
+    "transparency": "transparent",
+    "iCalUID": "2csh7a3a0nnujv8oh3keih0d8s@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "popup",
+          "minutes": 10
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"2709030638604000\"",
+    "id": "f91mluag68al3dpdmh8e82bik8_20171203",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=ZjkxbWx1YWc2OGFsM2RwZG1oOGU4MmJpazhfMjAxNzEyMDMgYW5kcmVAbGFzemxvLm51",
+    "created": "2012-12-03T06:15:19.000Z",
+    "updated": "2012-12-03T06:15:19.302Z",
+    "summary": "Uppdatera PPM",
+    "creator": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "organizer": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "start": {
+      "date": "2017-12-03"
+    },
+    "end": {
+      "date": "2017-12-04"
+    },
+    "recurringEventId": "f91mluag68al3dpdmh8e82bik8",
+    "originalStartTime": {
+      "date": "2017-12-03"
+    },
+    "transparency": "transparent",
+    "iCalUID": "f91mluag68al3dpdmh8e82bik8@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "popup",
+          "minutes": 10
+        }
+      ]
+    }
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"2979123319885000\"",
+    "id": "6thj8e9mcgo3ebb46gqm4b9k6coj6b9pcdj68bb26kq64cpg70q32ob170_20171215",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=NnRoajhlOW1jZ28zZWJiNDZncW00YjlrNmNvajZiOXBjZGo2OGJiMjZrcTY0Y3BnNzBxMzJvYjE3MF8yMDE3MTIxNSBhbmRyZUBsYXN6bG8ubnU",
+    "created": "2017-03-15T07:07:39.000Z",
+    "updated": "2017-03-15T07:07:39.964Z",
+    "summary": "Byt filter ",
+    "creator": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "organizer": {
+      "email": "andre@laszlo.nu",
+      "displayName": "André Laszlo",
+      "self": true
+    },
+    "start": {
+      "date": "2017-12-15"
+    },
+    "end": {
+      "date": "2017-12-16"
+    },
+    "recurringEventId": "6thj8e9mcgo3ebb46gqm4b9k6coj6b9pcdj68bb26kq64cpg70q32ob170",
+    "originalStartTime": {
+      "date": "2017-12-15"
+    },
+    "iCalUID": "6thj8e9mcgo3ebb46gqm4b9k6coj6b9pcdj68bb26kq64cpg70q32ob170@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": false,
+      "overrides": [
+        {
+          "method": "popup",
+          "minutes": 720
+        }
+      ]
+    }
+  }
+]
