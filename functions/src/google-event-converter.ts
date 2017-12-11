@@ -35,7 +35,6 @@ function isFullDay(event) {
 function guessTodo(description) {
   // If it matches any of these regexes, it's a todo
   const regexes = [
-    /^move\W/i,
     /^fix\W/i,
     /^finish\W/i,
     /(^|\W)todo\W/i,
@@ -51,13 +50,16 @@ function guessTodo(description) {
 
 export function convert(userId, event) {
   const note: any = {};
+  note.isEvent = true;
   note.user = userId;
   note.archived = false;
   note.date = parseTime(event, 'start');
   note.endDate = parseTime(event, 'end');
   note.isFullDay = isFullDay(event);
+  if (note.isFullDay) {
+    note.isEvent = false;
+  }
   note.content = event.summary.trim();
-  note.isEvent = true;
   note.isImported = true;
   note.isTodo = guessTodo(note.content);
   note.tags = ['imported', 'google'];
