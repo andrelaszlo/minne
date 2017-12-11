@@ -126,20 +126,24 @@ export class FirebaseProvider {
     });
   }
 
-  getItems(includeArchived: boolean = false): Observable<Note[]> {
+  getItems(): Observable<Note[]> {
     return this.getNotesByTime();
   }
 
-  getEvents(includeArchived: boolean = false): Observable<Note[]> {
+  getEvents(): Observable<Note[]> {
     return this.getNotesByTime(null, null, null, (query) => query.where('isEvent', "==", true));
   }
 
-  getTodos(includeArchived: boolean = false): Observable<Note[]> {
+  getTodos(): Observable<Note[]> {
     return this.getNotesByTime(null, null, null, (query) => query.where('isTodo', "==", true));
   }
 
-  getNotes(includeArchived: boolean = false): Observable<Note[]> {
+  getNotes(): Observable<Note[]> {
     return this.getNotesByTime(null, null, null, (query) => query.where('isEvent', "==", false).where('isTodo', "==", false));
+  }
+
+  getArchivedItems(): Observable<Note[]> {
+    return this.getNotesByTime(null, null, null, (query) => query.where('archived', "==", true));
   }
 
   getSortedItems(): Observable<Note[]> {
