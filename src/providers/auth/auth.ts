@@ -59,6 +59,7 @@ export class AuthProvider {
     return new Promise((resolve, reject) => {
       let unsubscribe = this.auth.auth.onAuthStateChanged(user => {
         if (user) {
+          unsubscribe();
           resolve(user);
         } else {
           console.log("getUserPromise rejecting promise");

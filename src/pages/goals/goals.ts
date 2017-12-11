@@ -53,7 +53,12 @@ export class GoalsPage {
   }
 
   getUserName() {
-    return this.authProvider.getUser().displayName.split(" ")[0];
+    let user = this.authProvider.getUser(false);
+    if (!user) {
+      return "";
+    }
+    let displayname = user.displayName || "";
+    return displayname.split(" ")[0];
   }
 
   getTime(date: Date) {
