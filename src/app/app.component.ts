@@ -17,6 +17,8 @@ import { LoginPage } from '../pages/login/login';
 import { ArchivePage } from '../pages/archive/archive';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { GoalsPage } from '../pages/goals/goals';
+import { TodoPage } from '../pages/todo/todo';
+import { NotesPage } from '../pages/notes/notes';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 
 @Component({
@@ -44,8 +46,8 @@ export class MyApp {
     this.pages = [
       { title: 'Home', icon: 'home', component: GoalsPage },
       { title: 'Calendar', icon: 'calendar', component: CalendarPage },
-      { title: 'To-do', icon: 'checkmark-circle', component: InboxPage },
-      { title: 'Drafts', icon: 'happy', component: InboxPage },
+      { title: 'To-do', icon: 'checkmark-circle', component: TodoPage },
+      { title: 'Notes', icon: 'book', component: NotesPage },
       { title: 'Archive', icon: 'folder', component: ArchivePage },
     ];
 

@@ -44,6 +44,8 @@ import { EditPageModule } from '../pages/edit/edit.module';
 import { GoalsPageModule } from '../pages/goals/goals.module';
 import { InboxPageModule } from '../pages/inbox/inbox.module';
 import { LoginPageModule } from '../pages/login/login.module';
+import { TodoPageModule } from '../pages/todo/todo.module';
+import { NotesPageModule } from '../pages/notes/notes.module';
 
 // Pages
 import { AddPage } from '../pages/add/add';
@@ -54,6 +56,8 @@ import { EditPage } from '../pages/edit/edit';
 import { GoalsPage } from '../pages/goals/goals';
 import { InboxPage } from '../pages/inbox/inbox';
 import { LoginPage } from '../pages/login/login';
+import { TodoPage } from '../pages/todo/todo';
+import { NotesPage } from '../pages/notes/notes';
 
 // Pipes
 import { HumanTimePipe } from '../pipes/human-time/human-time';
@@ -107,6 +111,8 @@ export const googleConfig = {
     GoalsPageModule,
     InboxPageModule,
     LoginPageModule,
+    TodoPageModule,
+    NotesPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -121,6 +127,8 @@ export const googleConfig = {
     GoalsPage,
     InboxPage,
     LoginPage,
+    TodoPage,
+    NotesPage,
 
     TabImport
   ],

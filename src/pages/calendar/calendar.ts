@@ -24,7 +24,7 @@ export class CalendarPage {
     public modalCtrl: ModalController,
     public alertCtrl: AlertController
   ) {
-    this.items = firebaseProvider.getSortedItems().map(items => {
+    this.items = firebaseProvider.getEvents().map(items => {
       var lastGroup = null;
       var result = [];
       var temp = [];

@@ -130,6 +130,18 @@ export class FirebaseProvider {
     return this.getNotesByTime();
   }
 
+  getEvents(includeArchived: boolean = false): Observable<Note[]> {
+    return this.getNotesByTime(null, null, null, (query) => query.where('isEvent', "==", true));
+  }
+
+  getTodos(includeArchived: boolean = false): Observable<Note[]> {
+    return this.getNotesByTime(null, null, null, (query) => query.where('isTodo', "==", true));
+  }
+
+  getNotes(includeArchived: boolean = false): Observable<Note[]> {
+    return this.getNotesByTime(null, null, null, (query) => query.where('isEvent', "==", false).where('isTodo', "==", false));
+  }
+
   getSortedItems(): Observable<Note[]> {
     return this.getNotesByTime(moment().startOf('day'));
   }
