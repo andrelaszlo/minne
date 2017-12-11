@@ -59,7 +59,7 @@ page-goals {
     }
 
     .goal {
-        font-size: 1.8em;
+        font-size: 1.45em;
         width: 100%;
         color: #fff;
         margin-top: 0.5em;
@@ -70,8 +70,12 @@ page-goals {
 
     .date, .calendar {
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: 1.3em;
+        font-size: 1.25em;
         white-space: normal;
+    }
+
+    .date-col label {
+        white-space: nowrap !important;
     }
 
     .past-item, .date {
