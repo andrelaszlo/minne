@@ -55,7 +55,7 @@ export class MyApp {
         // Make sure that the scope you need is added, see AuthenticationProvider
         var token = result.credential.accessToken;
         if (token) {
-          firebaseProvider.setGoogleAccessToken(token);
+          firebaseProvider.setUserField('googleAccessToken', token);
         }
       }
     }).catch(function(error) {

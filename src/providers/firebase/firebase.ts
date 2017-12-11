@@ -24,11 +24,20 @@ export interface User {
   goal: string;
 }
 
+export interface Job {
+  userId: string;
+  type: string;
+  payload: any;
+  created: Date;
+}
+
+
 @Injectable()
 export class FirebaseProvider {
 
   private notesCollection: AngularFirestoreCollection<Note>;
   private usersCollection: AngularFirestoreCollection<User>;
+  private jobsCollection: AngularFirestoreCollection<Job>;
 
   constructor(
     public http: Http,
@@ -38,6 +47,7 @@ export class FirebaseProvider {
   ) {
     this.notesCollection = angularFireStore.collection<Note>('notes');
     this.usersCollection = angularFireStore.collection<User>('users');
+    this.jobsCollection = angularFireStore.collection<Job>('jobs');
   }
 
   private getNotesByQuery(filterFn: QueryFn): Observable<Note[]> {
@@ -50,6 +60,10 @@ export class FirebaseProvider {
       });
     });
     return notes;
+  }
+
+  private anyToUTC(datelike: any) {
+    return moment(datelike).utc().toDate();
   }
 
   private getNotesByTime(afterTime?: any, beforeTime?: any, order?: string, customFilter?: (Query) => Query): Observable<Note[]> {
@@ -70,10 +84,10 @@ export class FirebaseProvider {
           query = query.orderBy('date', 'asc');
         }
         if (afterTime) {
-          query = query.where('date', ">=", afterTime);
+          query = query.where('date', ">=", this.anyToUTC(afterTime));
         }
         if (beforeTime) {
-          query = query.where('date', "<=", beforeTime);
+          query = query.where('date', "<=", this.anyToUTC(beforeTime));
         }
         if (customFilter) {
           query = customFilter(query);
@@ -83,9 +97,9 @@ export class FirebaseProvider {
     );
   }
 
-  private updateUser(updates: any) {
-    let userId = this.authProvider.getUserPromise().then(user => {
-      this.usersCollection.doc(user.uid).set(updates, {merge: true});
+  private updateUser(updates: any): Promise<void> {
+    return this.authProvider.getUserPromise().then(user => {
+      return this.usersCollection.doc(user.uid).set(updates, {merge: true});
     });
   }
 
@@ -98,7 +112,9 @@ export class FirebaseProvider {
       start = moment();
     }
 
-    return this.getNotesByTime(start.format(), end.format(), null, (query) => query.where('isEvent', "==", true)).map(notes => {
+
+    return this.getNotesByTime(start, end, null, (query) => query.where('isEvent', "==", true)).map(notes => {
+
       let totalHours = end.diff(start, 'hours');
       for (let note of notes) {
         let startDate = moment(note['date']);
@@ -115,28 +131,39 @@ export class FirebaseProvider {
   }
 
   getSortedItems(): Observable<Note[]> {
-    return this.getNotesByTime(moment().startOf('day').format());
+    return this.getNotesByTime(moment().startOf('day'));
   }
 
   getUpcomingItems(): Observable<Note[]> {
-    return this.getNotesByTime(moment().format());
+    return this.getNotesByTime(moment());
   }
 
-  saveItem(id, note): void {
+  /**
+   * Verify and/or convert some fields on a note before saving
+   */
+  private processNote(note: any) {
     if (note['id']) {
       delete note['id'];
     }
+    if (note['date']) {
+      note['date'] = this.anyToUTC(note['date']);
+    }
+    if (note['endDate']) {
+      note['endDate'] = this.anyToUTC(note['endDate']);
+    }
+    return note;
+  }
+
+  saveItem(id, note): void {
+    note = this.processNote(note);
     this.angularFireStore
       .doc<Note>(`notes/${id}`)
       .update(note);
   }
 
   addItem(note: Note): void {
+    note = this.processNote(note);
     this.notesCollection.add(note);
-  }
-
-  addGoal(goal: string): void {
-    this.updateUser({goal});
   }
 
   getGoal(): Observable<string> {
@@ -169,21 +196,40 @@ export class FirebaseProvider {
       .delete();
   }
 
-  setGoogleAccessToken(token: string) {
-    this.updateUser({googleAccessToken: token});
+  addJob(type, payload): Promise<Job> {
+    return this.authProvider.getUserPromise().then(user => {
+      let job: Job = {
+        userId: user.uid,
+        type: 'import',
+        payload: payload,
+        created: moment().utc().toDate()
+      }
+      this.jobsCollection.add(job);
+      return job;
+    });
   }
 
-  hasGoogleAccessToken(): Observable<boolean> {
+  /**
+   * Update a field on the logged in user
+   * @param field The field to change, for example 'goal'
+   * @param value The value to set, for example 'world domination'
+   */
+  setUserField(field: string, value: any): Promise<void> {
+    let update = {};
+    update[field] = value;
+    return this.updateUser(update);
+  }
+
+  /**
+   * Get an observable of a field on the signed in user object
+   * @param field The field of the user object to subscribe to changes of
+   */
+  getUserField(field: string): Observable<any> {
     return Observable.fromPromise(this.authProvider.getUserPromise()).flatMap(user =>
       this.usersCollection.doc(user.uid).valueChanges().map(user => {
-        if (user['googleAccessToken']) {
-          return true;
-        } else {
-          return false;
-        }
+        return user[field];
       })
     );
-
   }
 
 }
