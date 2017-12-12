@@ -41,7 +41,8 @@
 
         <ion-list-header text-center>
           <div>{{ day | humanTime }}</div>
-          <div>{{ items[day].hours }} free hours</div>
+          <div *ngIf="items[day].hours > 1">{{ items[day].hours }} free hours</div>
+          <div *ngIf="items[day].hours === 1">1 free hour</div>
         </ion-list-header>
 
         <ion-item-sliding *ngFor="let item of items[day].items" title="{{item.id}}">
