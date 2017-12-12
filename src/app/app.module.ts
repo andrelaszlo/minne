@@ -36,6 +36,7 @@ import { localNotificationsFactory } from '../lib/local-notifications';
 // Components
 import { MainMenuComponent } from '../components/main-menu/main-menu';
 import { TabImport } from '../pages/config/tab-import';
+import { TabFeedback } from '../pages/config/tab-feedback';
 
 // Page modules
 import { AddPageModule } from '../pages/add/add.module';
@@ -124,7 +125,8 @@ export const googleConfig = {
     InboxPage,
     LoginPage,
 
-    TabImport
+    TabImport,
+    TabFeedback,
   ],
   providers: [
     HockeyApp,
