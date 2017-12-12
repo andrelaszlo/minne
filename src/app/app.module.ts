@@ -19,6 +19,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { HockeyApp } from 'ionic-hockeyapp';
 
 // Firebase
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -126,6 +127,7 @@ export const googleConfig = {
     TabImport
   ],
   providers: [
+    HockeyApp,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

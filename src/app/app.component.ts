@@ -1,10 +1,11 @@
 import * as firebase from 'firebase';
 import * as moment from 'moment';
 
+import { HockeyApp } from 'ionic-hockeyapp';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, ViewController } from 'ionic-angular';
+import { Nav, Platform, ViewController, App } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -39,6 +40,8 @@ export class MyApp {
     public configProvider: ConfigProvider,
     public notificationProvider: NotificationProvider,
     public firebaseProvider: FirebaseProvider,
+    public hockeyApp: HockeyApp,
+    public app: App,
     afAuth: AngularFireAuth,
   ) {
     this.pages = [
@@ -67,25 +70,53 @@ export class MyApp {
       console.log("Logged in as", user);
       if (!user) {
         this.rootPage = 'login';
-      } else if (this.nav.getActive().component === LoginPage) {
-        this.rootPage = GoalsPage;
       } else {
-        console.log("Logged in, not redirecting from", this.nav.getActive().component);
+        if (this.nav.getActive().component === LoginPage) {
+          this.rootPage = GoalsPage;
+        } else  {
+          console.log("Logged in, not redirecting from", this.nav.getActive().component);
+        }
+        this.hockeyApp.setUserName(user.displayName);
+        if (user.email) {
+          this.hockeyApp.setUserEmail(user.email);
+        }
       }
     });
 
     this.initializeApp();
   }
 
-  initializeApp() {
+  private initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       console.log("Platform ready")
+
+      this.initializeHockeyApp();
+
       moment.locale(this.configProvider.getLocale());
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     }).catch(err => console.log("Platform ready error", err));
+  }
+
+  private initializeHockeyApp() {
+    let androidAppId = '09e9a38ac0de43d596e45fdaa31687fe';
+    let iosAppId = null;
+    let autoSendCrashReports = true;
+    let ignoreCrashDialog = true;
+
+    this.hockeyApp.start(androidAppId, iosAppId, autoSendCrashReports, ignoreCrashDialog);
+
+    // So app doesn't close when hockey app activities close
+    // This also has a side effect of unable to close the app when on the rootPage and using the back button.
+    // Back button will perform as normal on other pages and pop to the previous page.
+    this.platform.registerBackButtonAction(() => {
+      let nav = this.app.getRootNav();
+      if (nav.canGoBack()) {
+        nav.pop();
+      } else {
+        nav.setRoot(this.rootPage);
+      }
+    });
   }
 
   openPage(page) {
