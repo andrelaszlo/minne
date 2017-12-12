@@ -48,7 +48,7 @@
         <ion-item-sliding *ngFor="let item of items[day].items" title="{{item.id}}">
 
           <ion-card ion-item [ngClass]="{'past-item': item.isEvent && isPast(item.date)}" class="note-content">
-            <label *ngIf="item.isEvent && !item.isFullDay" class="date" [class.strikethrough]="item.isChecked" (click)="showEditNote(item)">
+            <label *ngIf="item.isEvent && !item.isFullDay" class="date" (click)="showEditNote(item)">
               {{ getTime(item.date) }}
             </label>
             <input *ngIf="item.isTodo" type="checkbox" (change)="toggleTodo($event, item)" [checked]="item.isChecked">

@@ -5,15 +5,18 @@ import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { EditPage } from '../edit/edit';
+import { AddPage } from '../../pages/add/add';
+
+import * as moment from 'moment-timezone';
 
 @IonicPage({
-  name: 'archive'
+  name: 'todo'
 })
 @Component({
-  selector: 'page-archive',
-  templateUrl: 'archive.html',
+  selector: 'page-todo',
+  templateUrl: 'todo.html',
 })
-export class ArchivePage {
+export class TodoPage {
 
   public items: Observable<any>;
 
@@ -25,7 +28,7 @@ export class ArchivePage {
     public modalCtrl: ModalController,
     public alertCtrl: AlertController
   ) {
-    this.items = firebaseProvider.getArchivedItems();
+    this.items = firebaseProvider.getTodos();
   }
 
   showEditNote(note) {
@@ -33,8 +36,8 @@ export class ArchivePage {
     modal.present();
   }
 
-  unarchive(note) {
-    this.firebaseProvider.unarchive(note.id, note);
+  archive(note) {
+    this.firebaseProvider.archive(note.id, note);
   }
 
   delete(note) {
@@ -57,9 +60,22 @@ export class ArchivePage {
     alert.present();
   }
 
+  addNote(fab: FabContainer) {
+    fab.close();
+    let modal = this.modalCtrl.create(AddPage);
+    modal.present();
+  }
+
   toggleTodo(event, note) {
     let toggleState = event.target.checked;
     this.firebaseProvider.toggleCheck(note.id, note, toggleState);
   }
 
+  getTime(date: Date) {
+    return moment(date).format('LT');
+  }
+
+  isPast(when: any) {
+    return moment(when).isBefore(moment());
+  }
 }

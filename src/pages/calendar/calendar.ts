@@ -24,7 +24,7 @@ export class CalendarPage {
     public modalCtrl: ModalController,
     public alertCtrl: AlertController
   ) {
-    this.items = firebaseProvider.getSortedItems().map(items => {
+    this.items = firebaseProvider.getEvents().map(items => {
       var lastGroup = null;
       var result = [];
       var temp = [];
@@ -50,9 +50,24 @@ export class CalendarPage {
     });
   }
 
-  getTime(date: Date) {
+  getTime(date: Date, fullDay: boolean) {
+    if (fullDay) {
+      return moment(date).calendar(null, {
+        lastDay: 'Do',
+        lastWeek: 'Do',
+        sameDay: '[Today]',
+        nextDay: '[Tomorrow]',
+        nextWeek: 'Do',
+        // TODO: adapt to location
+        sameElse: function(now) {
+          return this.isBefore(now.endOf("year")) ? 'Do' : 'MM/DD';
+        }
+      });
+    }
     return moment(date)
       .calendar(null, {
+        lastDay: 'Do LT',
+        lastWeek: 'Do LT',
         sameDay: 'LT',
         nextDay: 'LT',
         nextWeek: 'LT',
@@ -105,6 +120,8 @@ export class CalendarPage {
   private getDayName(note) {
     return moment(note.date)
       .calendar(null, {
+        lastDay: 'MMMM',
+        lastWeek: 'MMMM',
         sameDay: '[Today]',
         nextDay: '[Tomorrow]',
         nextWeek: 'dddd',

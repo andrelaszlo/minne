@@ -1,21 +1,18 @@
 <ion-header>
-  <main-menu title="Drafts"></main-menu>
+  <main-menu title="To-dos"></main-menu>
 </ion-header>
 
 <ion-content>
   <ion-list>
     <ion-item-sliding *ngFor="let item of items | async">
-      <ion-card ion-item (click)="showEditNote(item)">
-        <ion-card-content style="height:auto">
+      <ion-card ion-item [ngClass]="{'past-item': item.isEvent && isPast(item.date)}">
+        <input *ngIf="item.isTodo" type="checkbox" (change)="toggleTodo($event, item)" [checked]="item.isChecked">
+        <label [class.strikethrough]="item.isChecked" (click)="showEditNote(item)">
           {{ item.content }}
-        </ion-card-content>
-        <ion-row>
-          <ion-col center text-right>
-            <ion-note *ngIf="item.date">
-              {{ item.date | humanTime }}
-            </ion-note>
-          </ion-col>
-        </ion-row>
+        </label>
+        <label *ngIf="item.isEvent && !item.isFullDay" class="date" (click)="showEditNote(item)">
+          {{ item.date | humanTime }}
+        </label>
       </ion-card>
 
       <ion-item-options side="left" (ionSwipe)="archive(item)">

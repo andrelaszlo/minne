@@ -73,14 +73,18 @@ export class FirebaseProvider {
     return moment(datelike).utc().toDate();
   }
 
-  private getNotesByTime(afterTime?: any, beforeTime?: any, order?: string, customFilter?: (Query) => Query): Observable<Note[]> {
+  private getNotesByTime(afterTime?: any, beforeTime?: any, order?: string, archived: boolean = null, customFilter?: (Query) => Query): Observable<Note[]> {
     return Observable.fromPromise(this.authProvider.getUserPromise())
       .flatMap(user => {
         let userId = user.uid;
         return this.getNotesByQuery(ref => {
             let query = ref
               .where('user', '==', userId)
-              .where('archived', '==', false)
+            if (archived === null) {
+              query = query.where('archived', '==', false);
+            } else {
+              query = query.where('archived', '==', archived);
+            }
             if (order == 'desc') {
               query = query.orderBy('date', 'desc');
             } else {
@@ -108,8 +112,24 @@ export class FirebaseProvider {
     });
   }
 
-  getItems(includeArchived: boolean = false): Observable<Note[]> {
+  getItems(): Observable<Note[]> {
     return this.getNotesByTime();
+  }
+
+  getEvents(): Observable<Note[]> {
+    return this.getNotesByTime(null, null, null, null, (query) => query.where('isEvent', "==", true));
+  }
+
+  getTodos(): Observable<Note[]> {
+    return this.getNotesByTime(null, null, null, null, (query) => query.where('isTodo', "==", true));
+  }
+
+  getNotes(): Observable<Note[]> {
+    return this.getNotesByTime(null, null, null, null, (query) => query.where('isEvent', "==", false).where('isTodo', "==", false));
+  }
+
+  getArchivedItems(): Observable<Note[]> {
+    return this.getNotesByTime(null, null, null, true);
   }
 
   getSortedItems(): Observable<Note[]> {
@@ -165,6 +185,11 @@ export class FirebaseProvider {
 
   archive(id, note) {
     note['archived'] = true;
+    this.saveItem(id, note);
+  }
+
+  unarchive(id, note) {
+    note['archived'] = false;
     this.saveItem(id, note);
   }
 

@@ -1,7 +1,37 @@
 <ion-header>
-    <main-menu title="archive"></main-menu>
-  </ion-header>
+  <main-menu title="Archive"></main-menu>
+</ion-header>
 
-<ion-content padding>
-  <i>The archive is not implemented yet</i>
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of items | async">
+      <ion-card ion-item>
+        <ion-card-content style="height:auto" title="{{item.id}}">
+          <input *ngIf="item.isTodo" type="checkbox" (change)="toggleTodo($event, item)" [checked]="item.isChecked">
+          <label [class.strikethrough]="item.isChecked" (click)="showEditNote(item)">
+            {{ item.content }}
+          </label>
+        </ion-card-content>
+        <ion-row>
+          <ion-col center text-right>
+            <ion-note *ngIf="item.date">
+              {{ item.date | humanTime }}
+            </ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+
+      <ion-item-options side="left" (ionSwipe)="unarchive(item)">
+        <button ion-button expandable color="secondary" icon-only (click)="unarchive(item)">
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+      </ion-item-options>
+
+      <ion-item-options side="right">
+        <button ion-button (click)="showEditNote(item)" color="#00ffff" icon-only><ion-icon name="create"></ion-icon></button>
+        <button ion-button (click)="delete(item)" color="danger" icon-only><ion-icon name="trash"></ion-icon></button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
 </ion-content>
