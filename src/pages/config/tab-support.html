@@ -1,0 +1,35 @@
+<ion-content>
+    <p>When something goes wrong, this information might help us fix it.</p>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col col-3>User id</ion-col>
+            <ion-col col-9>{{userId}}</ion-col>     
+        </ion-row>
+
+        <ion-row>
+            <ion-col col-3>Platforms</ion-col>
+            <ion-col col-9>{{platforms}}</ion-col>     
+        </ion-row>
+
+        <ng-template [ngIf]="buildInfo">
+            <ion-row>
+                <ion-col col-3>Build name</ion-col>
+                <ion-col col-9>{{buildInfo.displayName}}</ion-col>     
+            </ion-row>
+            <ion-row>
+                <ion-col col-3>Build version</ion-col>
+                <ion-col col-9>{{buildInfo.version}}</ion-col>     
+            </ion-row>
+            <ion-row>
+                <ion-col col-3>Build type</ion-col>
+                <ion-col col-9>{{buildInfo.buildType}}</ion-col>     
+            </ion-row>
+            <ion-row>
+                <ion-col col-3>Build date</ion-col>
+                <ion-col col-9>{{buildInfo.buildDate}}</ion-col>     
+            </ion-row>
+        </ng-template>
+    </ion-grid>
+
+</ion-content>
