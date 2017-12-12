@@ -50,7 +50,20 @@ export class CalendarPage {
     });
   }
 
-  getTime(date: Date) {
+  getTime(date: Date, fullDay: boolean) {
+    if (fullDay) {
+      return moment(date).calendar(null, {
+        lastDay: 'Do',
+        lastWeek: 'Do',
+        sameDay: '[Today]',
+        nextDay: '[Tomorrow]',
+        nextWeek: 'Do',
+        // TODO: adapt to location
+        sameElse: function(now) {
+          return this.isBefore(now.endOf("year")) ? 'Do' : 'MM/DD';
+        }
+      });
+    }
     return moment(date)
       .calendar(null, {
         lastDay: 'Do LT',
