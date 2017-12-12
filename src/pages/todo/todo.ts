@@ -4,8 +4,10 @@ import { IonicPage, NavController, NavParams, ModalController, AlertController, 
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
-import { EditPage } from '../edit/edit'
-import { AddPage } from '../../pages/add/add'
+import { EditPage } from '../edit/edit';
+import { AddPage } from '../../pages/add/add';
+
+import * as moment from 'moment-timezone';
 
 @IonicPage({
   name: 'todo'
@@ -64,4 +66,16 @@ export class TodoPage {
     modal.present();
   }
 
+  toggleTodo(event, note) {
+    let toggleState = event.target.checked;
+    this.firebaseProvider.toggleCheck(note.id, note, toggleState);
+  }
+
+  getTime(date: Date) {
+    return moment(date).format('LT');
+  }
+
+  isPast(when: any) {
+    return moment(when).isBefore(moment());
+  }
 }
