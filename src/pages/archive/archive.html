@@ -5,11 +5,14 @@
 <ion-content>
   <ion-list>
     <ion-item-sliding *ngFor="let item of items | async">
-      <ion-card ion-item (click)="showEditNote(item)">
+      <ion-card ion-item>
         <ion-card-content style="height:auto" title="{{item.id}}">
-          {{ item.content }}
+          <input *ngIf="item.isTodo" type="checkbox" (change)="toggleTodo($event, item)" [checked]="item.isChecked">
+          <label [class.strikethrough]="item.isChecked" (click)="showEditNote(item)">
+            {{ item.content }}
+          </label>
         </ion-card-content>
-        <ion-row >
+        <ion-row>
           <ion-col center text-right>
             <ion-note *ngIf="item.date">
               {{ item.date | humanTime }}
@@ -18,8 +21,8 @@
         </ion-row>
       </ion-card>
 
-      <ion-item-options side="left" (ionSwipe)="archive(item)">
-        <button ion-button expandable color="secondary" icon-only (click)="archive(item)">
+      <ion-item-options side="left" (ionSwipe)="unarchive(item)">
+        <button ion-button expandable color="secondary" icon-only (click)="unarchive(item)">
           <ion-icon name="checkmark"></ion-icon>
         </button>
       </ion-item-options>
@@ -30,11 +33,5 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-
-  <ion-fab bottom right #addFab>
-    <button ion-fab icon-only color="danger" (click)="addNote(addFab)">
-      <ion-icon name="add"></ion-icon>
-    </button>
-  </ion-fab>
 
 </ion-content>

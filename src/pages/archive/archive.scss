@@ -1,3 +1,11 @@
 page-archive {
+    ion-card-content {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+        line-height: 1.4em !important;
+        white-space: normal !important;
+    }
 
+    .strikethrough {
+        text-decoration: line-through;
+    }
 }

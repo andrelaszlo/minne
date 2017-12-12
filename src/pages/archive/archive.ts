@@ -4,8 +4,7 @@ import { IonicPage, NavController, NavParams, ModalController, AlertController, 
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
-import { EditPage } from '../edit/edit'
-import { AddPage } from '../../pages/add/add'
+import { EditPage } from '../edit/edit';
 
 @IonicPage({
   name: 'archive'
@@ -34,8 +33,8 @@ export class ArchivePage {
     modal.present();
   }
 
-  archive(note) {
-    this.firebaseProvider.archive(note.id, note);
+  unarchive(note) {
+    this.firebaseProvider.unarchive(note.id, note);
   }
 
   delete(note) {
@@ -58,10 +57,9 @@ export class ArchivePage {
     alert.present();
   }
 
-  addNote(fab: FabContainer) {
-    fab.close();
-    let modal = this.modalCtrl.create(AddPage);
-    modal.present();
+  toggleTodo(event, note) {
+    let toggleState = event.target.checked;
+    this.firebaseProvider.toggleCheck(note.id, note, toggleState);
   }
 
 }

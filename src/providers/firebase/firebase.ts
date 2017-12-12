@@ -188,6 +188,11 @@ export class FirebaseProvider {
     this.saveItem(id, note);
   }
 
+  unarchive(id, note) {
+    note['archived'] = false;
+    this.saveItem(id, note);
+  }
+
   toggleCheck(id, note, toggleState) {
     note['isChecked'] = toggleState;
     this.saveItem(id, note);
