@@ -60,8 +60,8 @@ export class GoalsPage {
         this.freeHours = 10;
       }
 
-      //this.googleAnalytics.trackMetric();
       this.googleAnalytics.trackView('GoalsPage');
+      this.googleAnalytics.trackMetric(1, this.items.length);
 
       this.items = result;
       loading.dismiss();

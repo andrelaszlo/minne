@@ -82,6 +82,8 @@ export class MyApp {
         }
 
         this.googleAnalytics.setUserId(user.uid);
+        this.googleAnalytics.enableUncaughtExceptionReporting(true);
+        this.googleAnalytics.addCustomDimension(1, 'minne:n_events_on_start_view');   
 
         this.hockeyApp.setUserName(user.displayName);
         if (user.email) {
