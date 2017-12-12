@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, FabContainer, ModalController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, FabContainer, ModalController, AlertController, LoadingController } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Observable } from 'rxjs/Observable';
@@ -29,8 +29,12 @@ export class GoalsPage {
     public firebaseProvider: FirebaseProvider,
     public modalCtrl: ModalController,
     public authProvider: AuthProvider,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
   ) {
+    let loading = this.loadingCtrl.create({cssClass: 'page-loading'});
+    loading.present();
+
     this.days = this.getDays();
     firebaseProvider.getSortedItems().forEach(items => {
       var result = {};
@@ -55,6 +59,7 @@ export class GoalsPage {
       }
 
       this.items = result;
+      loading.dismiss();
     });
     firebaseProvider.getUserField('goal').forEach(newGoal => this.goal = newGoal);
   }
@@ -150,7 +155,7 @@ export class GoalsPage {
 
     let totalHours = end.diff(start, 'hours');
     for (let note of day.items) {
-      if (!note.isEvent) {
+      if (!note.isEvent || note.isFullDay) {
         continue;
       }
       let startDate = moment(note['date']);

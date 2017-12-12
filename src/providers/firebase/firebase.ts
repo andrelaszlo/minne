@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { QueryFn } from 'angularfire2/firestore/interfaces';
 import { Observable } from 'rxjs/Observable';
 import { AuthProvider } from '../auth/auth';
@@ -38,6 +38,7 @@ export class FirebaseProvider {
   private notesCollection: AngularFirestoreCollection<Note>;
   private usersCollection: AngularFirestoreCollection<User>;
   private jobsCollection: AngularFirestoreCollection<Job>;
+  private userRef: Promise<AngularFirestoreDocument<User>>;
 
   constructor(
     public http: Http,
@@ -45,21 +46,27 @@ export class FirebaseProvider {
     public authProvider: AuthProvider,
     public angularFireStore: AngularFirestore
   ) {
-    this.notesCollection = angularFireStore.collection<Note>('notes');
-    this.usersCollection = angularFireStore.collection<User>('users');
     this.jobsCollection = angularFireStore.collection<Job>('jobs');
+    this.usersCollection = angularFireStore.collection<User>('users');
+    this.userRef = this.authProvider.getUserPromise().then(user => {
+      this.notesCollection = this.usersCollection.doc(user.uid).collection('notes');
+      return this.usersCollection.doc<User>(user.uid);
+    });
   }
 
   private getNotesByQuery(filterFn: QueryFn): Observable<Note[]> {
-    var notesCollection = this.angularFireStore.collection<Note>('notes', filterFn);
-    var notes: Observable<Note[]> = notesCollection.snapshotChanges().map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() as Note;
-        const id = a.payload.doc.id;
-        return { id, ...data };
+    return Observable.fromPromise(this.userRef)
+      .flatMap(userRef => {
+        var notesCollection = userRef.collection<Note>('notes', filterFn);
+        var notes: Observable<Note[]> = notesCollection.snapshotChanges().map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data() as Note;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        });
+        return notes;
       });
-    });
-    return notes;
   }
 
   private anyToUTC(datelike: any) {
@@ -152,8 +159,8 @@ export class FirebaseProvider {
 
   saveItem(id, note): void {
     note = this.processNote(note);
-    this.angularFireStore
-      .doc<Note>(`notes/${id}`)
+    this.notesCollection
+      .doc<Note>(id)
       .update(note);
   }
 
@@ -191,8 +198,8 @@ export class FirebaseProvider {
     if(!key) {
       throw new Error('The note id was not found');
     }
-    this.angularFireStore
-      .doc<Note>(`notes/${note.id}`)
+    this.notesCollection
+      .doc<Note>(note.id)
       .delete();
   }
 

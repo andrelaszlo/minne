@@ -52,13 +52,12 @@ export function convert(userId, event) {
   const note: any = {};
   note.isEvent = true;
   note.user = userId;
-  note.archived = false;
   note.date = parseTime(event, 'start');
   note.endDate = parseTime(event, 'end');
   note.isFullDay = isFullDay(event);
   note.content = event.summary.trim();
   note.isImported = true;
-  note.isTodo = guessTodo(note.content);
+  //note.isTodo = guessTodo(note.content);
   note.tags = ['imported', 'google'];
   note._googleEvent = JSON.parse(JSON.stringify(event));
   return note;
