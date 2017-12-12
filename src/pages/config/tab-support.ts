@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 declare var BuildInfo: any;
 
@@ -19,6 +20,7 @@ export class TabSupport {
     public navParams: NavParams,
     private authProvider: AuthProvider,
     private platform: Platform,
+    public googleAnalytics: GoogleAnalytics,
   ) {
     this.authProvider.getUserPromise().then(user => {
       this.userId = user.uid;
@@ -34,5 +36,7 @@ export class TabSupport {
         console.log("No build info available");
       }
     });
+
+    this.googleAnalytics.trackView('TabSupport');
   }
 }

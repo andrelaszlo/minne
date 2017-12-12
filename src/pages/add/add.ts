@@ -3,6 +3,7 @@ import { IonicPage, ViewController, NavController, NavParams } from 'ionic-angul
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AuthProvider } from '../../providers/auth/auth';
 import { ConfigProvider} from '../../providers/config/config';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 import * as moment from 'moment-timezone';
 
@@ -25,7 +26,8 @@ export class AddPage {
     public navParams: NavParams,
     public firebaseProvider: FirebaseProvider,
     public authProvider: AuthProvider,
-    public config: ConfigProvider
+    public config: ConfigProvider,
+    public googleAnalytics: GoogleAnalytics,
   ) {
     let startDay = this.navParams.get("startDay");
     if (startDay == moment().startOf('day').format()) {
@@ -34,6 +36,7 @@ export class AddPage {
       this.note['date'] = moment(this.navParams.get("startDay")).add(8, 'hours');
     }
     this.note['endDate'] = moment(this.note['date']).add(1, 'hours');
+    this.googleAnalytics.trackView('AddPage');
   }
 
   changeDate(newDate) {

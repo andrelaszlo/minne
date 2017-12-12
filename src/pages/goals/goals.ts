@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import * as moment from 'moment-timezone';
 import { AddPage } from '../../pages/add/add';
 import { EditPage } from '../edit/edit';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 @IonicPage({
   name: 'goals',
@@ -31,6 +32,7 @@ export class GoalsPage {
     public authProvider: AuthProvider,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
+    public googleAnalytics: GoogleAnalytics,
   ) {
     let loading = this.loadingCtrl.create({cssClass: 'page-loading'});
     loading.present();
@@ -57,6 +59,9 @@ export class GoalsPage {
       } else {
         this.freeHours = 10;
       }
+
+      //this.googleAnalytics.trackMetric();
+      this.googleAnalytics.trackView('GoalsPage');
 
       this.items = result;
       loading.dismiss();

@@ -5,6 +5,7 @@ import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { EditPage } from '../edit/edit';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 @IonicPage({
   name: 'archive'
@@ -23,9 +24,11 @@ export class ArchivePage {
     public firebaseProvider: FirebaseProvider,
     public angularFireDatabase: AngularFireDatabase,
     public modalCtrl: ModalController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public googleAnalytics: GoogleAnalytics,
   ) {
     this.items = firebaseProvider.getArchivedItems();
+    this.googleAnalytics.trackView('ArchivePage');
   }
 
   showEditNote(note) {

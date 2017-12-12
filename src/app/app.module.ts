@@ -73,6 +73,9 @@ import { AuthProvider } from '../providers/auth/auth';
 import { ConfigProvider } from '../providers/config/config';
 import { NotificationProvider } from '../providers/notification/notification';
 
+// Analytics
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
+
 
 const firebaseConfig = {
   apiKey: "***REMOVED***",
@@ -139,6 +142,7 @@ export const googleConfig = {
     TabSupport,
   ],
   providers: [
+    GoogleAnalytics,
     HockeyApp,
     StatusBar,
     SplashScreen,

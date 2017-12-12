@@ -3,6 +3,7 @@ import * as moment from 'moment';
 
 import { HockeyApp } from 'ionic-hockeyapp';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, ViewController, App } from 'ionic-angular';
@@ -44,6 +45,7 @@ export class MyApp {
     public firebaseProvider: FirebaseProvider,
     public hockeyApp: HockeyApp,
     public app: App,
+    public googleAnalytics: GoogleAnalytics,
     afAuth: AngularFireAuth,
   ) {
     this.pages = [
@@ -55,7 +57,7 @@ export class MyApp {
     ];
 
     firebase.auth().getRedirectResult().then(function(result) {
-      if (result.credential) {
+      if (result && result.credential) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         // Make sure that the scope you need is added, see AuthenticationProvider
         var token = result.credential.accessToken;
@@ -78,6 +80,9 @@ export class MyApp {
         } else  {
           console.log("Logged in, not redirecting from", this.nav.getActive().component);
         }
+
+        this.googleAnalytics.setUserId(user.uid);
+
         this.hockeyApp.setUserName(user.displayName);
         if (user.email) {
           this.hockeyApp.setUserEmail(user.email);
@@ -91,6 +96,8 @@ export class MyApp {
   private initializeApp() {
     this.platform.ready().then(() => {
       console.log("Platform ready")
+
+      this.googleAnalytics.startTrackerWithId('UA-110874991-1');
 
       this.initializeHockeyApp();
 

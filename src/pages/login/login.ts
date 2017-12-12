@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthProvider } from '../../providers/auth/auth';
 import { IonicPage, NavController, NavParams, Platform, LoadingController} from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import * as moment from 'moment-timezone';
 
 declare var BuildInfo: any;
@@ -24,6 +25,7 @@ export class LoginPage {
     configProvider: ConfigProvider,
     public platform: Platform,
     public loadingCtrl: LoadingController,
+    private googleAnalytics: GoogleAnalytics,
   ) {
     let loading = this.loadingCtrl.create({cssClass: 'page-loading'});
     loading.present();
@@ -38,6 +40,8 @@ export class LoginPage {
       }
     }).catch(err => console.log("Error in platform ready", err));
     this.appName = configProvider.applicationName;
+
+    this.googleAnalytics.trackView('LoginPage');
   }
 
   login(provider: string) {

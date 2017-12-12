@@ -110,4 +110,5 @@
         <variable name="ANDROID_PATHPREFIX" value="/" />
     </plugin>
     <plugin name="cordova-plugin-hockeyapp" spec="^5.0.1" />
+    <plugin name="cordova-plugin-google-analytics" spec="~1.8.3" />
 </widget>

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import * as moment from 'moment-timezone';
 import { AddPage } from '../../pages/add/add';
 import { EditPage } from '../edit/edit';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 @IonicPage({
   name: 'calendar'
@@ -22,7 +23,8 @@ export class CalendarPage {
     public navParams: NavParams,
     public firebaseProvider: FirebaseProvider,
     public modalCtrl: ModalController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public googleAnalytics: GoogleAnalytics,
   ) {
     this.items = firebaseProvider.getEvents().map(items => {
       var lastGroup = null;
@@ -48,6 +50,7 @@ export class CalendarPage {
       }
       return result;
     });
+    this.googleAnalytics.trackView('LoginPage');
   }
 
   getTime(date: Date, fullDay: boolean) {

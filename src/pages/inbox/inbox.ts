@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, AlertController, FabContainer } from 'ionic-angular';
-
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
@@ -24,9 +24,11 @@ export class InboxPage {
     public firebaseProvider: FirebaseProvider,
     public angularFireDatabase: AngularFireDatabase,
     public modalCtrl: ModalController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public googleAnalytics: GoogleAnalytics,
   ) {
     this.items = firebaseProvider.getItems();
+    this.googleAnalytics.trackView('InboxPage');
   }
 
   showEditNote(note) {

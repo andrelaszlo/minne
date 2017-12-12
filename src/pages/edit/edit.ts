@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, ViewController, NavController, NavParams } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 import * as moment from 'moment-timezone';
 
@@ -21,11 +22,14 @@ export class EditPage {
     public navCtrl: NavController,
     public viewCtrl: ViewController,
     public navParams: NavParams,
-    public firebaseProvider: FirebaseProvider) {
+    public firebaseProvider: FirebaseProvider,
+    public googleAnalytics: GoogleAnalytics,
+    ) {
       this.note = navParams.get("note");
       this.id = this.note.id;
       this.isEvent = this.note['isEvent'];
       this.isTodo = this.note['isTodo'];
+      this.googleAnalytics.trackView('EditPage');
   }
 
   changeDate(newDate) {
