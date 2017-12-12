@@ -32,7 +32,7 @@
       <ng-template [ngIf]="!items[day]">
         <ion-list-header text-center>
           <div>{{ day | humanTime }}</div>
-          <div>10 free hours</div>
+          <div>free all day</div>
         </ion-list-header>
         <button ion-button small outline class="add-button" (click)="addNewNote(day)"><ion-icon name="add" color="dark"></ion-icon></button>
       </ng-template>
