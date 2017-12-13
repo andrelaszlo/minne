@@ -51,6 +51,7 @@ function guessTodo(description) {
 export function convert(userId, event) {
   const note: any = {};
   note.isEvent = true;
+  note.archived = false;
   note.user = userId;
   note.date = parseTime(event, 'start');
   note.endDate = parseTime(event, 'end');

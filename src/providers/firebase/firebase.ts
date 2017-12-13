@@ -264,8 +264,7 @@ export class FirebaseProvider {
         if (typeof user['importing'] != 'undefined') {
           return;
         }
-        let googleAccessToken = user['googleAccessToken'];
-        this.addJob('import', {googleAccessToken: googleAccessToken})
+        this.addJob('import', {googleAccessToken: user['googleAccessToken']})
           .then(job => {
             this.setUserField('importing', true);
           });

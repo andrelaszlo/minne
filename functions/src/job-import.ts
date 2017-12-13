@@ -13,7 +13,7 @@ const REDIRECT_URL = 'https://calico-dev.firebaseapp.com/__/auth/handler'; // No
 const ID_PREFIX = 'gcal';
 
 export async function importJob(db, userId, accessToken): Promise<any> {
-  console.log("Running import job for user", userId);
+  console.log("Running import job for user", userId, accessToken);
 
   const auth = createAuth(accessToken);
   let calendars;
@@ -112,7 +112,7 @@ async function saveEvents(db, userId, events: any[]): Promise<any> {
     try {
       const converted = convert(userId, event);
       const docId = `${ID_PREFIX}:${userId}:${converted._googleEvent.id}`;
-      await db.collection('notes').doc(docId).set(converted, {merge: true});
+      await db.collection('users').doc(userId).collection('notes').doc(docId).set(converted, {merge: true});
     } catch (err) {
       console.warn('Error converting/saving event', err, event);
     }
