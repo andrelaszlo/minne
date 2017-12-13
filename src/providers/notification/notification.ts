@@ -25,6 +25,8 @@ export class NotificationProvider {
     public storage: Storage,
     private authProvider: AuthProvider
   ) {
+    // TODO: Fix the bugs in this module and re-enable :P
+    /*
     const EVERY_HOUR = 1000*60*60;
 
     this.localNotifications.on("schedule", (notification) => console.log("*** Notification scheduled", notification));
@@ -46,6 +48,7 @@ export class NotificationProvider {
         this.refreshNotificationItems(items);
       });
     }).catch(err => console.log("Error while getting user promise", err));
+    */
   }
 
   private setTriggered(noteId: string, configType: string, timestamp: number): Promise<boolean> {
