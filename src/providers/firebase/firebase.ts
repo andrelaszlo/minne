@@ -244,4 +244,32 @@ export class FirebaseProvider {
     );
   }
 
+  /**
+   * Get an observable of the signed in user object
+   */
+  getUser(): Observable<any> {
+    return Observable.fromPromise(this.authProvider.getUserPromise()).flatMap(user =>
+      this.usersCollection.doc(user.uid).valueChanges().map(user => {
+        return user;
+      })
+    );
+  }
+
+  startImport() {
+    this.getUser().take(1)
+      .forEach(user => {
+        if (!user['googleAccessToken']) {
+          return;
+        }
+        if (typeof user['importing'] != 'undefined') {
+          return;
+        }
+        let googleAccessToken = user['googleAccessToken'];
+        this.addJob('import', {googleAccessToken: googleAccessToken})
+          .then(job => {
+            this.setUserField('importing', true);
+          });
+      });
+  }
+
 }

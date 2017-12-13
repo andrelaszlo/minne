@@ -75,6 +75,8 @@ export class MyApp {
       if (!user) {
         this.rootPage = 'login';
       } else {
+        this.firebaseProvider.startImport();
+
         if (this.nav.getActive().component === LoginPage) {
           this.rootPage = GoalsPage;
         } else  {
