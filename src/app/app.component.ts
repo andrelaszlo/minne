@@ -58,6 +58,8 @@ export class MyApp {
 
     this.platform.ready().then(() => {
 
+      this.initializeApp();
+
       const authObserver = afAuth.authState.subscribe( user => {
 
         this.initializeUser(user);
@@ -75,16 +77,16 @@ export class MyApp {
         }
       });
 
-      this.initializeApp();
     }).catch(err => console.log("Platform ready error", err))
   }
 
   private initializeApp() {
     console.log("Platform ready")
 
-    this.googleAnalytics.startTrackerWithId('UA-110874991-1');
-
-    this.initializeHockeyApp();
+    if(this.platform.is('cordova')) {
+      this.initializeHockeyApp();
+      this.initializeGoogleAnalytics();
+    }
 
     moment.locale(this.configProvider.getLocale());
     this.statusBar.styleDefault();
@@ -95,18 +97,17 @@ export class MyApp {
     if (!user) {
       return;
     }
-
     console.log("Logged in as", user);
 
     this.user = user;
 
-    this.googleAnalytics.setUserId(user.uid);
-    this.googleAnalytics.enableUncaughtExceptionReporting(true);
-    this.googleAnalytics.addCustomDimension(1, 'minne:n_events_on_start_view');
+    if (this.platform.is('cordova')) {
+      this.googleAnalytics.setUserId(user.uid);
 
-    this.hockeyApp.setUserName(user.displayName);
-    if (user.email) {
-      this.hockeyApp.setUserEmail(user.email);
+      this.hockeyApp.setUserName(user.displayName);
+      if (user.email) {
+        this.hockeyApp.setUserEmail(user.email);
+      }
     }
 
     firebase.auth().getRedirectResult().then(result => {
@@ -124,6 +125,12 @@ export class MyApp {
       console.error("Login error", error.code, error.message, error.email, error.credential);
     });
 
+  }
+
+  private initializeGoogleAnalytics() {
+    this.googleAnalytics.startTrackerWithId('UA-110874991-1');
+    this.googleAnalytics.enableUncaughtExceptionReporting(true);
+    this.googleAnalytics.addCustomDimension(1, 'minne:n_events_on_start_view');
   }
 
   private initializeHockeyApp() {
