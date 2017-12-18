@@ -13,38 +13,20 @@ export class AuthProvider {
   }
 
   login(provider: string) {
-    var authProvider: firebaseAuth.AuthProvider;
-    switch(provider) {
-      case 'google':
-        authProvider = new firebase.auth.GoogleAuthProvider();
-        authProvider.addScope('https://www.googleapis.com/auth/calendar.readonly');
-        break;
-      case 'facebook':
-        authProvider = new firebase.auth.FacebookAuthProvider();
-        break;
-      case 'twitter':
-        authProvider = new firebase.auth.TwitterAuthProvider();
-        break;
-      case 'github':
-        authProvider = new firebase.auth.GithubAuthProvider();
-        break;
-    }
+    var authProvider = new firebase.auth.GoogleAuthProvider();
+    authProvider.addScope('https://www.googleapis.com/auth/calendar.readonly');
+    // https://developers.google.com/identity/protocols/OpenIDConnect#authenticationuriparameters
+    authProvider.setCustomParameters({prompt: 'consent'});
 
-    console.log("Sign in with redirect");
+    console.log("Auth provider", authProvider);
+
     // Signin with popup is not supported in Cordova
-    this.auth.auth.signInWithRedirect(authProvider)
-      .then( result => {
-        // This gives you a Google Access Token.
-        // You can use it to access the Google API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        console.log("sign in info", token, user, result);
-      }).catch(error => console.log("signin error", error.message));
+    //this.auth.auth.languageCode = 'fr';
+    this.auth.auth.signInWithRedirect(authProvider);
   }
 
   logout() {
-    this.auth.auth.signOut();
+    this.auth.auth.signOut().then(() => console.log("Signed out")).catch(err => console.warn("Error signing out", err))
   }
 
   getUser(throwError: boolean = true) {

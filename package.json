@@ -1,6 +1,6 @@
 {
   "name": "minne",
-  "version": "0.0.55",
+  "version": "0.0.58",
   "author": "Narjis Hachilif and André Laszlo",
   "homepage": "http://example.com/",
   "private": true,
@@ -76,7 +76,8 @@
       "cordova-plugin-ionic": {
         "APP_ID": "4dbbdf6c",
         "CHANNEL_NAME": "Master",
-        "UPDATE_METHOD": "background"
+        "UPDATE_METHOD": "background",
+        "MAX_VERSIONS": "1"
       },
       "de.appplant.cordova.plugin.local-notification": {},
       "cordova-sqlite-storage": {},

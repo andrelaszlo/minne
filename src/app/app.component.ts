@@ -56,59 +56,74 @@ export class MyApp {
       { title: 'Archive', icon: 'folder', component: ArchivePage },
     ];
 
-    firebase.auth().getRedirectResult().then(function(result) {
-      if (result && result.credential) {
+    this.platform.ready().then(() => {
+
+      const authObserver = afAuth.authState.subscribe( user => {
+
+        this.initializeUser(user);
+
+        if (!user) {
+          this.rootPage = 'login';
+        } else if (this.nav.getActive().component === LoginPage) {
+          this.rootPage = GoalsPage;
+        } else {
+          if (this.nav.getActive().component === LoginPage) {
+            this.rootPage = GoalsPage;
+          } else  {
+            console.log("Logged in, not redirecting from", this.nav.getActive().component);
+          }
+        }
+      });
+
+      this.initializeApp();
+    }).catch(err => console.log("Platform ready error", err))
+  }
+
+  private initializeApp() {
+    console.log("Platform ready")
+
+    this.googleAnalytics.startTrackerWithId('UA-110874991-1');
+
+    this.initializeHockeyApp();
+
+    moment.locale(this.configProvider.getLocale());
+    this.statusBar.styleDefault();
+    this.splashScreen.hide();
+  }
+
+  private initializeUser(user: any) {
+    if (!user) {
+      return;
+    }
+
+    console.log("Logged in as", user);
+
+    this.user = user;
+
+    this.googleAnalytics.setUserId(user.uid);
+    this.googleAnalytics.enableUncaughtExceptionReporting(true);
+    this.googleAnalytics.addCustomDimension(1, 'minne:n_events_on_start_view');
+
+    this.hockeyApp.setUserName(user.displayName);
+    if (user.email) {
+      this.hockeyApp.setUserEmail(user.email);
+    }
+
+    firebase.auth().getRedirectResult().then(result => {
+      console.log("Redirect results", result)
+      if (result.credential) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         // Make sure that the scope you need is added, see AuthenticationProvider
         var token = result.credential.accessToken;
         if (token) {
-          firebaseProvider.setUserField('googleAccessToken', token);
+          this.firebaseProvider.setUserField('googleAccessToken', token);
+          this.firebaseProvider.startImport();
         }
       }
     }).catch(function(error) {
       console.error("Login error", error.code, error.message, error.email, error.credential);
     });
 
-    const authObserver = afAuth.authState.subscribe( user => {
-      this.user = user;
-      console.log("Logged in as", user);
-      if (!user) {
-        this.rootPage = 'login';
-      } else {
-        this.firebaseProvider.startImport();
-
-        if (this.nav.getActive().component === LoginPage) {
-          this.rootPage = GoalsPage;
-        } else  {
-          console.log("Logged in, not redirecting from", this.nav.getActive().component);
-        }
-
-        this.googleAnalytics.setUserId(user.uid);
-        this.googleAnalytics.enableUncaughtExceptionReporting(true);
-        this.googleAnalytics.addCustomDimension(1, 'minne:n_events_on_start_view');   
-
-        this.hockeyApp.setUserName(user.displayName);
-        if (user.email) {
-          this.hockeyApp.setUserEmail(user.email);
-        }
-      }
-    });
-
-    this.initializeApp();
-  }
-
-  private initializeApp() {
-    this.platform.ready().then(() => {
-      console.log("Platform ready")
-
-      this.googleAnalytics.startTrackerWithId('UA-110874991-1');
-
-      this.initializeHockeyApp();
-
-      moment.locale(this.configProvider.getLocale());
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    }).catch(err => console.log("Platform ready error", err));
   }
 
   private initializeHockeyApp() {

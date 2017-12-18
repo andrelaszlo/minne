@@ -21,10 +21,6 @@ export class TabFeedback {
   }
 
   sendFeedback() {
-    if (this.platform.is('cordova')) {
-      this.hockeyApp.feedback();
-    } else {
-      window.open('mailto:andre@laszlo.nu,hnarjis@gmail.com?subject=Feedback', '_system');
-    }
+    window.open('mailto:andre@laszlo.nu,hnarjis@gmail.com?subject=Feedback', '_system');
   }
 }
