@@ -255,6 +255,23 @@ export class FirebaseProvider {
     );
   }
 
+  canImport(): Promise<boolean> {
+    return new Promise((accept, reject) => {
+      this.getUser().take(1)
+        .forEach(user => {
+          if (!user['googleAccessToken']) {
+            reject();
+            return;
+          }
+          if (typeof user['importing'] != 'undefined') {
+            reject();
+            return;
+          }
+          accept();
+        });
+    });
+  }
+
   startImport() {
     this.getUser().take(1)
       .forEach(user => {

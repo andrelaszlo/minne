@@ -6,7 +6,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, ViewController, App } from 'ionic-angular';
+import { Nav, Platform, ViewController, App, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -46,6 +46,7 @@ export class MyApp {
     public hockeyApp: HockeyApp,
     public app: App,
     public googleAnalytics: GoogleAnalytics,
+    public alertCtrl: AlertController,
     afAuth: AngularFireAuth,
   ) {
     this.pages = [
@@ -118,13 +119,32 @@ export class MyApp {
         var token = result.credential.accessToken;
         if (token) {
           this.firebaseProvider.setUserField('googleAccessToken', token);
-          this.firebaseProvider.startImport();
+          this.firebaseProvider.canImport().then(() => this.showImportDialog());
         }
       }
     }).catch(function(error) {
       console.error("Login error", error.code, error.message, error.email, error.credential);
     });
 
+  }
+
+  private showImportDialog() {
+    let prompt = this.alertCtrl.create({
+      title: 'Import',
+      message: "Do you want to import your data from Google Calendar?",
+      buttons: [
+        {
+          text: 'No'
+        },
+        {
+          text: 'Yes, import!',
+          handler: data => {
+            this.firebaseProvider.startImport();
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   private initializeGoogleAnalytics() {
