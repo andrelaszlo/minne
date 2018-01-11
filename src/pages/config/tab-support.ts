@@ -25,7 +25,7 @@ export class TabSupport {
     this.authProvider.getUserPromise().then(user => {
       this.userId = user.uid;
       console.log("User", user);
-    });
+    }).catch(e => console.log('Error getting user', e));
 
     this.platform.ready().then(() => {
       this.platforms = this.platform.platforms().join(', ');
@@ -35,7 +35,7 @@ export class TabSupport {
       } else {
         console.log("No build info available");
       }
-    });
+    }).catch(e => console.log('Error in platform.ready', e));
 
     this.googleAnalytics.trackView('TabSupport');
   }

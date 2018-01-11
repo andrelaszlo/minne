@@ -31,6 +31,6 @@ export class TabImport {
     this.firebaseProvider.addJob('import', {googleAccessToken: this.googleAccessToken})
       .then(job => {
         this.firebaseProvider.setUserField('importing', true);
-      });
+      }).catch(e => console.log('Error adding import job', e));
   }
 }

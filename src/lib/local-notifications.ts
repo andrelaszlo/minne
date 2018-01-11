@@ -42,7 +42,7 @@ class BrowserNotifications implements LocalNotifications {
             let self = this;
             notification.addEventListener("show", event => self.fireCallback("trigger", item));
             notification.addEventListener("click", event => self.fireCallback("click", item));
-        });
+        }).catch(e => console.log('Error requesting notification permissions', e));
     }
 
     private getUniqueId(): number {

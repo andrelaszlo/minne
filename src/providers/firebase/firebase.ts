@@ -109,7 +109,7 @@ export class FirebaseProvider {
   private updateUser(updates: any): Promise<void> {
     return this.authProvider.getUserPromise().then(user => {
       return this.usersCollection.doc(user.uid).set(updates, {merge: true});
-    });
+    }).catch(e => console.log('Error getting user promise', e));
   }
 
   getItems(): Observable<Note[]> {
@@ -267,7 +267,7 @@ export class FirebaseProvider {
         this.addJob('import', {googleAccessToken: user['googleAccessToken']})
           .then(job => {
             this.setUserField('importing', true);
-          });
+          }).catch(e => console.log('Error adding (automatic) import job', e));
       });
   }
 
