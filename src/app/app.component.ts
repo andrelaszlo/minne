@@ -91,6 +91,7 @@ export class MyApp {
 
     moment.locale(this.configProvider.getLocale());
     this.statusBar.styleDefault();
+    this.statusBar.show();
     this.splashScreen.hide();
   }
 
