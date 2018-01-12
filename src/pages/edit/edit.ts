@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ViewController, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ViewController, NavController, NavParams, Platform } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
@@ -24,12 +24,13 @@ export class EditPage {
     public navParams: NavParams,
     public firebaseProvider: FirebaseProvider,
     public googleAnalytics: GoogleAnalytics,
+    public platform: Platform,
     ) {
-      this.note = navParams.get("note");
-      this.id = this.note.id;
-      this.isEvent = this.note['isEvent'];
-      this.isTodo = this.note['isTodo'];
-      this.googleAnalytics.trackView('EditPage');
+    this.note = navParams.get("note");
+    this.id = this.note.id;
+    this.isEvent = this.note['isEvent'];
+    this.isTodo = this.note['isTodo'];
+    this.googleAnalytics.trackView('EditPage');
   }
 
   changeDate(newDate) {
@@ -46,6 +47,19 @@ export class EditPage {
 
   dismiss() {
     this.navCtrl.pop();
+  }
+
+  navigate() {
+    let location = encodeURIComponent(this.note['location']);
+    this.platform.ready().then(() => {
+      if (this.platform.is('core') || this.platform.is('mobileweb')) {
+        window.open(`https://www.google.com/maps/dir/?api=1&destination=${location}`);
+      } else if (this.platform.is('ios')) {
+        window.open(`maps://?q=${location}`, '_system');
+      } else if (this.platform.is('android')) {
+        window.open(`geo://?q=${location}`, '_system');
+      };
+    });
   }
 
 }

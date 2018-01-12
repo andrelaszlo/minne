@@ -1,5 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
-import { IonicPage, ViewController, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ViewController, NavController, NavParams, Platform } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AuthProvider } from '../../providers/auth/auth';
 import { ConfigProvider} from '../../providers/config/config';
@@ -29,6 +29,7 @@ export class AddPage {
     public authProvider: AuthProvider,
     public config: ConfigProvider,
     public googleAnalytics: GoogleAnalytics,
+    public platform: Platform,
   ) {
     let startDay = this.navParams.get("startDay");
     this.isTodo = !!this.navParams.get("todo");
@@ -69,6 +70,19 @@ export class AddPage {
 
   dismiss() {
     this.navCtrl.pop();
+  }
+
+  navigate() {
+    let location = encodeURIComponent(this.note['location']);
+    this.platform.ready().then(() => {
+      if (this.platform.is('core') || this.platform.is('mobileweb')) {
+        window.open(`https://www.google.com/maps/dir/?api=1&destination=${location}`);
+      } else if (this.platform.is('ios')) {
+        window.open(`maps://?q=${location}`, '_system');
+      } else if (this.platform.is('android')) {
+        window.open(`geo://?q=${location}`, '_system');
+      };
+    });
   }
 
 }

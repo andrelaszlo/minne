@@ -26,7 +26,7 @@
     <ion-label>Add time</ion-label>
     <ion-toggle [(ngModel)]="isEvent"></ion-toggle>
   </ion-item>
-  <div *ngIf="isEvent">
+  <ng-template [ngIf]="isEvent">
     <ion-item no-lines>
       <ion-label>Start date</ion-label>
       <ion-datetime
@@ -45,5 +45,11 @@
         (ngModelChange)="note.endDate=$event">>
       </ion-datetime>
     </ion-item>
-  </div>
+  </ng-template>
+  <ion-item>
+    <ion-input [(ngModel)]="note.location" type="text" placeholder="Location" value=""></ion-input>
+    <button ion-button clear icon-only item-end (click)="navigate()">
+      <ion-icon name='navigate'></ion-icon>
+    </button>
+  </ion-item>
 </ion-footer>

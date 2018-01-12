@@ -58,6 +58,9 @@ export function convert(userId, event) {
   note.isFullDay = isFullDay(event);
   note.content = event.summary.trim();
   note.isImported = true;
+  if (event['location']) {
+    note.location = event['location'];
+  }
   //note.isTodo = guessTodo(note.content);
   note.tags = ['imported', 'google'];
   note._googleEvent = JSON.parse(JSON.stringify(event));
