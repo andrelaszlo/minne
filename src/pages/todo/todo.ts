@@ -62,7 +62,7 @@ export class TodoPage {
 
   addNote(fab: FabContainer) {
     fab.close();
-    let modal = this.modalCtrl.create(AddPage);
+    let modal = this.modalCtrl.create(AddPage, {todo: true, hideTodo: true});
     modal.present();
   }
 

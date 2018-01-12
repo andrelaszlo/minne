@@ -115,12 +115,6 @@ export class GoalsPage {
     alert.present();
   }
 
-  addNote(fab: FabContainer) {
-    fab.close();
-    let modal = this.modalCtrl.create(AddPage);
-    modal.present();
-  }
-
   addNewNote(day) {
     let modal = this.modalCtrl.create(AddPage, {
       startDay: day

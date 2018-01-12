@@ -19,6 +19,7 @@ export class AddPage {
   note: any = {'content': ''};
   isEvent: boolean;
   isTodo: boolean;
+  hideTodo: boolean;
 
   constructor(
     public viewCtrl: ViewController,
@@ -30,6 +31,8 @@ export class AddPage {
     public googleAnalytics: GoogleAnalytics,
   ) {
     let startDay = this.navParams.get("startDay");
+    this.isTodo = !!this.navParams.get("todo");
+    this.hideTodo = !!this.navParams.get("hideTodo");
     if (startDay == moment().startOf('day').format()) {
       this.note['date'] = moment();
     } else {
