@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TabImport } from './tab-import';
-import { TabFeedback } from './tab-feedback';
 import { TabSupport } from './tab-support';
 
 @IonicPage({
@@ -15,7 +14,6 @@ import { TabSupport } from './tab-support';
 export class ConfigPage {
 
   tabImport = TabImport;
-  tabFeedback = TabFeedback;
   tabSupport = TabSupport;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {

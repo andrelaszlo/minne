@@ -36,7 +36,6 @@ import { localNotificationsFactory } from '../lib/local-notifications';
 // Components
 import { MainMenuComponent } from '../components/main-menu/main-menu';
 import { TabImport } from '../pages/config/tab-import';
-import { TabFeedback } from '../pages/config/tab-feedback';
 import { TabSupport } from '../pages/config/tab-support';
 
 // Page modules
@@ -138,7 +137,6 @@ export const googleConfig = {
     NotesPage,
 
     TabImport,
-    TabFeedback,
     TabSupport,
   ],
   providers: [

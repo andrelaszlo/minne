@@ -184,6 +184,10 @@ export class MyApp {
     this.nav.push(page);
   }
 
+  sendFeedback() {
+    window.open('mailto:andre@laszlo.nu,hnarjis@gmail.com?subject=Feedback', '_system');
+  }
+
   logout() {
     this.authProvider.logout();
     this.nav.setRoot(LoginPage);
