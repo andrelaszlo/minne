@@ -22,6 +22,9 @@ export interface Note {
 
 export interface User {
   goal: string;
+  googleAccessToken: any;
+  importStatus: any;
+  importing: any;
 }
 
 export interface Job {
@@ -113,9 +116,7 @@ export class FirebaseProvider {
   }
 
   private updateUser(updates: any): Promise<void> {
-    return this.authProvider.getUserPromise().then(user => {
-      return this.usersCollection.doc(user.uid).set(updates, {merge: true});
-    }).catch(e => console.log('Error getting user promise', e));
+    return this.userRef.take(1).forEach(userRef => userRef.set(updates, {merge: true}));
   }
 
   getItems(): Observable<Note[]> {
@@ -256,22 +257,24 @@ export class FirebaseProvider {
    * Get an observable of the signed in user object
    */
   getUser(): Observable<any> {
-    return this.authProvider.getUserObservable().flatMap(user =>
-      this.usersCollection.doc(user.uid).valueChanges().map(user => {
-        return user;
-      })
-    );
+    return this.userRef.flatMap(userRef => userRef.valueChanges());
   }
 
   canImport(): Promise<boolean> {
     return new Promise((accept, reject) => {
-      this.getUser().take(1)
-        .forEach(user => {
+      this.userRef.flatMap(userRef => userRef.snapshotChanges())
+        .forEach(userSnapshot => {
+          // This is a workaround for the case when the user object
+          // is just a cached field, and not a complete object
+          // TODO: not a perfect solution, figure out how to get the full object
+          if (userSnapshot.payload.metadata.fromCache) {
+            return;
+          }
+          let user = userSnapshot.payload.data();
           if (!user['googleAccessToken']) {
             reject('No google access token');
             return;
           }
-          console.log("user", user);
           if (typeof user['importing'] != 'undefined') {
             reject('Calendar already imported');
             return;

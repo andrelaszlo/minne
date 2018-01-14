@@ -120,7 +120,9 @@ export class MyApp {
         var token = result.credential.accessToken;
         if (token) {
           this.firebaseProvider.setUserField('googleAccessToken', token);
-          this.firebaseProvider.canImport().then(() => this.showImportDialog());
+          this.firebaseProvider.canImport()
+            .then(() => this.showImportDialog())
+            .catch(err => console.log("Calendars can't be imported", err));
         }
       }
     }).catch(function(error) {
