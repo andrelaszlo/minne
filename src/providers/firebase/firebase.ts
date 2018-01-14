@@ -38,7 +38,7 @@ export class FirebaseProvider {
   private notesCollection: AngularFirestoreCollection<Note>;
   private usersCollection: AngularFirestoreCollection<User>;
   private jobsCollection: AngularFirestoreCollection<Job>;
-  private userRef: Promise<AngularFirestoreDocument<User>>;
+  private userRef: Observable<AngularFirestoreDocument<User>>;
 
   constructor(
     public http: Http,
@@ -48,14 +48,20 @@ export class FirebaseProvider {
   ) {
     this.jobsCollection = angularFireStore.collection<Job>('jobs');
     this.usersCollection = angularFireStore.collection<User>('users');
-    this.userRef = this.authProvider.getUserPromise().then(user => {
-      this.notesCollection = this.usersCollection.doc(user.uid).collection('notes');
-      return this.usersCollection.doc<User>(user.uid);
-    });
+    this.userRef = Observable.create(observer => {
+      this.authProvider.getUserPromise()
+        .then(user => {
+          this.notesCollection = this.usersCollection.doc(user.uid).collection('notes');
+          observer.next(this.usersCollection.doc<User>(user.uid));
+          observer.complete();
+        })
+        .catch(err => observer.error(err));
+    })
+    
   }
 
   private getNotesByQuery(filterFn: QueryFn): Observable<Note[]> {
-    return Observable.fromPromise(this.userRef)
+    return this.userRef
       .flatMap(userRef => {
         var notesCollection = userRef.collection<Note>('notes', filterFn);
         var notes: Observable<Note[]> = notesCollection.snapshotChanges().map(actions => {
@@ -74,7 +80,7 @@ export class FirebaseProvider {
   }
 
   private getNotesByTime(afterTime?: any, beforeTime?: any, order?: string, archived: boolean = null, customFilter?: (Query) => Query): Observable<Note[]> {
-    return Observable.fromPromise(this.authProvider.getUserPromise())
+    return this.authProvider.getUserObservable()
       .flatMap(user => {
         let userId = user.uid;
         return this.getNotesByQuery(ref => {
@@ -209,7 +215,9 @@ export class FirebaseProvider {
   }
 
   addJob(type, payload): Promise<Job> {
-    return this.authProvider.getUserPromise().then(user => {
+    let userPromise = this.authProvider.getUserPromise();
+    userPromise.catch(err => console.log('User not logged in while adding job', err));
+    return userPromise.then(user => {
       let job: Job = {
         userId: user.uid,
         type: 'import',
@@ -237,7 +245,7 @@ export class FirebaseProvider {
    * @param field The field of the user object to subscribe to changes of
    */
   getUserField(field: string): Observable<any> {
-    return Observable.fromPromise(this.authProvider.getUserPromise()).flatMap(user =>
+    return this.authProvider.getUserObservable().flatMap(user =>
       this.usersCollection.doc(user.uid).valueChanges().map(user => {
         return user[field];
       })
@@ -248,7 +256,7 @@ export class FirebaseProvider {
    * Get an observable of the signed in user object
    */
   getUser(): Observable<any> {
-    return Observable.fromPromise(this.authProvider.getUserPromise()).flatMap(user =>
+    return this.authProvider.getUserObservable().flatMap(user =>
       this.usersCollection.doc(user.uid).valueChanges().map(user => {
         return user;
       })
@@ -260,11 +268,12 @@ export class FirebaseProvider {
       this.getUser().take(1)
         .forEach(user => {
           if (!user['googleAccessToken']) {
-            reject();
+            reject('No google access token');
             return;
           }
+          console.log("user", user);
           if (typeof user['importing'] != 'undefined') {
-            reject();
+            reject('Calendar already imported');
             return;
           }
           accept();

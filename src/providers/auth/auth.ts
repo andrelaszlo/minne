@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import * as firebaseAuth from '@firebase/auth';
@@ -44,10 +45,20 @@ export class AuthProvider {
           unsubscribe();
           resolve(user);
         } else {
-          console.log("getUserPromise rejecting promise");
-          reject();
+          reject(new Error("User not logged in"));
         }
       })
+    });
+  }
+
+  getUserObservable(): Observable<any> {
+    return Observable.create(observer => {
+      this.getUserPromise()
+        .then(user => {
+          observer.next(user);
+          observer.complete();
+        })
+        .catch(err => observer.error(err))
     });
   }
 
