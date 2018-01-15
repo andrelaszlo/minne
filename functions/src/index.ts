@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
 import { importJob } from './job-import';
+import { createUser } from './create-user';
 
 admin.initializeApp(functions.config().firebase);
 
@@ -10,6 +11,10 @@ const db = admin.firestore();
 exports.handleJob = functions.firestore
   .document('jobs/{jobId}')
   .onCreate(handleJob);
+
+exports.createUser = functions.firestore
+  .document('users/{userId}')
+  .onCreate(createUser);
 
 /*
   Note:
@@ -47,3 +52,4 @@ async function removeJobData(jobId, data) {
   console.log("Deleting job", jobId);
   await data.ref.delete();
 }
+

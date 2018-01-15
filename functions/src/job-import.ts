@@ -124,5 +124,5 @@ async function setImported(db, userId, msg?: string): Promise<any> {
   if (msg) {
     userRef.update({importStatus: msg});
   }
-  await userRef.update({importing: false});
+  await userRef.update({importing: false, imported: true});
 }

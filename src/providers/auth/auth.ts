@@ -1,9 +1,10 @@
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import * as firebaseAuth from '@firebase/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { User } from '../firebase/firebase';
 
 @Injectable()
 export class AuthProvider {
@@ -54,7 +55,7 @@ export class AuthProvider {
   getUserObservable(): Observable<any> {
     return Observable.create(observer => {
       this.getUserPromise()
-        .then(user => {
+        .then((user: User) => {
           observer.next(user);
           observer.complete();
         })

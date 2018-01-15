@@ -262,25 +262,21 @@ export class FirebaseProvider {
 
   canImport(): Promise<boolean> {
     return new Promise((accept, reject) => {
-      this.userRef.flatMap(userRef => userRef.snapshotChanges())
-        .forEach(userSnapshot => {
-          // This is a workaround for the case when the user object
-          // is just a cached field, and not a complete object
-          // TODO: not a perfect solution, figure out how to get the full object
-          if (userSnapshot.payload.metadata.fromCache) {
-            return;
-          }
-          let user = userSnapshot.payload.data();
-          if (!user['googleAccessToken']) {
-            reject('No google access token');
-            return;
-          }
-          if (typeof user['importing'] != 'undefined') {
-            reject('Calendar already imported');
-            return;
-          }
-          accept();
-        });
+      this.getUser().forEach(user => {
+        if (!user['googleAccessToken']) {
+          reject('No google access token');
+          return;
+        }
+        if (typeof user['imported'] == 'undefined') {
+          // Sometimes we get cached data, ie an incomplete user object
+          return;
+        }
+        if (user['imported'] == true) {
+          reject('Calendar already imported');
+          return;
+        }
+        accept();
+      });
     });
   }
 
@@ -290,7 +286,7 @@ export class FirebaseProvider {
         if (!user['googleAccessToken']) {
           return;
         }
-        if (typeof user['importing'] != 'undefined') {
+        if (user['importing'] == true) {
           return;
         }
         this.addJob('import', {googleAccessToken: user['googleAccessToken']})
