@@ -1,3 +1,6 @@
+// Sentry, for error reporting
+import * as Raven from 'raven-js';
+
 // RX
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/observable/from';
@@ -90,6 +93,15 @@ export const googleConfig = {
   id: '***REMOVED******REMOVED***'
 }
 
+Raven
+  .config('***REMOVED***')
+  .install();
+
+export class RavenErrorHandler implements ErrorHandler {
+  handleError(err:any) : void {
+    Raven.captureException(err);
+  }
+}
 
 @NgModule({
   declarations: [
@@ -150,7 +162,8 @@ export const googleConfig = {
     AuthProvider,
     ConfigProvider,
     NotificationProvider,
-    {provide: LocalNotifications, useFactory: localNotificationsFactory, deps: [Platform]}
+    { provide: LocalNotifications, useFactory: localNotificationsFactory, deps: [Platform] },
+    { provide: ErrorHandler, useClass: RavenErrorHandler }
   ]
 })
 export class AppModule {}

@@ -1,5 +1,6 @@
 import * as firebase from 'firebase';
 import * as moment from 'moment';
+import * as Raven from 'raven-js';
 
 import { HockeyApp } from 'ionic-hockeyapp';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -111,6 +112,15 @@ export class MyApp {
         this.hockeyApp.setUserEmail(user.email);
       }
     }
+
+    let ravenUserContext = {
+      id: user.uid,
+      username: user.displayName,
+    };
+    if (user.email) {
+      ravenUserContext['email'] = user.email;
+    }
+    Raven.setUserContext(ravenUserContext);
 
     firebase.auth().getRedirectResult().then(result => {
       console.log("Redirect results", result)

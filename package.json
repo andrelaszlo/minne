@@ -1,6 +1,6 @@
 {
   "name": "minne",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "author": "Narjis Hachilif and André Laszlo",
   "homepage": "http://example.com/",
   "private": true,
@@ -39,6 +39,7 @@
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-customurlscheme": "^4.3.0",
     "cordova-plugin-device": "1.1.4",
+    "cordova-plugin-google-analytics": "~1.8.3",
     "cordova-plugin-hockeyapp": "^5.0.1",
     "cordova-plugin-inappbrowser": "^1.7.2",
     "cordova-plugin-ionic": "^2.0.3",
@@ -61,10 +62,10 @@
     "moment": "^2.19.2",
     "moment-timezone": "^0.5.14",
     "promise-polyfill": "6.0.2",
+    "raven-js": "^3.22.1",
     "rxjs": "5.5.2",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.18",
-    "cordova-plugin-google-analytics": "~1.8.3"
+    "zone.js": "0.8.18"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.0",

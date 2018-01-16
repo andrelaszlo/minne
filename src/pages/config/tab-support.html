@@ -1,5 +1,11 @@
 <ion-content>
-    <p>When something goes wrong, this information might help us fix it.</p>
+    <p (click)="enableDebug()">
+        When something goes wrong, this information might help us fix it.
+        <ng-template [ngIf]="debugClicked > 5 && debugClicked < 10">
+            Click this text {{ 10 - debugClicked }} more time(s) to enable the debug
+            menu.
+        </ng-template>
+    </p>
 
     <ion-grid>
         <ion-row>
@@ -31,5 +37,19 @@
             </ion-row>
         </ng-template>
     </ion-grid>
+
+    <ng-template [ngIf]="debugEnabled">
+        <hr>
+        <h1 ion-text color="danger">Debug menu</h1>
+        <ion-item>
+            <ion-textarea [(ngModel)]="exceptionMessage"></ion-textarea>
+        </ion-item>
+        <button ion-button small (click)="debugThrowException()">Throw exception</button>
+        <hr>
+        <ion-item>
+            <ion-textarea [(ngModel)]="evalCode"></ion-textarea>
+        </ion-item>
+        <button ion-button small (click)="debugEval(evalCode)">Eval</button>
+    </ng-template>
 
 </ion-content>

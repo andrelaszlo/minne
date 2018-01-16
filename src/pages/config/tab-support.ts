@@ -14,6 +14,10 @@ export class TabSupport {
   userId: string;
   buildInfo: any;
   platforms: string;
+  debugEnabled: boolean;
+  debugClicked: number;
+  evalCode: string;
+  exceptionMessage: string;
 
   constructor(
     public navCtrl: NavController,
@@ -38,5 +42,24 @@ export class TabSupport {
     }).catch(e => console.log('Error in platform.ready', e));
 
     this.googleAnalytics.trackView('TabSupport');
+    this.debugEnabled = false;
+    this.debugClicked = 0;
+    this.evalCode = "alert('hello')";
+    this.exceptionMessage = "Debugging: exception thrown manually from debug menu";
+  }
+
+  enableDebug() {
+    this.debugClicked++;
+    if (this.debugClicked >= 10) {
+      this.debugEnabled = true;
+    }
+  }
+
+  debugThrowException() {
+    throw new Error(this.exceptionMessage);
+  }
+
+  debugEval(code) {
+    eval(code)
   }
 }
