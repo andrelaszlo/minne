@@ -28,6 +28,17 @@ ionic cordova build --prod --release android -- -- --keystore=calico.keystore --
 
 The password is secret, but you can probably guess it ;)
 
+## Configure
+
+Make sure to configure the function environment
+
+```
+firebase functions:config:set \
+  google.client_id="CLIENT_ID" \
+  google.client_secret="CLIENT_SECRET" \
+  google.redirect_url="https://example.firebaseapp.com/__/auth/handler"
+```
+
 ## Deploy
 
 To deploy both functions and to https://minne.linkely.co

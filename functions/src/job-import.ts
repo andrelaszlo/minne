@@ -1,3 +1,4 @@
+const functions = require('firebase-functions');
 
 import * as google from 'googleapis';
 import * as moment from 'moment';
@@ -6,9 +7,9 @@ import { OAuth2Client } from 'google-auth-library/types/lib/auth/oauth2client';
 
 import { convert } from './google-event-converter';
 
-const CLIENT_ID = '***REMOVED***';
-const CLIENT_SECRET = '***REMOVED***';
-const REDIRECT_URL = 'https://calico-dev.firebaseapp.com/__/auth/handler'; // Not sure if needed
+const CLIENT_ID = functions.config().google.client_id;
+const CLIENT_SECRET = functions.config().google.client_secret;
+const REDIRECT_URL = functions.config().google.redirect_url; // Not sure if needed
 
 const ID_PREFIX = 'gcal';
 
