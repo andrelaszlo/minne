@@ -6,7 +6,7 @@ import { OAuth2Client } from 'google-auth-library/types/lib/auth/oauth2client';
 
 import { convert } from './google-event-converter';
 
-const CLIENT_ID = '***REMOVED***-qrp39t94cog9j2o9c2rn0djn6um8iv4***REMOVED***';
+const CLIENT_ID = '***REMOVED***';
 const CLIENT_SECRET = '***REMOVED***';
 const REDIRECT_URL = 'https://calico-dev.firebaseapp.com/__/auth/handler'; // Not sure if needed
 

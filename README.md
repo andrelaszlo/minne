@@ -1,5 +1,15 @@
 This is Minne (name tbd).
 
+Minne is a helpful and easier-to-use calendar that provides you with:
+
+* All your events, to-dos and notes in one place
+* Easy overview of your free time
+* Daily reminder of your weekly goals
+
+On Android, you can [download the app here][https://rink.hockeyapp.net/apps/09e9a38ac0de43d596e45fdaa31687fe].
+
+On iPhone, or if you don't want to install an app, you can [use the web version here][https://minne.linkely.co/].
+
 ## Setup
 
 After checkout, install the git hooks:
