@@ -78,23 +78,10 @@ import { NotificationProvider } from '../providers/notification/notification';
 // Analytics
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
-
-const firebaseConfig = {
-  apiKey: "***REMOVED***",
-  authDomain: "calico-dev.firebaseapp.com",
-  databaseURL: "https://calico-dev.firebaseio.com",
-  projectId: "calico-dev",
-  storageBucket: "",
-  messagingSenderId: "***REMOVED***"
-};
-
-export const googleConfig = {
-  secret: '***REMOVED***',
-  id: '***REMOVED******REMOVED***'
-}
+import { firebaseConfig, ravenConfig } from '../secrets'
 
 Raven
-  .config('***REMOVED***')
+  .config(ravenConfig)
   .install();
 
 export class RavenErrorHandler implements ErrorHandler {
